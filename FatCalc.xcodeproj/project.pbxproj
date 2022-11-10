@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6043554F291D75BC0023AA5B /* weightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043554E291D75BC0023AA5B /* weightViewController.swift */; };
+		60435551291D75CC0023AA5B /* bodyFatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* bodyFatViewController.swift */; };
+		60435553291D75DC0023AA5B /* photosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435552291D75DC0023AA5B /* photosViewController.swift */; };
+		60808645291D676700DAC7BE /* mainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60808644291D676700DAC7BE /* mainViewController.swift */; };
 		6097B9E7291976B700773892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9E6291976B700773892 /* AppDelegate.swift */; };
 		6097B9E9291976B700773892 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9E8291976B700773892 /* SceneDelegate.swift */; };
 		6097B9EB291976B700773892 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9EA291976B700773892 /* ViewController.swift */; };
@@ -17,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6043554E291D75BC0023AA5B /* weightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weightViewController.swift; sourceTree = "<group>"; };
+		60435550291D75CC0023AA5B /* bodyFatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bodyFatViewController.swift; sourceTree = "<group>"; };
+		60435552291D75DC0023AA5B /* photosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photosViewController.swift; sourceTree = "<group>"; };
+		60808644291D676700DAC7BE /* mainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainViewController.swift; sourceTree = "<group>"; };
 		6097B9E3291976B700773892 /* FatCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FatCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6097B9E6291976B700773892 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6097B9E8291976B700773892 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +68,10 @@
 			children = (
 				6097B9E6291976B700773892 /* AppDelegate.swift */,
 				6097B9E8291976B700773892 /* SceneDelegate.swift */,
+				60808644291D676700DAC7BE /* mainViewController.swift */,
+				6043554E291D75BC0023AA5B /* weightViewController.swift */,
+				60435550291D75CC0023AA5B /* bodyFatViewController.swift */,
+				60435552291D75DC0023AA5B /* photosViewController.swift */,
 				6097B9EA291976B700773892 /* ViewController.swift */,
 				6097B9EC291976B700773892 /* Main.storyboard */,
 				6097B9F2291976B800773892 /* Assets.xcassets */,
@@ -142,8 +154,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6097B9EB291976B700773892 /* ViewController.swift in Sources */,
+				60435553291D75DC0023AA5B /* photosViewController.swift in Sources */,
 				6097B9E7291976B700773892 /* AppDelegate.swift in Sources */,
+				60808645291D676700DAC7BE /* mainViewController.swift in Sources */,
 				6097B9F1291976B700773892 /* FatCalc.xcdatamodeld in Sources */,
+				6043554F291D75BC0023AA5B /* weightViewController.swift in Sources */,
+				60435551291D75CC0023AA5B /* bodyFatViewController.swift in Sources */,
 				6097B9E9291976B700773892 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
