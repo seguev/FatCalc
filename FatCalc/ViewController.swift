@@ -11,11 +11,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+
         // Do any additional setup after loading the view.
     }
     
     @IBAction func guestButtonPressed(_ sender: UIButton) {
         //no need to setup segue. this one has no standard
+        performSegue(withIdentifier: "guestLog", sender: self)
     }
 
     @IBAction func signInPressed(_ sender: UIButton) {
@@ -26,13 +29,34 @@ class ViewController: UIViewController {
         self.present(showAlert(alertTitle: "Not Available yet!", alertMessage: ""), animated: true)
     }
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //        if segue.identifier == "" {
-    //            //let destinationVC = segue.destination as! mainViewController
-    //            //set mainVC properties before segue
-    //
-    //        }
-    //    }
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            
+            let main = 0
+            //let bodyFat = 1
+            //let photos = 2
+            //let weight = 3
+
+            
+            //set tab bar cons from destination and cast as UITabBarController
+            let tabBar = segue.destination as! UITabBarController
+            
+            //print controllers arrays with Tags to debug
+            print ("the controllers are: \(tabBar.viewControllers!)")
+            
+            if segue.identifier == "guestLog" {
+                print("guest loged in")
+                
+                //if guest, set shared "isLoged" variable to false.
+                Funcs.shared.isLoged = false
+                
+                //set mainVC as the 0 n from the controllers array and cast
+                let mainVC = tabBar.viewControllers?[main] as! MainViewController
+                
+                //set its loged property to false (cause guest)
+                //mainVC.isLoged = false
+            }
+
+        }
     
     
     

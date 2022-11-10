@@ -7,14 +7,27 @@
 
 import UIKit
 
-class bodyFatViewController: UIViewController {
+class BodyFatViewController: UIViewController {
 
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //get current name from shared func
+        let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
+        
+        if Funcs.shared.isLoged == false {
+            print("guest!")
+        }
+        
+        print("current controller is \(currentControllerName)")
+
+    }
 
     /*
     // MARK: - Navigation

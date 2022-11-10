@@ -27,7 +27,6 @@
                                 <buttonConfiguration key="configuration" style="filled" title="guest"/>
                                 <connections>
                                     <action selector="guestButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XKt-PX-gD0"/>
-                                    <segue destination="jDj-RC-vSS" kind="show" id="Ye7-Aa-H2D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTW-Dn-FEx">
@@ -70,6 +69,9 @@
                     <navigationItem key="navigationItem" title="Log In" largeTitleDisplayMode="always" id="3n9-nc-yIC">
                         <barButtonItem key="backBarButtonItem" title="log out" id="IIE-YA-vB5"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="jDj-RC-vSS" kind="show" identifier="guestLog" id="b9c-3M-9Wj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -78,14 +80,14 @@
         <!--main-->
         <scene sceneID="o93-pn-OtN">
             <objects>
-                <viewController id="H3s-Hl-jx2" customClass="mainViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="H3s-Hl-jx2" customClass="MainViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rXn-09-aM9">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="6Zl-Qo-EQo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="main" image="figure.cooldown" catalog="system" id="1Xz-qz-hnm"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="main" image="figure.cooldown" catalog="system" id="1Xz-qz-hnm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8N-lc-VHJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -94,14 +96,14 @@
         <!--fat percentage-->
         <scene sceneID="kWm-TU-OLs">
             <objects>
-                <viewController id="ldK-Ey-ZxW" customClass="bodyFatViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ldK-Ey-ZxW" customClass="BodyFatViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ryy-iP-J9G">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="UFO-8C-xSt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="fat percentage" image="percent" catalog="system" id="4LK-xb-y87"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="fat percentage" image="percent" catalog="system" id="4LK-xb-y87"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kkv-Ab-SoR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,14 +112,14 @@
         <!--photos library-->
         <scene sceneID="RUi-tw-vrC">
             <objects>
-                <viewController id="cO1-cy-7C7" customClass="photosViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cO1-cy-7C7" customClass="PhotosViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Nk-Lj-NSB">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="KBg-gv-Pga"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="photos library" image="chart.bar.doc.horizontal" catalog="system" id="ezg-iT-cCT"/>
+                    <tabBarItem key="tabBarItem" tag="4" title="photos library" image="chart.bar.doc.horizontal" catalog="system" id="ezg-iT-cCT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owY-DS-coT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -126,14 +128,14 @@
         <!--weight graph-->
         <scene sceneID="tXS-jo-QX4">
             <objects>
-                <viewController id="ckF-BY-BHd" customClass="weightViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ckF-BY-BHd" customClass="WeightViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d9H-yK-9kI">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="2ua-He-2hJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="weight graph" image="figure.stand.line.dotted.figure.stand" catalog="system" id="b7i-bE-Ahi"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="weight graph" image="figure.stand.line.dotted.figure.stand" catalog="system" id="b7i-bE-Ahi"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xn5-5K-PWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,6 +156,9 @@
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" systemColor="labelColor"/>
                         </textAttributes>
+                        <connections>
+                            <outlet property="delegate" destination="t2r-ik-6XW" id="8Rl-4x-FCT"/>
+                        </connections>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -169,6 +174,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="jDj-RC-vSS" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="R4B-h2-OaJ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gKE-cE-hjg">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
