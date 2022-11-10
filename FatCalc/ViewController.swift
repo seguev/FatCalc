@@ -8,11 +8,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    #warning("Add weight log functionality")
+    #warning("Add tape body fat calculator ")
+    #warning("Add caliper body fat calculator")
+    #warning("Add graph view with weight and body fat")
+    #warning("Add photos library with coreData(?) or realm")
+    #warning("add user auth at the very end! only when everything works")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-
+       let firstColor = #colorLiteral(red: 0.01960784314, green: 0.8509803922, blue: 1, alpha: 1)
+        let secondColor = #colorLiteral(red: 0.05490196078, green: 0.4549019608, blue: 0.9882352941, alpha: 1)
+        addGradient(firstColor: firstColor, secondColor: secondColor)
         // Do any additional setup after loading the view.
     }
     
@@ -22,11 +29,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func signInPressed(_ sender: UIButton) {
-        self.present(showAlert(alertTitle: "Not Available yet!", alertMessage: ""), animated: true)
+        //logIn with fireBase
+        let alertController = Funcs.shared.comingSoonAlertController()
+        self.present(alertController, animated: true)
     }
     
     @IBAction func signUpPressed(_ sender: UIButton) {
-        self.present(showAlert(alertTitle: "Not Available yet!", alertMessage: ""), animated: true)
+        //signUp with fireBase
+        let alertController = Funcs.shared.comingSoonAlertController()
+        self.present(alertController, animated: true)
+        
     }
     
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,21 +75,19 @@ class ViewController: UIViewController {
     
     
     
-    private func addGradient (firstColor:UIColor, secondColor:UIColor, view:UIView) {
+    
+
+}
+
+extension ViewController {
+    func addGradient (firstColor:UIColor, secondColor:UIColor) {
         let layer = CAGradientLayer()
         let colors = [firstColor.cgColor, secondColor.cgColor]
         layer.colors = colors
-        //layer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
+        layer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
         layer.frame = view.frame
         view.layer.insertSublayer(layer, at: 0)
     }
-
 }
 
- private func showAlert (alertTitle:String?, alertMessage:String?) -> UIViewController {
-    let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-     let action = UIAlertAction(title: "Dismiss", style: .cancel)
-     alert.addAction(action)
-    
-     return alert
-}
+ 

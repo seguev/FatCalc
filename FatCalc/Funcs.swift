@@ -51,5 +51,13 @@ class Funcs {
     
     
     
+     func comingSoonAlertController () -> UIViewController {
+       let alert = UIAlertController(title: "Coming Soon!", message: "this content isn't ready yet", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel)
+        alert.addAction(action)
+       
+        return alert
+   }
+    
     
 }

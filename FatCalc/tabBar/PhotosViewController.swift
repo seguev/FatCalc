@@ -29,6 +29,13 @@ class PhotosViewController: UIViewController {
 
     }
 
+    func loadPhotos () {
+        
+        #warning("load photos from realm or coreData")
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 

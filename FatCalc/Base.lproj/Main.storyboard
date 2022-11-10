@@ -22,7 +22,6 @@
                                     <constraint firstAttribute="height" constant="50" id="Jrg-oO-e8a"/>
                                     <constraint firstAttribute="width" constant="150" id="cSU-XW-fI3"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="guest"/>
                                 <connections>
@@ -35,7 +34,6 @@
                                     <constraint firstAttribute="height" constant="50" id="1Ez-o0-JMl"/>
                                     <constraint firstAttribute="width" constant="150" id="bbg-DG-deP"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign In"/>
                                 <connections>
@@ -48,7 +46,6 @@
                                     <constraint firstAttribute="width" constant="150" id="ITE-iP-rn7"/>
                                     <constraint firstAttribute="height" constant="50" id="nkJ-Hr-dok"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="opaqueSeparatorColor"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Sign Up"/>
                                 <connections>
                                     <action selector="signUpPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zoi-PW-mCC"/>
@@ -84,8 +81,60 @@
                     <view key="view" contentMode="scaleToFill" id="rXn-09-aM9">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" axis="vertical" distribution="fillEqually" alignment="center" spacing="66" translatesAutoresizingMaskIntoConstraints="NO" id="NyQ-2T-DuO">
+                                <rect key="frame" x="17.666666666666657" y="254.33333333333334" width="355" height="335.33333333333326"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbx-vc-Ybc">
+                                        <rect key="frame" x="125.66666666666669" y="0.0" width="103.33333333333331" height="34.333333333333336"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add photo"/>
+                                        <connections>
+                                            <action selector="addPhoto:" destination="H3s-Hl-jx2" eventType="touchUpInside" id="usS-jW-XWy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ni-mp-Itr">
+                                        <rect key="frame" x="122.66666666666666" y="100.33333333333334" width="109.66666666666666" height="34.333333333333343"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Add weight"/>
+                                        <connections>
+                                            <action selector="addWeight:" destination="H3s-Hl-jx2" eventType="touchUpInside" id="pZy-Ww-fVu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQP-vM-eIp">
+                                        <rect key="frame" x="26.333333333333343" y="200.66666666666666" width="302" height="34.333333333333343"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Calculate fat percentage with caliper"/>
+                                        <connections>
+                                            <action selector="calcWithCaliper:" destination="H3s-Hl-jx2" eventType="touchUpInside" id="6FK-fD-zBB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjh-67-jhx">
+                                        <rect key="frame" x="0.0" y="301" width="355" height="34.333333333333314"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Calculate fat percentage with tape measure"/>
+                                        <connections>
+                                            <action selector="calcWithTape:" destination="H3s-Hl-jx2" eventType="touchUpInside" id="L13-hE-t1n"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Zl-Qo-EQo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NyQ-2T-DuO" firstAttribute="centerY" secondItem="rXn-09-aM9" secondAttribute="centerY" id="Geh-vm-SzS"/>
+                            <constraint firstItem="6Zl-Qo-EQo" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NyQ-2T-DuO" secondAttribute="bottom" id="HIJ-Fo-EkJ"/>
+                            <constraint firstItem="NyQ-2T-DuO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Zl-Qo-EQo" secondAttribute="top" id="a9x-5u-3OX"/>
+                            <constraint firstItem="NyQ-2T-DuO" firstAttribute="centerX" secondItem="rXn-09-aM9" secondAttribute="centerX" id="p2g-Nq-MLT"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="main" image="figure.cooldown" catalog="system" id="1Xz-qz-hnm"/>
                 </viewController>
@@ -200,8 +249,8 @@
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
