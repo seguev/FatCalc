@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BodyFatViewController: UIViewController {
+class GraphViewController: UIViewController {
 
 
     

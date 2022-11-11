@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6043554F291D75BC0023AA5B /* WeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043554E291D75BC0023AA5B /* WeightViewController.swift */; };
-		60435551291D75CC0023AA5B /* BodyFatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* BodyFatViewController.swift */; };
-		60435553291D75DC0023AA5B /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435552291D75DC0023AA5B /* PhotosViewController.swift */; };
+		6043554F291D75BC0023AA5B /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043554E291D75BC0023AA5B /* AlbumViewController.swift */; };
+		60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* GraphViewController.swift */; };
 		60435555291D7C680023AA5B /* Funcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435554291D7C680023AA5B /* Funcs.swift */; };
 		60808645291D676700DAC7BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60808644291D676700DAC7BE /* MainViewController.swift */; };
 		6097B9E7291976B700773892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9E6291976B700773892 /* AppDelegate.swift */; };
@@ -22,9 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6043554E291D75BC0023AA5B /* WeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightViewController.swift; sourceTree = "<group>"; };
-		60435550291D75CC0023AA5B /* BodyFatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyFatViewController.swift; sourceTree = "<group>"; };
-		60435552291D75DC0023AA5B /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		6043554E291D75BC0023AA5B /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		60435550291D75CC0023AA5B /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		60435554291D7C680023AA5B /* Funcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Funcs.swift; sourceTree = "<group>"; };
 		60808644291D676700DAC7BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6097B9E3291976B700773892 /* FatCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FatCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,9 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				60808644291D676700DAC7BE /* MainViewController.swift */,
-				60435550291D75CC0023AA5B /* BodyFatViewController.swift */,
-				6043554E291D75BC0023AA5B /* WeightViewController.swift */,
-				60435552291D75DC0023AA5B /* PhotosViewController.swift */,
+				60435550291D75CC0023AA5B /* GraphViewController.swift */,
+				6043554E291D75BC0023AA5B /* AlbumViewController.swift */,
 			);
 			path = tabBar;
 			sourceTree = "<group>";
@@ -166,12 +163,11 @@
 			files = (
 				60435555291D7C680023AA5B /* Funcs.swift in Sources */,
 				6097B9EB291976B700773892 /* ViewController.swift in Sources */,
-				60435553291D75DC0023AA5B /* PhotosViewController.swift in Sources */,
 				6097B9E7291976B700773892 /* AppDelegate.swift in Sources */,
 				60808645291D676700DAC7BE /* MainViewController.swift in Sources */,
 				6097B9F1291976B700773892 /* FatCalc.xcdatamodeld in Sources */,
-				6043554F291D75BC0023AA5B /* WeightViewController.swift in Sources */,
-				60435551291D75CC0023AA5B /* BodyFatViewController.swift in Sources */,
+				6043554F291D75BC0023AA5B /* AlbumViewController.swift in Sources */,
+				60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */,
 				6097B9E9291976B700773892 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

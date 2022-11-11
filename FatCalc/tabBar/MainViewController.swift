@@ -32,12 +32,12 @@ class MainViewController: UIViewController  {
     
    
     @IBAction func calcWithCaliper(_ sender: UIButton) {
-        comingSoon()
+        
 
     }
     
     @IBAction func calcWithTape(_ sender: UIButton) {
-        comingSoon()
+        
     }
     private func comingSoon () {
         self.present(Funcs.shared.comingSoonAlertController(), animated: true)
