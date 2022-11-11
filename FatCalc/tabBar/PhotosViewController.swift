@@ -7,43 +7,69 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController {
+class PhotosViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
 
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    let picker = UIImagePickerController()
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    @IBAction func plusButtonPressed(_ sender: UIButton) {
+        print("pressed")
+        present(picker, animated: true)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Funcs.shared.addGradient(view: self.view) //set color
+        picker.delegate = self //set delegate
+        picker.allowsEditing = false
+        picker.sourceType = .camera
+        picker.cameraFlashMode = .auto
+    }
+    
+   
     override func viewDidAppear(_ animated: Bool) {
-        
-        //get current name from shared func
         let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
-        
         if Funcs.shared.isLoged == false {
             print("guest!")
         }
-        
         print("current controller is \(currentControllerName)")
-
     }
-
+    
     func loadPhotos () {
+        print("loading photos")
         
-        #warning("load photos from realm or coreData")
+        loadPhotos()
+        #warning("load from core Data")
+    }
+    
+    func save (_ image:CIImage) {
+        print("saving")
+        
+    }
+    // MARK: - Picker Delegate funcs
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let imagePicked = info[.originalImage] as? UIImage {
+            
+            if let coreImage = imagePicked as? CIImage {
+                save(coreImage)
+                #warning("save to core Data")
+                
+            }
+        }
+        
+        picker.dismiss(animated: true)
         
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print(#function)
+        picker.dismiss(animated: true)
+        return
     }
-    */
-
+    
+    
+    
 }

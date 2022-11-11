@@ -13,6 +13,7 @@ class BodyFatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Funcs.shared.addGradient(view: self.view)
 
         // Do any additional setup after loading the view.
     }

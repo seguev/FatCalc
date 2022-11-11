@@ -9,13 +9,12 @@ import UIKit
 
 class MainViewController: UIViewController  {
     
-    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = false
+        Funcs.shared.addGradient(view: self.view)
+
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,14 +30,7 @@ class MainViewController: UIViewController  {
         
     }
     
-    @IBAction func addPhoto(_ sender: UIButton) {
-        present(imagePicker, animated: true)
-    }
-    
-    @IBAction func addWeight(_ sender: UIButton) {
-        comingSoon()
-
-    }
+   
     @IBAction func calcWithCaliper(_ sender: UIButton) {
         comingSoon()
 
@@ -51,25 +43,4 @@ class MainViewController: UIViewController  {
         self.present(Funcs.shared.comingSoonAlertController(), animated: true)
     }
     
-}
-extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let imagePicked = info[.originalImage] as? UIImage {
-            
-            //save imagePicked
-            #warning("save with coreData or realm")
-        }
-        
-        picker.dismiss(animated: true)
-        
-        
-        comingSoon()
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print(#function)
-        picker.dismiss(animated: true)
-        return
-    }
 }
