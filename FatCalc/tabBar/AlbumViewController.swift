@@ -7,24 +7,73 @@
 
 import UIKit
 
-class AlbumViewController: UIViewController {
-    #warning("save it to coreData")
+class AlbumViewController: UIViewController, UIScrollViewDelegate {
+#warning("save it to coreData")
     
+    @IBOutlet weak var scrollView: UIScrollView!
     var weightArray = [Float]()
     
+    var imageArray = [UIImage]() {
+        didSet {
+            print("new image has been added : \(imageArray.first?.description)")
+            setupImages(imageArray)
+        }
+    }
+    
     let picker = UIImagePickerController()
-
+    
    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Funcs.shared.addGradient(view: self.view) //set color
-        picker.delegate = self 
+        picker.delegate = self
         picker.allowsEditing = false
         picker.sourceType = .camera
-        picker.cameraFlashMode = .auto
+        
         // Do any additional setup after loading the view.
+        //addDogImages()
+        //setupImages(imageArray)
+        
+        
+
+
+
     }
     
+    @IBAction func addNewImage(_ sender: UIButton) {
+        
+        present(picker, animated: true)
+    }
+    
+    func addDogImages () {
+        imageArray = [#imageLiteral(resourceName: "dog2"), #imageLiteral(resourceName: "dog3"), #imageLiteral(resourceName: "dog1")]
+    }
+    
+    func setupImages(_ images: [UIImage]){
+        
+        for i in 0..<images.count {
+            
+            let imageView = UIImageView() //create new instance of ImageView for eatch image
+            imageView.image = images[i] //attach the actual image from eatch one to the new imageView
+            
+            
+            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
+            
+            imageView.frame = CGRect(x: xPosition, y: 0, width: scrollView.frame.width, height: scrollView.frame.height) //set eatch imageView's frame
+            
+            imageView.contentMode = .scaleAspectFit //save relative photo aspect
+            
+            scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
+            
+            
+            scrollView.addSubview(imageView) //add the imageView after setup to scroll view
+            scrollView.delegate = self
+            
+            
+        }
+        
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -36,7 +85,7 @@ class AlbumViewController: UIViewController {
         }
         
         print("current controller is \(currentControllerName)")
-
+        
     }
     
     func setWeight () { //present alert with textField and convert to Float
@@ -71,8 +120,8 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
         
         if let imagePicked = info[.originalImage] as? UIImage {
             
-           
-                
+            imageArray.append(imagePicked)
+            
             //save photo
         }
         

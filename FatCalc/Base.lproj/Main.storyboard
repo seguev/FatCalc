@@ -468,15 +468,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0j-M9-Jls">
-                                <rect key="frame" x="75" y="321" width="240" height="308"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="ITQ-SA-WqE">
+                                <rect key="frame" x="0.0" y="322" width="390" height="388"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <viewLayoutGuide key="contentLayoutGuide" id="6Bu-fL-aMo"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="lHj-Wy-e0q"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-kI-AEl">
+                                <rect key="frame" x="120" y="214" width="150" height="35"/>
+                                <color key="backgroundColor" red="0.47684186699999997" green="0.50480759139999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="lzM-eV-UHO"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add New Image!"/>
+                                <connections>
+                                    <action selector="addNewImage:" destination="ckF-BY-BHd" eventType="touchUpInside" id="RCB-cT-oOB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2ua-He-2hJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kbd-kI-AEl" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="123" id="1fN-B2-SWa"/>
+                            <constraint firstItem="kbd-kI-AEl" firstAttribute="centerX" secondItem="d9H-yK-9kI" secondAttribute="centerX" id="Llj-Wf-8Pj"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="Album" image="camera" catalog="system" id="b7i-bE-Ahi"/>
+                    <connections>
+                        <outlet property="scrollView" destination="ITQ-SA-WqE" id="Yc8-En-vy7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xn5-5K-PWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
