@@ -19,6 +19,7 @@ class GraphViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         //get current name from shared func
         let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)

@@ -9,21 +9,24 @@ import UIKit
 
 class AlbumViewController: UIViewController, UIScrollViewDelegate {
     
-#warning("delete weight after setButtonPressed")
-#warning("write show NoImage icon when array is blank")
-#warning("create image and weight struct, each photo present its weight, you can add weigh to each photo")
+#warning("each photo present its weight, you can add weigh to each photo")
     #warning("save everything in coreData")
-    #warning("delete login page, too many bugs and not nessesery yet")
+    @IBOutlet weak var imageDateLabel: UILabel!
     
+    @IBOutlet weak var imageWeightLabel: UILabel!
     @IBOutlet var popUpView: UIView!
     
     @IBOutlet weak var weightTextField: UITextField!
+    
+    
     let scrollView: UIScrollView = {
      let scroll = UIScrollView()
      scroll.isPagingEnabled = true
      scroll.showsVerticalScrollIndicator = false
      scroll.showsHorizontalScrollIndicator = false
-     scroll.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
+        #warning("maybe should change y value")
+     scroll.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-200)
     
      return scroll
      }()
@@ -44,6 +47,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         Funcs.shared.addGradient(view: self.view) //set color
         weightTextField.delegate = self
         picker.delegate = self
@@ -59,9 +63,8 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         let yPosition = self.view.center.y+30
         popUpView.center = .init(x: xPosition, y: yPosition)
 
-
-
-
+        setDefaultImage()
+        
     }
    
     
@@ -70,7 +73,6 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func addNewImage(_ sender: UIButton) {
-        
         present(picker, animated: true)
     }
     
@@ -78,6 +80,12 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         imageArray = [#imageLiteral(resourceName: "dog2"), #imageLiteral(resourceName: "dog3"), #imageLiteral(resourceName: "dog1")]
     }
     
+    func setDefaultImage () {
+        if imageArray.isEmpty {
+            let defaultImage = UIImage(systemName: "nosign")!
+            imageArray.append(defaultImage)
+        }
+    }
     
     func setupImages(_ images: [UIImage]){
         
@@ -132,18 +140,15 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
 extension AlbumViewController: UITextFieldDelegate {
    
     
-   
-    
-    
     @IBAction func addWeight(_ sender: UIButton) {
+        
         animateIn(popUp: popUpView)
     }
     
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        animateOut(popUp: popUpView)
-        return true
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.text = ""
+        resignFirstResponder()
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -156,15 +161,10 @@ extension AlbumViewController: UITextFieldDelegate {
                 if string == "." { //dont allow any other dot
                     return false
                 }
-//                if text.count > 5 { //if theres a dot, max characters is 5
-//                    return false
-//                }
-                
+   
                
             }
-//            if text.count > 3 { //if there isn't a dot, max character is 3
-//                return false
-//            }
+
         }
         return true //allow range to change
     }
@@ -193,7 +193,7 @@ extension AlbumViewController: UITextFieldDelegate {
         popUp.alpha = 0
         
         //show
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.2) {
             popUp.transform = CGAffineTransform(scaleX: 1, y: 1)
             
             //make invisible
@@ -204,7 +204,7 @@ extension AlbumViewController: UITextFieldDelegate {
     
     
     func animateOut (popUp:UIView) {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.2) {
             popUp.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             popUp.alpha = 0
         } completion: { _ in

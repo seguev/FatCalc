@@ -59,6 +59,10 @@ class Funcs {
         return alert
    }
     
+    func makeButtonRound (_ button:UIButton) {
+        button.layer.cornerRadius = button.frame.height/2
+    }
+    
     func addGradient (firstColor:UIColor = #colorLiteral(red: 0.01960784314, green: 0.8509803922, blue: 1, alpha: 1), secondColor:UIColor =  #colorLiteral(red: 0.05490196078, green: 0.4549019608, blue: 0.9882352941, alpha: 1), view:UIView) {
         let layer = CAGradientLayer()
         let colors = [firstColor.cgColor, secondColor.cgColor]
