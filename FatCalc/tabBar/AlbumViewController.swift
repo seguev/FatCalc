@@ -8,7 +8,9 @@
 import UIKit
 
 class AlbumViewController: UIViewController, UIScrollViewDelegate {
-    
+    #warning("attach value to each photo")
+    #warning("attach value to each date and weight")
+    #warning("change date and weight when phhoto is swiped")
 #warning("each photo present its weight, you can add weigh to each photo")
     #warning("save everything in coreData")
     @IBOutlet weak var imageDateLabel: UILabel!
@@ -18,26 +20,33 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var weightTextField: UITextField!
     
+    var imageIndex : Int? { //every complited scroll
+        didSet{ //when scrolled. index is set and weight text is changed to arrays[i] weight
+            print("index has been set to \(imageIndex!)")
+                imageWeightLabel.text = weightsArray[imageIndex!]
+            #warning("out of range if no weights")
+            #warning("only updated after scrolling")
+        }
+    }
+    
+    var weightsArray = [String]()
     
     let scrollView: UIScrollView = {
      let scroll = UIScrollView()
      scroll.isPagingEnabled = true
      scroll.showsVerticalScrollIndicator = false
      scroll.showsHorizontalScrollIndicator = false
-        
-        #warning("maybe should change y value")
+        scroll.minimumZoomScale = 1
+        scroll.maximumZoomScale = 1
      scroll.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-200)
-    
-     return scroll
+         return scroll
      }()
     
 
-    var weightArray = [Float]()
     
     var imageArray = [UIImage]() {
         didSet {
-            setupImages(imageArray)
-            print("new image has been added : \(imageArray.first!)")
+            setupImages(imageArray) //add to scrollView
         }
     }
     
@@ -63,14 +72,18 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         let yPosition = self.view.center.y+30
         popUpView.center = .init(x: xPosition, y: yPosition)
 
-        setDefaultImage()
-        
     }
-   
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setDefaultImage()
+
+    }
     
-    @IBAction func dismissPressed(_ sender: UIButton) {
+    @IBAction func setPressed(_ sender: UIButton) {
+        
         animateOut(popUp: popUpView)
     }
+    
     
     @IBAction func addNewImage(_ sender: UIButton) {
         present(picker, animated: true)
@@ -84,6 +97,10 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         if imageArray.isEmpty {
             let defaultImage = UIImage(systemName: "nosign")!
             imageArray.append(defaultImage)
+        } else {
+            if imageArray.contains(UIImage(systemName: "nosign")!){
+                imageArray.remove(at: 0)
+            }
         }
     }
     
@@ -110,6 +127,10 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     
     
     
+    @IBAction func xPressed(_ sender: UIButton) {
+        #warning("delete image")
+        animateOut(popUp: popUpView)
+    }
     
 }
 
@@ -121,11 +142,11 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             imageArray.append(imagePicked)
             
-            //save photo
+            
         }
         
         picker.dismiss(animated: true)
-        
+        animateIn(popUp: popUpView)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -133,7 +154,11 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
         picker.dismiss(animated: true)
         return
     }
-    
+    // MARK: - scrolling detection
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let currentImageIndex = Int(targetContentOffset.move().x/390)
+        imageIndex = currentImageIndex
+    }
     
 }
 // MARK: - weight popUp
@@ -141,12 +166,17 @@ extension AlbumViewController: UITextFieldDelegate {
    
     
     @IBAction func addWeight(_ sender: UIButton) {
-        
         animateIn(popUp: popUpView)
     }
     
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {return}
+        
+        weightsArray.append(text)
+        print("appending \(text) to weight array")
+        print("weights are: \(weightsArray)")
+//        imageDateLabel.text = Date().formatted(date: .numeric, time: .omitted)
         textField.text = ""
         resignFirstResponder()
     }
@@ -168,14 +198,6 @@ extension AlbumViewController: UITextFieldDelegate {
         }
         return true //allow range to change
     }
-    
-    
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("editing")
-    }
-    
-    
     
     
     

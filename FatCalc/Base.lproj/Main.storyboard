@@ -424,13 +424,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="image weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRC-SR-KWp">
-                                <rect key="frame" x="19.999999999999993" y="247.00000000000003" width="101.33333333333331" height="20.333333333333343"/>
+                                <rect key="frame" x="19.999999999999993" y="197" width="101.33333333333331" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47w-Uz-fgy">
-                                <rect key="frame" x="328.66666666666669" y="247.00000000000003" width="41.333333333333314" height="20.333333333333343"/>
+                                <rect key="frame" x="328.66666666666669" y="197" width="41.333333333333314" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -440,8 +440,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="crg-G6-IjC" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="50" id="3C0-by-mDh"/>
-                            <constraint firstItem="47w-Uz-fgy" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="200" id="3Ni-Sf-hhn"/>
-                            <constraint firstItem="QRC-SR-KWp" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="200" id="NzX-YK-Nx8"/>
+                            <constraint firstItem="47w-Uz-fgy" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="150" id="3Ni-Sf-hhn"/>
+                            <constraint firstItem="QRC-SR-KWp" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="150" id="NzX-YK-Nx8"/>
                             <constraint firstItem="QRC-SR-KWp" firstAttribute="leading" secondItem="2ua-He-2hJ" secondAttribute="leading" constant="20" id="bnt-SB-ir8"/>
                             <constraint firstItem="crg-G6-IjC" firstAttribute="leading" secondItem="2ua-He-2hJ" secondAttribute="leading" id="eJU-OJ-FQe"/>
                             <constraint firstItem="2ua-He-2hJ" firstAttribute="trailing" secondItem="47w-Uz-fgy" secondAttribute="trailing" constant="20" id="nIq-m0-4Gr"/>
@@ -458,25 +458,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xn5-5K-PWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="Gcu-ti-Du5">
-                    <rect key="frame" x="0.0" y="0.0" width="233" height="103"/>
+                    <rect key="frame" x="0.0" y="0.0" width="233" height="145"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJJ-pr-a2I">
-                            <rect key="frame" x="91.666666666666671" y="58" width="49.666666666666671" height="35"/>
+                            <rect key="frame" x="91.666666666666671" y="100" width="49.666666666666671" height="35"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="filled" title="Set"/>
                             <connections>
-                                <action selector="dismissPressed:" destination="ckF-BY-BHd" eventType="touchUpInside" id="F7y-h4-s2v"/>
+                                <action selector="setPressed:" destination="ckF-BY-BHd" eventType="touchUpInside" id="0qL-tK-V0p"/>
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHE-5e-fpN">
-                            <rect key="frame" x="76.666666666666671" y="16" width="80.000000000000014" height="34"/>
+                            <rect key="frame" x="76.666666666666671" y="58" width="80.000000000000014" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="IUH-Rc-CJ5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezx-AG-hxR">
+                            <rect key="frame" x="5" y="5" width="49" height="34.333333333333336"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="xmark.circle" catalog="system"/>
+                            <connections>
+                                <action selector="xPressed:" destination="ckF-BY-BHd" eventType="touchUpInside" id="F32-rX-PiE"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="l43-TI-vga"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -485,6 +493,8 @@
                         <constraint firstItem="l43-TI-vga" firstAttribute="bottom" secondItem="rJJ-pr-a2I" secondAttribute="bottom" constant="10" id="L3i-a2-haU"/>
                         <constraint firstItem="cHE-5e-fpN" firstAttribute="centerX" secondItem="Gcu-ti-Du5" secondAttribute="centerX" id="a85-mK-GGv"/>
                         <constraint firstItem="rJJ-pr-a2I" firstAttribute="top" secondItem="cHE-5e-fpN" secondAttribute="bottom" constant="8" symbolic="YES" id="cdh-yg-cLc"/>
+                        <constraint firstItem="ezx-AG-hxR" firstAttribute="leading" secondItem="Gcu-ti-Du5" secondAttribute="leading" constant="5" id="msU-li-bSM"/>
+                        <constraint firstItem="ezx-AG-hxR" firstAttribute="top" secondItem="Gcu-ti-Du5" secondAttribute="top" constant="5" id="wsp-K4-OWH"/>
                     </constraints>
                 </view>
             </objects>
@@ -522,6 +532,7 @@
         <image name="chart.xyaxis.line" catalog="system" width="128" height="102"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="pencil.circle" catalog="system" width="128" height="123"/>
+        <image name="xmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
