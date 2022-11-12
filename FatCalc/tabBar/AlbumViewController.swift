@@ -12,6 +12,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet var popUpView: UIView!
     
+    @IBOutlet weak var weightPicker: UIPickerView!
     let scrollView: UIScrollView = {
      let scroll = UIScrollView()
      scroll.isPagingEnabled = true
@@ -41,7 +42,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         picker.delegate = self
         picker.allowsEditing = false
         picker.sourceType = .camera
-        
+        weightPicker.delegate = self
         view.addSubview(scrollView)
         view.layer.insertSublayer(scrollView.layer, at: 1)
         
@@ -119,12 +120,50 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
     
 }
 // MARK: - weight popUp
-extension AlbumViewController {
+extension AlbumViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+   
+    
+   
+    
     
     @IBAction func addWeight(_ sender: UIButton) {
         animateIn(popUp: popUpView)
-        
     }
+    
+    
+    //number of horizontal components
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+           1
+       }
+    
+    //number of cells in each component
+        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+            1500
+        }
+
+    //what to write inside each one
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        var weightsArray = [Float]()
+        for weight in stride(from: 50, to: 200, by: 0.1) {
+            weightsArray.append(Float(weight))
+        }
+        let stringedWeightArray = weightsArray.map{"\($0)"}
+        return stringedWeightArray[row]
+    }
+   
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("selected")
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func animateIn (popUp:UIView) {
         let background = self.view!
         
@@ -152,11 +191,17 @@ extension AlbumViewController {
     func animateOut (popUp:UIView) {
         UIView.animate(withDuration: 0.5) {
             popUp.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-            
             popUp.alpha = 0
-            
+        } completion: { _ in
             popUp.removeFromSuperview()
-            
         }
+
+       
     }
+    
+    
+    
+    
+    
+    
 }

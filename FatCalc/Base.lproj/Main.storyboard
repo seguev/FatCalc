@@ -503,6 +503,7 @@
                     <tabBarItem key="tabBarItem" tag="3" title="Album" image="camera" catalog="system" id="b7i-bE-Ahi"/>
                     <connections>
                         <outlet property="popUpView" destination="Gcu-ti-Du5" id="hSe-7v-tEJ"/>
+                        <outlet property="weightPicker" destination="UMC-lw-rOs" id="X3f-He-vTI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xn5-5K-PWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
