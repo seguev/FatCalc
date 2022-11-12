@@ -10,13 +10,24 @@ import UIKit
 class AlbumViewController: UIViewController, UIScrollViewDelegate {
 #warning("save it to coreData")
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet var popUpView: UIView!
+    
+    let scrollView: UIScrollView = {
+     let scroll = UIScrollView()
+     scroll.isPagingEnabled = true
+     scroll.showsVerticalScrollIndicator = false
+     scroll.showsHorizontalScrollIndicator = false
+     scroll.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+    
+     return scroll
+     }()
+    
     var weightArray = [Float]()
     
     var imageArray = [UIImage]() {
         didSet {
-            print("new image has been added : \(imageArray.first?.description)")
             setupImages(imageArray)
+            print("new image has been added : \(imageArray.first!)")
         }
     }
     
@@ -31,14 +42,21 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         picker.allowsEditing = false
         picker.sourceType = .camera
         
-        // Do any additional setup after loading the view.
-        //addDogImages()
-        //setupImages(imageArray)
+        view.addSubview(scrollView)
+        view.layer.insertSublayer(scrollView.layer, at: 1)
         
-        
+        //set popUpView size
+        popUpView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.8, height: self.view.bounds.width * 0.8)
+        popUpView.center = self.view.center
 
 
 
+
+    }
+   
+    
+    @IBAction func dismissPressed(_ sender: UIButton) {
+        animateOut(popUp: popUpView)
     }
     
     @IBAction func addNewImage(_ sender: UIButton) {
@@ -50,64 +68,27 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         imageArray = [#imageLiteral(resourceName: "dog2"), #imageLiteral(resourceName: "dog3"), #imageLiteral(resourceName: "dog1")]
     }
     
+    
     func setupImages(_ images: [UIImage]){
         
+        //n=count, for n times run for loop. i=n.
         for i in 0..<images.count {
             
-            let imageView = UIImageView() //create new instance of ImageView for eatch image
-            imageView.image = images[i] //attach the actual image from eatch one to the new imageView
-            
-            
-            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
-            
-            imageView.frame = CGRect(x: xPosition, y: 0, width: scrollView.frame.width, height: scrollView.frame.height) //set eatch imageView's frame
-            
-            imageView.contentMode = .scaleAspectFit //save relative photo aspect
-            
+            let imageView = UIImageView()
+             imageView.image = images[i]
+             let xPosition = UIScreen.main.bounds.width * CGFloat(i)
+             imageView.frame = CGRect(x: xPosition, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+             imageView.contentMode = .scaleAspectFit
+
             scrollView.contentSize.width = scrollView.frame.width * CGFloat(i + 1)
-            
-            
-            scrollView.addSubview(imageView) //add the imageView after setup to scroll view
-            scrollView.delegate = self
+             scrollView.addSubview(imageView)
+             scrollView.delegate = self
             
             
         }
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        //get current name from shared func
-        let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
-        
-        if Funcs.shared.isLoged == false {
-            print("guest!")
-        }
-        
-        print("current controller is \(currentControllerName)")
-        
-    }
-    
-    func setWeight () { //present alert with textField and convert to Float
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add your weight", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "ADD", style: .default) { action in
-            //save text to array
-            if let newWeight = textField.text { //if textfield text isnt nil
-                print(newWeight)
-                if let floatWeight = Float(newWeight) {
-                    print(floatWeight)
-                    self.weightArray.append(floatWeight)
-                    print(self.weightArray)
-                } else {print("could not convert into float")}
-            } else {print("textField.text is nil!")}
-        }
-        alert.addAction(action)
-        alert.addTextField { alertTextField in
-            textField = alertTextField
-        }
-        present(alert, animated: true)
-    }
     
     
     
@@ -136,4 +117,46 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
     }
     
     
+}
+// MARK: - weight popUp
+extension AlbumViewController {
+    
+    @IBAction func addWeight(_ sender: UIButton) {
+        animateIn(popUp: popUpView)
+        
+    }
+    func animateIn (popUp:UIView) {
+        let background = self.view!
+        
+        //make our popUp apear
+        background.addSubview(popUp)
+        
+        
+        //make it 120% bigger
+        popUp.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        
+        //make invisible
+        popUp.alpha = 0
+        
+        //show
+        UIView.animate(withDuration: 0.5) {
+            popUp.transform = CGAffineTransform(scaleX: 1, y: 1)
+            
+            //make invisible
+            popUp.alpha = 1
+        }
+        
+    }
+    
+    
+    func animateOut (popUp:UIView) {
+        UIView.animate(withDuration: 0.5) {
+            popUp.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            
+            popUp.alpha = 0
+            
+            popUp.removeFromSuperview()
+            
+        }
+    }
 }

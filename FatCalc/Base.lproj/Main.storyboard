@@ -151,7 +151,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="0Pk-2B-UJa">
-                                <rect key="frame" x="79.333333333333329" y="341" width="231.33333333333337" height="162"/>
+                                <rect key="frame" x="79.333333333333314" y="341" width="231.33333333333337" height="162"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="eup-RL-yLU">
                                         <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="162"/>
@@ -297,7 +297,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="0K3-Pk-b15">
-                                <rect key="frame" x="79.333333333333329" y="341" width="231.33333333333337" height="162"/>
+                                <rect key="frame" x="79.333333333333314" y="341" width="231.33333333333337" height="162"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="InJ-P9-tAB">
                                         <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="162"/>
@@ -468,39 +468,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="ITQ-SA-WqE">
-                                <rect key="frame" x="0.0" y="322" width="390" height="388"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="6Bu-fL-aMo"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="lHj-Wy-e0q"/>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-kI-AEl">
-                                <rect key="frame" x="120" y="214" width="150" height="35"/>
-                                <color key="backgroundColor" red="0.47684186699999997" green="0.50480759139999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="lzM-eV-UHO"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add New Image!"/>
-                                <connections>
-                                    <action selector="addNewImage:" destination="ckF-BY-BHd" eventType="touchUpInside" id="RCB-cT-oOB"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="201" translatesAutoresizingMaskIntoConstraints="NO" id="crg-G6-IjC">
+                                <rect key="frame" x="0.0" y="141" width="390" height="34.333333333333343"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKs-ze-iCg">
+                                        <rect key="frame" x="0.0" y="0.0" width="94.666666666666671" height="34.333333333333336"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="pencil.circle" catalog="system"/>
+                                        <connections>
+                                            <action selector="addWeight:" destination="ckF-BY-BHd" eventType="touchUpInside" id="4dV-T0-wA7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-kI-AEl">
+                                        <rect key="frame" x="295.66666666666669" y="0.0" width="94.333333333333314" height="34.333333333333336"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="camera.circle" catalog="system"/>
+                                        <connections>
+                                            <action selector="addNewImage:" destination="ckF-BY-BHd" eventType="touchUpInside" id="RCB-cT-oOB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2ua-He-2hJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="kbd-kI-AEl" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="123" id="1fN-B2-SWa"/>
-                            <constraint firstItem="kbd-kI-AEl" firstAttribute="centerX" secondItem="d9H-yK-9kI" secondAttribute="centerX" id="Llj-Wf-8Pj"/>
+                            <constraint firstItem="crg-G6-IjC" firstAttribute="top" secondItem="2ua-He-2hJ" secondAttribute="top" constant="50" id="3C0-by-mDh"/>
+                            <constraint firstItem="crg-G6-IjC" firstAttribute="leading" secondItem="2ua-He-2hJ" secondAttribute="leading" id="eJU-OJ-FQe"/>
+                            <constraint firstItem="2ua-He-2hJ" firstAttribute="trailing" secondItem="crg-G6-IjC" secondAttribute="trailing" id="ylS-1v-pQC"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="Album" image="camera" catalog="system" id="b7i-bE-Ahi"/>
                     <connections>
-                        <outlet property="scrollView" destination="ITQ-SA-WqE" id="Yc8-En-vy7"/>
+                        <outlet property="popUpView" destination="Gcu-ti-Du5" id="hSe-7v-tEJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xn5-5K-PWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Gcu-ti-Du5">
+                    <rect key="frame" x="0.0" y="0.0" width="326" height="249"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJJ-pr-a2I">
+                            <rect key="frame" x="125.66666666666669" y="194" width="75" height="35"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                            <connections>
+                                <action selector="dismissPressed:" destination="ckF-BY-BHd" eventType="touchUpInside" id="F7y-h4-s2v"/>
+                            </connections>
+                        </button>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMC-lw-rOs">
+                            <rect key="frame" x="0.0" y="0.0" width="326" height="162"/>
+                        </pickerView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="l43-TI-vga"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="rJJ-pr-a2I" firstAttribute="centerX" secondItem="Gcu-ti-Du5" secondAttribute="centerX" id="A86-6D-PI0"/>
+                        <constraint firstItem="UMC-lw-rOs" firstAttribute="leading" secondItem="l43-TI-vga" secondAttribute="leading" id="Cf6-bf-g1d"/>
+                        <constraint firstItem="l43-TI-vga" firstAttribute="bottom" secondItem="rJJ-pr-a2I" secondAttribute="bottom" constant="20" id="L3i-a2-haU"/>
+                        <constraint firstItem="UMC-lw-rOs" firstAttribute="top" secondItem="Gcu-ti-Du5" secondAttribute="top" id="heL-5c-c0p"/>
+                        <constraint firstItem="rJJ-pr-a2I" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UMC-lw-rOs" secondAttribute="bottom" id="hn6-EO-xAl"/>
+                        <constraint firstItem="UMC-lw-rOs" firstAttribute="trailing" secondItem="l43-TI-vga" secondAttribute="trailing" id="n3v-sl-oDU"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="3170.7692307692305" y="936.96682464454977"/>
         </scene>
@@ -557,8 +589,10 @@
     </scenes>
     <resources>
         <image name="camera" catalog="system" width="128" height="93"/>
+        <image name="camera.circle" catalog="system" width="128" height="123"/>
         <image name="chart.xyaxis.line" catalog="system" width="128" height="102"/>
         <image name="house" catalog="system" width="128" height="104"/>
+        <image name="pencil.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
