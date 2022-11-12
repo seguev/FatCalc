@@ -9,7 +9,8 @@ import UIKit
 
 class GraphViewController: UIViewController {
 
-
+    #warning("only after images and weights are saved into coreData")
+    #warning("learn about graphs .")
     
     override func viewDidLoad() {
         super.viewDidLoad()

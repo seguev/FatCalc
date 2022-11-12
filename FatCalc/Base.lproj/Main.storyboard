@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nsE-vb-ztd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jDj-RC-vSS">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
@@ -503,35 +503,38 @@
                     <tabBarItem key="tabBarItem" tag="3" title="Album" image="camera" catalog="system" id="b7i-bE-Ahi"/>
                     <connections>
                         <outlet property="popUpView" destination="Gcu-ti-Du5" id="hSe-7v-tEJ"/>
-                        <outlet property="weightPicker" destination="UMC-lw-rOs" id="X3f-He-vTI"/>
+                        <outlet property="weightTextField" destination="cHE-5e-fpN" id="gh8-CO-XHu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xn5-5K-PWX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="Gcu-ti-Du5">
-                    <rect key="frame" x="0.0" y="0.0" width="326" height="249"/>
+                    <rect key="frame" x="0.0" y="0.0" width="233" height="103"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJJ-pr-a2I">
-                            <rect key="frame" x="125.66666666666669" y="194" width="75" height="35"/>
+                            <rect key="frame" x="91.666666666666671" y="58" width="49.666666666666671" height="35"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Set"/>
                             <connections>
                                 <action selector="dismissPressed:" destination="ckF-BY-BHd" eventType="touchUpInside" id="F7y-h4-s2v"/>
                             </connections>
                         </button>
-                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMC-lw-rOs">
-                            <rect key="frame" x="0.0" y="0.0" width="326" height="162"/>
-                        </pickerView>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cHE-5e-fpN">
+                            <rect key="frame" x="76.666666666666671" y="16" width="80.000000000000014" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="IUH-Rc-CJ5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                        </textField>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="l43-TI-vga"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="rJJ-pr-a2I" firstAttribute="centerX" secondItem="Gcu-ti-Du5" secondAttribute="centerX" id="A86-6D-PI0"/>
-                        <constraint firstItem="UMC-lw-rOs" firstAttribute="leading" secondItem="l43-TI-vga" secondAttribute="leading" id="Cf6-bf-g1d"/>
-                        <constraint firstItem="l43-TI-vga" firstAttribute="bottom" secondItem="rJJ-pr-a2I" secondAttribute="bottom" constant="20" id="L3i-a2-haU"/>
-                        <constraint firstItem="UMC-lw-rOs" firstAttribute="top" secondItem="Gcu-ti-Du5" secondAttribute="top" id="heL-5c-c0p"/>
-                        <constraint firstItem="rJJ-pr-a2I" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UMC-lw-rOs" secondAttribute="bottom" id="hn6-EO-xAl"/>
-                        <constraint firstItem="UMC-lw-rOs" firstAttribute="trailing" secondItem="l43-TI-vga" secondAttribute="trailing" id="n3v-sl-oDU"/>
+                        <constraint firstItem="l43-TI-vga" firstAttribute="bottom" secondItem="rJJ-pr-a2I" secondAttribute="bottom" constant="10" id="L3i-a2-haU"/>
+                        <constraint firstItem="cHE-5e-fpN" firstAttribute="centerX" secondItem="Gcu-ti-Du5" secondAttribute="centerX" id="a85-mK-GGv"/>
+                        <constraint firstItem="rJJ-pr-a2I" firstAttribute="top" secondItem="cHE-5e-fpN" secondAttribute="bottom" constant="8" symbolic="YES" id="cdh-yg-cLc"/>
                     </constraints>
                 </view>
             </objects>

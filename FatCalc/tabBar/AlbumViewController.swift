@@ -8,11 +8,16 @@
 import UIKit
 
 class AlbumViewController: UIViewController, UIScrollViewDelegate {
-#warning("save it to coreData")
+    
+#warning("delete weight after setButtonPressed")
+#warning("write show NoImage icon when array is blank")
+#warning("create image and weight struct, each photo present its weight, you can add weigh to each photo")
+    #warning("save everything in coreData")
+    #warning("delete login page, too many bugs and not nessesery yet")
     
     @IBOutlet var popUpView: UIView!
     
-    @IBOutlet weak var weightPicker: UIPickerView!
+    @IBOutlet weak var weightTextField: UITextField!
     let scrollView: UIScrollView = {
      let scroll = UIScrollView()
      scroll.isPagingEnabled = true
@@ -23,6 +28,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
      return scroll
      }()
     
+
     var weightArray = [Float]()
     
     var imageArray = [UIImage]() {
@@ -39,16 +45,19 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         Funcs.shared.addGradient(view: self.view) //set color
+        weightTextField.delegate = self
         picker.delegate = self
         picker.allowsEditing = false
         picker.sourceType = .camera
-        weightPicker.delegate = self
         view.addSubview(scrollView)
         view.layer.insertSublayer(scrollView.layer, at: 1)
         
         //set popUpView size
-        popUpView.bounds = CGRect(x: 0, y: 0, width: self.view.bounds.width * 0.8, height: self.view.bounds.width * 0.8)
-        popUpView.center = self.view.center
+        //self.view.bounds.width * 0.2 = 20% from view's width
+        popUpView.bounds = CGRect(x: 0, y: 0, width: 200 , height: 150)
+        let xPosition = self.view.center.x
+        let yPosition = self.view.center.y+30
+        popUpView.center = .init(x: xPosition, y: yPosition)
 
 
 
@@ -120,7 +129,7 @@ extension AlbumViewController: UIImagePickerControllerDelegate, UINavigationCont
     
 }
 // MARK: - weight popUp
-extension AlbumViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AlbumViewController: UITextFieldDelegate {
    
     
    
@@ -131,34 +140,40 @@ extension AlbumViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     
-    //number of horizontal components
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-           1
-       }
-    
-    //number of cells in each component
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            1500
-        }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        animateOut(popUp: popUpView)
+        return true
+    }
 
-    //what to write inside each one
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        var weightsArray = [Float]()
-        for weight in stride(from: 50, to: 200, by: 0.1) {
-            weightsArray.append(Float(weight))
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let text = textField.text {
+            print(text.count)
+            #warning("still counting even when false and cant delete cause out of range")
+            print("new character is \(string)") //new characters
+            if text.contains(".") { //if theres a dot
+                if string == "." { //dont allow any other dot
+                    return false
+                }
+//                if text.count > 5 { //if theres a dot, max characters is 5
+//                    return false
+//                }
+                
+               
+            }
+//            if text.count > 3 { //if there isn't a dot, max character is 3
+//                return false
+//            }
         }
-        let stringedWeightArray = weightsArray.map{"\($0)"}
-        return stringedWeightArray[row]
-    }
-   
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("selected")
+        return true //allow range to change
     }
     
     
     
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("editing")
+    }
     
     
     

@@ -8,7 +8,10 @@
 import UIKit
 
 class MainViewController: UIViewController  {
-    
+    #warning("add calculation with tame and with caliper to Func.Shared")
+    #warning("add caliper calculationController")
+    #warning("add tape measure calculationController")
+    #warning("set resultController")
     
     override func viewDidLoad() {
         super.viewDidLoad()
