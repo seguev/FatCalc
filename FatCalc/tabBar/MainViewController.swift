@@ -33,13 +33,16 @@ class MainViewController: UIViewController  {
         
     }
     
-   
+    
     @IBAction func calcWithCaliper(_ sender: UIButton) {
+     
+        performSegue(withIdentifier: "toCaliper", sender: self)
         
-
     }
     
     @IBAction func calcWithTape(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "toTape", sender: self)
         
     }
     private func comingSoon () {

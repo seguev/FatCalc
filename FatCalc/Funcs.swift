@@ -73,5 +73,57 @@ class Funcs {
         
     }
     
+    func calcMenBodyFat (chest:String, abdominal:String, thigh: String, age:Int) -> String? {
+        if let pec = Double(chest), let abs = Double(abdominal), let leg = Double(thigh) {
+            
+            let sumOfFolds = pec+abs+leg
+            let a = 1.10938+(-1*(0.0008267*sumOfFolds))
+            let b = 0.0000016*pow(sumOfFolds,2)
+            let c = 0.0002574*Double(age)
+            let bodyDensity = a+b-c
+            
+            //bodyDensity = 1.10938–(0.0008267*sumOfFolds) + (0.0000016 x square of the sum of skinfolds) – (0.0002574 x age)
+            
+            return menBodyFat(bodyDensity)
+        }
+        return nil
+    }
+    
+    private func menBodyFat(_ density:Double) -> String {
+        let a = 495/density
+        let b = Double(450)
+        let bodyFat = a-b
+        let resultString = String(format: "%.1f", bodyFat)
+        //BodyFatPercentage = (495 / Body Density) – 450
+        return resultString
+    }
+    
+    func calcWomenBodyFat (chest:String, suprailiac:String, thigh: String, age:Int) -> String? {
+        if let pec = Double(chest), let abs = Double(suprailiac), let leg = Double(thigh) {
+            
+            let sumOfFolds = pec+abs+leg
+            let a = 1.0994921+(-1*(0.0009929*sumOfFolds))
+            let b = 0.0000023*pow(sumOfFolds,2)
+            let c = 0.0001392*Double(age)
+            let bodyDensity = a+b-c
+         /*
+            Body Density = 1.0994921 – (0.0009929 x sum of skinfolds) + (0.0000023 x square of the sum of skinfolds) – (0.0001392 x age)
+          */
+            
+            return womenBodyFat(bodyDensity)
+        }
+        return nil
+    }
+    
+    private func womenBodyFat(_ density:Double) -> String {
+        let a = 495/density
+        let b = Double(450)
+        let bodyFat = a-b
+        let resultString = String(format: "%.1f", bodyFat)
+        //BodyFatPercentage = (495 / Body Density) – 450
+        return resultString
+    }
+    
+    
     
 }

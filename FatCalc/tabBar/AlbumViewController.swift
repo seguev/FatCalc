@@ -23,9 +23,12 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     var imageIndex : Int? { //every complited scroll
         didSet{ //when scrolled. index is set and weight text is changed to arrays[i] weight
             print("index has been set to \(imageIndex!)")
-                imageWeightLabel.text = weightsArray[imageIndex!]
-            #warning("out of range if no weights")
-            #warning("only updated after scrolling")
+            if imageIndex! < weightsArray.count {
+                imageWeightLabel.text = weightsArray[imageIndex ?? 0]
+            } else {
+                return
+            }
+           
         }
     }
     
@@ -128,6 +131,8 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     
     
     @IBAction func xPressed(_ sender: UIButton) {
+       
+        //remove from scroll vire
         #warning("delete image")
         animateOut(popUp: popUpView)
     }
