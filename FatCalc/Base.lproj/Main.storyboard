@@ -85,7 +85,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="0Pk-2B-UJa">
-                                <rect key="frame" x="79.333333333333314" y="312.66666666666669" width="231.33333333333337" height="162"/>
+                                <rect key="frame" x="79.333333333333329" y="312.66666666666669" width="231.33333333333337" height="162"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="eup-RL-yLU">
                                         <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="162"/>
@@ -438,6 +438,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UFO-8C-xSt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="graph" image="chart.xyaxis.line" catalog="system" id="4LK-xb-y87"/>
                 </viewController>

@@ -7,9 +7,12 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class Funcs {
     static let shared = Funcs()
+    
+    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     /*var isLoged : Bool?
     
@@ -122,8 +125,53 @@ class Funcs {
         return nil
     }
     
+    #warning("add image saving functionality")
+    func saveToCoreData (_ newWeight:Float, newImage: UIImage? = nil) {
+        
+        //saveImageToCoreData (newImage)
+        
+        let newEntry = Entry(context: context)
+        
+        newEntry.date = Date()
+        
+        newEntry.wight = newWeight
+        do {
+            try context.save()
+            print("New entry has been saved!")
+        } catch {
+            print("Saving Failed! : \(error)")
+        }
+    }
     
+    /*func saveImageToCoreData (_ image:UIImage?) {
+        if let pngImage = image?.pngData() {
+            newEntry.image = pngImage
+            let entityName =  NSEntityDescription.entity(forEntityName: "Entry", in: context)!
+            let image = NSManagedObject(entity: entityName, insertInto: context)
+            image.setValue(pngImage, forKeyPath: "image")
+        } else {
+            print("could not convert image to png. did not save!")
+        }
+    }*/
     
+    func loadFromCoreData (_ entry: Entry) -> [Entry]? {
+        do {
+            return try context.fetch(NSFetchRequest<Entry>(entityName: "Entry"))
+        } catch {
+            print("ERROR while \(#function): \(error)")
+        }
+        print("returning nil")
+        return nil
+    }
     
+    func deleteFromCoreData (_ entry:Entry) {
+        do {
+            context.delete(entry)
+            try context.save()
+            print("New entry has been saved!")
+        } catch {
+            print("Saving Failed! : \(error)")
+        }
+    }
     
 }
