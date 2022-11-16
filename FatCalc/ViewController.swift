@@ -60,9 +60,7 @@ class ViewController: UIViewController {
             if segue.identifier == "guestLog" {
                 print("guest loged in")
                 
-                //if guest, set shared "isLoged" variable to false.
-                Funcs.shared.isLoged = false
-                
+               
                 //set mainVC as the 0 n from the controllers array and cast
 #warning("dont delete")
 

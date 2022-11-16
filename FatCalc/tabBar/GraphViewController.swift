@@ -24,9 +24,7 @@ class GraphViewController: UIViewController {
         //get current name from shared func
         let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
         
-        if Funcs.shared.isLoged == false {
-            print("guest!")
-        }
+        
         
         print("current controller is \(currentControllerName)")
 

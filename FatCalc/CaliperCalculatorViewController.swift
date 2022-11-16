@@ -7,89 +7,107 @@
 
 import UIKit
 
-class MenCaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
+class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
+    @IBOutlet weak var fourthLabel: UILabel!
     @IBOutlet weak var firstTextField: UITextField!
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var thirdTextField: UITextField!
-    @IBOutlet weak var agePicker: UIPickerView!
-
-    var firstText : String?
-    var secondText : String?
-    var thirdText : String?
+    @IBOutlet weak var fourthTextField: UITextField!
+    
+    
+    var age : String?
+    var genderUniqueFold : String?
+    var abdominalFold : String?
+    var thighFold : String?
+    
     var numberArray = [Int]()
-    var age : Int = 20
     var fatPercentage: String?
     
-    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        
-        //0=Male, 1=Female
-        print(sender.selectedSegmentIndex)
-        if sender.selectedSegmentIndex == 0 { //male
-            print("male selected")
-            firstLabel.text = "pecs"
-            secondLabel.text = "abs"
-            thirdLabel.text = "thigh"
-            
-        } else if sender.selectedSegmentIndex == 1 { //female
-            print("female selected")
-            firstLabel.text = "suprailiac"
-            secondLabel.text = "thigh"
-            thirdLabel.text = "triceps"
+    var gender : String = "Male" {
+        didSet {
+            print("gender setter")
+            if gender == "Male" {
+                print("male has been set")
+                firstLabel.text = "Age"
+                secondLabel.text = "Chest"
+                thirdLabel.text = "Abdominal"
+                fourthLabel.text = "Mid thigh"
+            } else if gender == "Female" {
+                print("female has been set")
+                firstLabel.text = "Age"
+                secondLabel.text = "Triceps"
+                thirdLabel.text = "Suprailiac"
+                fourthLabel.text = "Mid thigh"
+            } else {
+                print("error while setting gender")
+                fatalError()
+            }
         }
-        
     }
     
     
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        //0=Male, 1=Female
+        if sender.selectedSegmentIndex == 0 { //Male
+            print("Male selected")
+            gender = "Male"
+        } else if sender.selectedSegmentIndex == 1 { //Female
+            print("female selected")
+            gender = "Female"
+        }
+    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         firstTextField.delegate = self
         secondTextField.delegate = self
         thirdTextField.delegate = self
-        agePicker.delegate = self
-        agePicker.dataSource = self
+        fourthTextField.delegate = self
+        Funcs.shared.addGradient(view: self.view)
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
     }
    
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-       
         
+            //decide which textfield.text to save
         if let availableText = textField.text{
             switch textField.restorationIdentifier{
             case "1":
-                firstText = availableText
-                print("\(firstText!) text saved")
+                age = availableText
             case "2":
-                secondText = availableText
-                print("\(secondText!) text saved")
+                genderUniqueFold = availableText
             case "3":
-                thirdText = availableText
-                print("\(thirdText!) text saved")
+                abdominalFold = availableText
+            case "4":
+                thighFold = availableText
             default:
                 print("da fuck did you just do")
             }
         }
-        
         return true
     }
    
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         
-        if let safeFirst = firstText, let safeSecond = secondText, let safeThird = thirdText{
-            fatPercentage = Funcs.shared.calcMenBodyFat(chest: safeFirst, abdominal: safeSecond, thigh: safeThird, age: age)
+        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold{
+            if gender == "Male" {
+               fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeSecond, abdominal: safeThird, thigh: safeFourh)
+            } else if gender == "Female" {
+                fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeSecond, suprailiac: safeThird, thigh: safeFourh)
+            }
         }
         
         if fatPercentage != nil {
             performSegue(withIdentifier: "toResult", sender: self)
-        
-        #warning("dont forget to check gender!")
-           
+        } else {
+            self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,7 +129,7 @@ class MenCaliperCalculatorViewController: UIViewController, UITextFieldDelegate 
 
 
 // MARK: - picker
-extension MenCaliperCalculatorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+/*extension CaliperCalculatorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -135,5 +153,6 @@ extension MenCaliperCalculatorViewController: UIPickerViewDelegate, UIPickerView
     }
     
     
-}
+    
+}*/
    
