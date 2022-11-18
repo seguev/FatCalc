@@ -8,11 +8,12 @@
 import UIKit
 
 class AlbumViewController: UIViewController, UIScrollViewDelegate {
-    #warning("attach value to each photo")
-    #warning("attach value to each date and weight")
-    #warning("change date and weight when phhoto is swiped")
-#warning("each photo present its weight, you can add weigh to each photo")
-    #warning("save everything in coreData")
+    /*
+     1. save weight in coreData
+     2. save fat caliper fatPercengage
+     3. no gradience to background, only buttons
+     4. find graph SDK and attach
+     */
     @IBOutlet weak var imageDateLabel: UILabel!
     
     @IBOutlet weak var imageWeightLabel: UILabel!

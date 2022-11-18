@@ -8,23 +8,20 @@
 import UIKit
 
 class MainViewController: UIViewController  {
-    #warning("add calculation with tame and with caliper to Func.Shared")
-    #warning("add caliper calculationController")
     #warning("add tape measure calculationController")
     #warning("set resultController")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Funcs.shared.addGradient(view: self.view)
-
+        view.backgroundColor = .cyan
+        
        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         //get current name from shared func
         let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
-        
+        title = currentControllerName
         
         
         print("current controller is \(currentControllerName)")

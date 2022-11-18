@@ -174,4 +174,46 @@ class Funcs {
         }
     }
     
+    func tapeFatCalcWomen (age: Int, hips:Float ,thigh:Float ,calf:Float ,wrist:Float) -> Float? {
+        
+        if age <= 30 {
+            let bodyFat = hips + (0.8*thigh) - (2*calf) - wrist
+            return bodyFat
+        } else if age > 30 {
+            let bodyFat = hips + thigh - (2*calf) - wrist
+            return bodyFat
+        }
+        print("ERROR \(#function) failed")
+        return nil
+    }
+    
+    func tapeFatCalcMen (age:Int, hips:Float ,waist:Float ,forearm:Float ,wrist:Float) -> Float? {
+
+        if age <= 30 {
+            let bodyFat = waist + (0.5*hips) - (3*forearm) - wrist
+            return bodyFat
+        } else if age > 30 {
+            let bodyFat = waist + (0.5*hips) - (2.7*forearm) - wrist
+            return bodyFat
+        }
+        print("ERROR \(#function) failed")
+        return nil
+    }
+    
+   
+    /*
+     Covert Bailey Method
+     women
+     A) Hips, B) Thigh, C) Calf, D) Wrist
+     Fat% = A+0.8B - 2C - D (for women 30 years old or younger)
+     Fat% = A+ B - 2C - D (for women over age 30)
+     men
+     A) Hips, B) Waist, C) Forearm Circumference, and D) Wrist.
+     Fat% = B + 0.5A - 3C - D (for men 30 years old or younger)
+     Fat% = B + 0.5A - 2.7C - D (for men over age 30)
+     
+     
+     
+     All measurements should be taken at their widest points and should be recorded in inches.
+     */
 }

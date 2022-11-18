@@ -1,13 +1,14 @@
 //
-//  CaliperCalculatorViewController.swift
+//  TapeMeasureViewController.swift
 //  FatCalc
 //
-//  Created by segev perets on 15/11/2022.
+//  Created by segev perets on 18/11/2022.
 //
 
 import UIKit
 
-class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
+class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
@@ -16,7 +17,6 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var thirdTextField: UITextField!
     @IBOutlet weak var fourthTextField: UITextField!
-    
     
     var age : String?
     var genderUniqueFold : String?
@@ -49,29 +49,21 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        //0=Male, 1=Female
-        if sender.selectedSegmentIndex == 0 { //Male
-            print("Male selected")
-            gender = "Male"
-        } else if sender.selectedSegmentIndex == 1 { //Female
-            print("female selected")
-            gender = "Female"
-        }
-    }
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         firstTextField.delegate = self
         secondTextField.delegate = self
         thirdTextField.delegate = self
         fourthTextField.delegate = self
+
         Funcs.shared.addGradient(view: self.view)
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
     }
    
+    @IBAction func genderChanged(_ sender: UISegmentedControl) {
+    }
+    
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
@@ -96,16 +88,16 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         
-        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold{
+        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold, let safeFifth = fifth{
             if gender == "Male" {
-               fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeSecond, abdominal: safeThird, thigh: safeFourh)
+               fatPercentage = Funcs.shared.tapeFatCalcMen(age: safeFirst, hips: safeSecond, waist: safeThird, forearm: safeFourh, wrist: safeFifth)
             } else if gender == "Female" {
-                fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeSecond, suprailiac: safeThird, thigh: safeFourh)
+                fatPercentage = Funcs.shared.tapeFatCalcWomen(age: <#T##Int#>, hips: <#T##Float#>, thigh: <#T##Float#>, calf: <#T##Float#>, wrist: <#T##Float#>)
             }
         }
         
         if fatPercentage != nil {
-            performSegue(withIdentifier: "caliperToResult", sender: self)
+            performSegue(withIdentifier: "tapeToResult", sender: self)
         } else {
             self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
         }
@@ -123,36 +115,5 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     
     
+
 }
-
-
-
-
-// MARK: - picker
-/*extension CaliperCalculatorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        100
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        for number in stride(from: 20, to: 100, by: 1) {
-            numberArray.append(number)
-        }
-        let StringArray = numberArray.map{"\($0)"}
-        return StringArray[row]
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(numberArray[row])
-        age = numberArray[row]
-    }
-    
-    
-    
-}*/
-   

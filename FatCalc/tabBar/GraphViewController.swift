@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SwiftUI
+import Charts
 
 class GraphViewController: UIViewController {
 
@@ -15,6 +17,8 @@ class GraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Funcs.shared.addGradient(view: self.view)
+        let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
+        title = currentControllerName
 
         // Do any additional setup after loading the view.
     }
@@ -33,3 +37,4 @@ class GraphViewController: UIViewController {
     
 
 }
+
