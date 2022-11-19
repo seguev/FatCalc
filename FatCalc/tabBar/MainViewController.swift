@@ -8,14 +8,15 @@
 import UIKit
 
 class MainViewController: UIViewController  {
-    #warning("add tape measure calculationController")
-    #warning("set resultController")
+  
+    @IBOutlet weak var caliperButton: UIButton!
+    @IBOutlet weak var tapeButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .cyan
-        
-       
+        Funcs.shared.makeButtonRound(caliperButton)
+        Funcs.shared.makeButtonRound(tapeButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {

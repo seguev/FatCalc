@@ -68,7 +68,7 @@ class Funcs {
   }
     
     func makeButtonRound (_ button:UIButton) {
-        button.layer.cornerRadius = button.frame.height/2
+        button.layer.cornerRadius = 4
     }
     
     func addGradient (firstColor:UIColor = #colorLiteral(red: 0.01960784314, green: 0.8509803922, blue: 1, alpha: 1), secondColor:UIColor =  #colorLiteral(red: 0.05490196078, green: 0.4549019608, blue: 0.9882352941, alpha: 1), view:UIView) {
@@ -77,6 +77,7 @@ class Funcs {
         layer.colors = colors
         layer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
         layer.frame = view.frame
+        
         view.layer.insertSublayer(layer, at: 0)
         
     }
@@ -125,7 +126,6 @@ class Funcs {
         return nil
     }
     
-    #warning("add image saving functionality")
     func saveToCoreData (_ newWeight:Float, newImage: UIImage? = nil) {
         
         //saveImageToCoreData (newImage)
@@ -174,27 +174,52 @@ class Funcs {
         }
     }
     
-    func tapeFatCalcWomen (age: Int, hips:Float ,thigh:Float ,calf:Float ,wrist:Float) -> Float? {
-        
-        if age <= 30 {
-            let bodyFat = hips + (0.8*thigh) - (2*calf) - wrist
-            return bodyFat
-        } else if age > 30 {
-            let bodyFat = hips + thigh - (2*calf) - wrist
-            return bodyFat
-        }
+    func tapeFatCalcWomen (age: String, hips:String ,thigh:String ,calf:String ,wrist:String) -> String? {
+        print("\(#function)")
+        let toInches : Float = 0.393700787
+        if var a = Float(age), var b = Float(hips), var c = Float(thigh), var d = Float(calf), var e = Float(wrist) {
+            a = a * toInches
+            b = b * toInches
+            c = c * toInches
+            d = d * toInches
+            e = e * toInches
+            print("success")
+            if a <= 30 {
+                let bodyFat = b + (0.8*c) - (2*d) - e
+                let bodyString = String(format: "%.1f", bodyFat)
+                return bodyString
+            } else if a > 30 {
+                let bodyFat = b + c - (2*d) - e
+                let bodyString = String(format: "%.1f", bodyFat)
+                return bodyString
+            }
+        } else {print(#function)}
         print("ERROR \(#function) failed")
         return nil
     }
     
-    func tapeFatCalcMen (age:Int, hips:Float ,waist:Float ,forearm:Float ,wrist:Float) -> Float? {
+    func tapeFatCalcMen (age:String, hips:String ,waist:String ,forearm:String ,wrist:String) -> String? {
+        print("\(#function)")
+        let toInches : Float = 0.393700787
 
-        if age <= 30 {
-            let bodyFat = waist + (0.5*hips) - (3*forearm) - wrist
-            return bodyFat
-        } else if age > 30 {
-            let bodyFat = waist + (0.5*hips) - (2.7*forearm) - wrist
-            return bodyFat
+        if var a = Float(age), var b = Float(hips), var c = Float(waist), var d = Float(forearm), var e = Float(wrist) {
+            a = a * toInches
+            b = b * toInches
+            c = c * toInches
+            d = d * toInches
+            e = e * toInches
+            print("success")
+            if a <= 30 {
+                let bodyFat = c + (0.5*b) - (3*d) - e
+                let bodyString = String(format: "%.1f", bodyFat)
+                return bodyString
+                
+            } else if a > 30 {
+                    let bodyFat = c + (0.5*b) - (2.7*d) - e
+                    let bodyString = String(format: "%.1f", bodyFat)
+                    return bodyString
+                    
+                }
         }
         print("ERROR \(#function) failed")
         return nil

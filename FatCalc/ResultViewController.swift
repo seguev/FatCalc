@@ -11,18 +11,26 @@ class ResultViewController: UIViewController {
 
     
     @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     var result : String?
     var gender : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         guard result != nil else {fatalError()}
         resultLabel.text = result!+"%"
-        if gender == "male" {
-            
-        } else if gender == "female" {
-            
+        guard let availableResult = Float(result!) else {fatalError()}
+        if Float(availableResult) < 0 {
+            resultLabel.text = "this is below 0. check yourself (:"
+            categoryLabel.isHidden = true
+            return
+        }
+        if gender == "Male" {
+            menHealthFat()
+        } else if gender == "Female" {
+            womenHealthFat()
         } else {
             present(Funcs.shared.somthingsWrongAlertController(), animated: true)
             print("ERROR, gender = \(gender ?? "nil") ")
@@ -42,26 +50,27 @@ class ResultViewController: UIViewController {
             case 2..<6:
                 //add label Essential Fat
                 view.backgroundColor = .green
-                resultLabel.text?.append(" Essential Fat")
+                categoryLabel.text = "Essential Fat"
             case 6..<14:
                 //add label Typical Athletes
                 view.backgroundColor = .blue
-                resultLabel.text?.append(" Typical Athletes")
+                categoryLabel.text = "Typical Athletes"
             case 14..<18:
                 //add label Fitness
                 view.backgroundColor = .yellow
-                resultLabel.text?.append(" Fitness")
+                categoryLabel.text = "Fitness"
             case 18..<26:
                 //add label Acceptable
                 view.backgroundColor = .orange
-                resultLabel.text?.append(" Acceptable")
+                categoryLabel.text = "Acceptable"
             case 26...:
                 //add label Obese
                 view.backgroundColor = .red
-                resultLabel.text?.append(" Obese")
+                categoryLabel.text = "Obese"
             default:
                 view.backgroundColor = .darkGray
-                resultLabel.text?.append(" yeah thats probably wrong, please check again...")
+                categoryLabel.text = "yeah thats probably wrong, please check again..."
+
 
             }
         }
@@ -73,22 +82,23 @@ class ResultViewController: UIViewController {
             switch resultFloat{
             case 10..<14:
                 view.backgroundColor = .green
-                resultLabel.text?.append(" Essential Fat")
+                categoryLabel.text = "Essential Fat"
             case 14..<21:
                 view.backgroundColor = .blue
-                resultLabel.text?.append(" Typical Athletes")
+                categoryLabel.text = "Typical Athletes"
+               
             case 21..<25:
                 view.backgroundColor = .yellow
-                resultLabel.text?.append(" Fitness")
+                categoryLabel.text = "Fitness"
             case 25..<32:
                 view.backgroundColor = .orange
-                resultLabel.text?.append(" Acceptable")
+                categoryLabel.text = "Acceptable"
             case 32...:
                 view.backgroundColor = .red
-                resultLabel.text?.append(" Obese")
+                categoryLabel.text = "Obese"
             default:
                 view.backgroundColor = .darkGray
-                resultLabel.text?.append(" yeah thats probably wrong, please check again...")
+                categoryLabel.text = "yeah thats probably wrong, please check again..."
             }
         }
        

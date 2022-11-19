@@ -8,39 +8,66 @@
 import UIKit
 
 class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
-    
-    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var ageLable: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
     @IBOutlet weak var fourthLabel: UILabel!
+    @IBOutlet weak var fifthLabel: UILabel!
     @IBOutlet weak var firstTextField: UITextField!
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var thirdTextField: UITextField!
     @IBOutlet weak var fourthTextField: UITextField!
+    @IBOutlet weak var fifthTextField: UITextField!
+   
     
-    var age : String?
-    var genderUniqueFold : String?
-    var abdominalFold : String?
-    var thighFold : String?
     
-    var numberArray = [Int]()
-    var fatPercentage: String?
+    var age : String? {
+        didSet{
+            print("age has been set")
+        }
+    }
+    var hips : String? {
+        didSet{
+            print("hips has been set")
+        }
+    }
+    var waistAndThigh : String? {
+        didSet{
+            print("waistAndThigh has been set")
+        }
+    }
+    var forarmAndCalf : String? {
+        didSet{
+            print("forarmAndCalf has been set")
+        }
+    }
+    var wrist: String? {
+        didSet{
+            print("wrist has been set")
+        }
+    }
+    
+    var fatPercentage: String?{
+        didSet{
+            print("fatPercentage has been set")
+        }
+    }
     
     var gender : String = "Male" {
         didSet {
             print("gender setter")
             if gender == "Male" {
                 print("male has been set")
-                firstLabel.text = "Age"
-                secondLabel.text = "Chest"
-                thirdLabel.text = "Abdominal"
-                fourthLabel.text = "Mid thigh"
+                secondLabel.text = "Hips"
+                thirdLabel.text = "Waist"
+                fourthLabel.text = "Forearm"
+                fifthLabel.text = "Wrist"
             } else if gender == "Female" {
                 print("female has been set")
-                firstLabel.text = "Age"
-                secondLabel.text = "Triceps"
-                thirdLabel.text = "Suprailiac"
-                fourthLabel.text = "Mid thigh"
+                secondLabel.text = "Hips"
+                thirdLabel.text = "Thigh"
+                fourthLabel.text = "Calf"
+                fifthLabel.text = "Wrist"
             } else {
                 print("error while setting gender")
                 fatalError()
@@ -51,17 +78,24 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Funcs.shared.addGradient(view: self.view)
         firstTextField.delegate = self
         secondTextField.delegate = self
         thirdTextField.delegate = self
         fourthTextField.delegate = self
-
-        Funcs.shared.addGradient(view: self.view)
+        fifthTextField.delegate = self
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
     }
    
     @IBAction func genderChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            gender = "Male"
+        } else if sender.selectedSegmentIndex == 1 {
+            gender = "Female"
+        } else {
+            present(Funcs.shared.somthingsWrongAlertController(), animated: true)
+        }
     }
     
     
@@ -71,13 +105,20 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         if let availableText = textField.text{
             switch textField.restorationIdentifier{
             case "1":
+                print("typing age")
                 age = availableText
             case "2":
-                genderUniqueFold = availableText
+                print("typing hips")
+                hips = availableText
             case "3":
-                abdominalFold = availableText
+                print("typing thigh")
+                waistAndThigh = availableText
             case "4":
-                thighFold = availableText
+                print("typing typing calf")
+                forarmAndCalf = availableText
+            case "5":
+                print("typing typing wrist")
+                wrist = availableText
             default:
                 print("da fuck did you just do")
             }
@@ -85,28 +126,35 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         return true
     }
    
-    
+
     @IBAction func calculatePressed(_ sender: UIButton) {
-        
-        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold, let safeFifth = fifth{
+        view.endEditing(true)
+        if let safeFirst = age, let safeSecond = hips, let safeThird = waistAndThigh, let safeFourh = forarmAndCalf, let safeFifth = wrist{
             if gender == "Male" {
+                print("gender is male")
                fatPercentage = Funcs.shared.tapeFatCalcMen(age: safeFirst, hips: safeSecond, waist: safeThird, forearm: safeFourh, wrist: safeFifth)
             } else if gender == "Female" {
-                fatPercentage = Funcs.shared.tapeFatCalcWomen(age: <#T##Int#>, hips: <#T##Float#>, thigh: <#T##Float#>, calf: <#T##Float#>, wrist: <#T##Float#>)
+                print("gender is female")
+                fatPercentage = Funcs.shared.tapeFatCalcWomen(age: safeFirst, hips: safeSecond, thigh: safeThird, calf: safeFourh, wrist: safeFifth)
+                
             }
         }
-        
+
         if fatPercentage != nil {
+            print("fatPercentage isn't nil!")
             performSegue(withIdentifier: "tapeToResult", sender: self)
         } else {
+            print("fatPercentage is nil! : \(fatPercentage ?? "nil")")
             self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier)
+        print(segue.identifier ?? "nil")
         print(segue.destination)
         let destinationVC = segue.destination as! ResultViewController
         destinationVC.result = fatPercentage!
+        destinationVC.gender = gender
     }
     
     

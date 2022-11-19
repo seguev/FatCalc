@@ -23,7 +23,6 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     var abdominalFold : String?
     var thighFold : String?
     
-    var numberArray = [Int]()
     var fatPercentage: String?
     
     var gender : String = "Male" {
@@ -75,7 +74,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
-            //decide which textfield.text to save
+        print(textField.restorationIdentifier)
         if let availableText = textField.text{
             switch textField.restorationIdentifier{
             case "1":
@@ -95,8 +94,10 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
    
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        
-        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold{
+        view.endEditing(true) //end editing for all textfields and save values
+        print(age,genderUniqueFold,abdominalFold,thighFold)
+
+        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold {
             if gender == "Male" {
                fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeSecond, abdominal: safeThird, thigh: safeFourh)
             } else if gender == "Female" {
@@ -107,14 +108,16 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         if fatPercentage != nil {
             performSegue(withIdentifier: "caliperToResult", sender: self)
         } else {
+            print("fatPercentage is nil! \(fatPercentage ?? "nil")")
             self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier)
+        print(segue.identifier ?? "nil")
         print(segue.destination)
         let destinationVC = segue.destination as! ResultViewController
         destinationVC.result = fatPercentage!
+        destinationVC.gender = gender
     }
     
     
@@ -128,31 +131,5 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
 
 
 
-// MARK: - picker
-/*extension CaliperCalculatorViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        100
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        for number in stride(from: 20, to: 100, by: 1) {
-            numberArray.append(number)
-        }
-        let StringArray = numberArray.map{"\($0)"}
-        return StringArray[row]
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(numberArray[row])
-        age = numberArray[row]
-    }
-    
-    
-    
-}*/
+
    
