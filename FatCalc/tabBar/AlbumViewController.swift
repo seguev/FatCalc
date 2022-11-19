@@ -14,6 +14,8 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
      3. no gradience to background, only buttons
      4. find graph SDK and attach
      */
+    
+    
     @IBOutlet weak var imageDateLabel: UILabel!
     
     @IBOutlet weak var imageWeightLabel: UILabel!
@@ -34,7 +36,6 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     }
     
     var weightsArray = [String]()
-    
     let scrollView: UIScrollView = {
      let scroll = UIScrollView()
      scroll.isPagingEnabled = true
@@ -46,6 +47,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
          return scroll
      }()
     
+    #warning("YALLA is added")
 
     
     var imageArray = [UIImage]() {
