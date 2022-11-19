@@ -15,7 +15,6 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
      4. find graph SDK and attach
      */
     
-    
     @IBOutlet weak var imageDateLabel: UILabel!
     
     @IBOutlet weak var imageWeightLabel: UILabel!
@@ -46,9 +45,6 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
      scroll.frame = CGRect(x: 0, y: 200, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-200)
          return scroll
      }()
-    
-    #warning("YALLA is added")
-
     
     var imageArray = [UIImage]() {
         didSet {
