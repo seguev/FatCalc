@@ -10,8 +10,7 @@ import Charts
 
 class GraphViewController: UIViewController, ChartViewDelegate {
 
-  
-    
+      
     lazy var lineChartView: LineChartView = {
         let chartView = LineChartView()
         chartView.leftAxis.axisLineColor = .black
@@ -23,9 +22,8 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         Funcs.shared.addGradient(view: self.view)
         lineChartView.delegate = self
-        
-       
         chartSetup()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,11 +33,10 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         //title = currentControllerName
         print("current controller is \(currentControllerName)")
         
-        //set chartData when loading
-        setData()
+        loadFats() //(every time user check chart)
     }
 
-    func chartSetup () {
+    private func chartSetup () {
         lineChartView.frame = CGRect(x: 0, y: 50, width: view.frame.width, height: view.frame.height*0.8)
         lineChartView.rightAxis.enabled = false
         lineChartView.xAxis.labelPosition = .bottom
@@ -61,35 +58,70 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         print(entry.y)
     }
     
-    func loadData () {
-        //1.get entries from core data and make in [ChartdataEntriy]
-        //2.make lineChartDataSet from it
-        //3.make lineChartData from dataSet
-        //4.add new data to lineChartView
+   
+    private func loadFats () {
+        #warning("load all entries as [Entry] with weight and fat percent properties")
+        //1. "everytime theres value in [Entry], it also load all weights"
+        //2. "show dates insted of numbers at bottom axis"
+        //3. "attach weight to fats if on the same date"
+        //4. "set different line for weights and fats"
+        //5. "hide chart net"
+        //6. "set bottom values to Intergers"
+        //7. "hide left axis"
+        
+        //load all entries
+        if let loadedEntries = Funcs.shared.loadFromCoreData() {
+            
+            //every load, let an index for each (later will be used for x value)
+            var entryIndex : Double = 0.0
+            
+            //init empty chartDataEntry array
+            var fatsArray : [ChartDataEntry] = []
+            
+            //for each entry from array
+            for entry in loadedEntries {
+                
+                //set + 1 index from previous
+                entryIndex += 1
+                
+                //isolate the weight from the intire Entry
+                let weightEntry = Double(entry.fatPercentage)
+                
+                //create new ChartDataEntry from index and weight
+                let newEntry = ChartDataEntry(x: entryIndex, y: weightEntry)
+                
+                //append to an array of ChartDataEntries
+                fatsArray.append(newEntry)
+            }
+            
+            //procied to next func
+            setData(fatsArray)
+        } else {
+            print("Chart has no entries to load!")
+        }
     }
-    //1. set chart data entries
-        let weightValue : [ChartDataEntry] = [
-            ChartDataEntry(x: 1, y: 65.4),
-            ChartDataEntry(x: 2, y: 64.2),
-            ChartDataEntry(x: 3, y: 62.9),
-            ChartDataEntry(x: 4, y: 61.1),
-            ChartDataEntry(x: 5, y: 60)
-        ]
     
+   
     //2. set data to chart
-    func setData () {
+    private func setData (_ chartDataEntryArray: [ChartDataEntry]) {
         //take the entries and insert into a data set and name it.
-        let weightSet = LineChartDataSet(entries: weightValue, label: "Weight")
-        weightSet.mode = .cubicBezier
-        weightSet.circleHoleRadius = 0.08
-        weightSet.fillColor = .white
-        weightSet.drawFilledEnabled = true
-        weightSet.fillAlpha = 0.4
-        //make data from the data set
-        let data = LineChartData(dataSet: weightSet)
+        let fatsSet = LineChartDataSet(entries: chartDataEntryArray, label: "Fat %")
+        
+        //set the set's attributes
+        fatsSet.mode = .cubicBezier //little bit rounded
+        fatsSet.circleHoleRadius = 0.05 //circle radius
+        fatsSet.drawFilledEnabled = true //add fill
+        fatsSet.fillColor = .white //fill color
+        fatsSet.fillAlpha = 0.4 //fill alpha
+        
+        //make LineChartData from the data set. (LineData specificly)
+        let fatsData = LineChartData(dataSet: fatsSet)
         
         //attach data to chart
-        lineChartView.data = data
+        lineChartView.data = fatsData
+        
+        
+     
     }
     
     

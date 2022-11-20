@@ -35,6 +35,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     }
     
     var weightsArray = [String]()
+    
     let scrollView: UIScrollView = {
      let scroll = UIScrollView()
      scroll.isPagingEnabled = true

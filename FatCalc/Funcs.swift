@@ -126,15 +126,25 @@ class Funcs {
         return nil
     }
     
-    func saveToCoreData (_ newWeight:Float, newImage: UIImage? = nil) {
+    func saveToCoreData (_ weight:Float?, fatPercentage:Float?) {
+        //1. check if theres another entry at this date
+        //if not, create new entry
+        //if available, add to existing entry
         
-        //saveImageToCoreData (newImage)
         
+        //create new entry when saving data
         let newEntry = Entry(context: context)
-        
         newEntry.date = Date()
         
-        newEntry.wight = newWeight
+        //if weight is being saved
+        if let weightSaving = weight {
+            newEntry.weight = weightSaving //save new weight inside new entry
+        } else {print("No weight to save")}
+        
+        if let fatSaving = fatPercentage {
+            newEntry.fatPercentage = fatSaving //save new fat inside new entry
+        } else {print("No fat to save")}
+        
         do {
             try context.save()
             print("New entry has been saved!")
@@ -154,13 +164,13 @@ class Funcs {
         }
     }*/
     
-    func loadFromCoreData (_ entry: Entry) -> [Entry]? {
+    func loadFromCoreData () -> [Entry]? {
         do {
             return try context.fetch(NSFetchRequest<Entry>(entityName: "Entry"))
         } catch {
             print("ERROR while \(#function): \(error)")
         }
-        print("returning nil")
+        print("no data available, returning nil")
         return nil
     }
     

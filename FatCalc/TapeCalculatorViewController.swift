@@ -21,37 +21,12 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
    
     
     
-    var age : String? {
-        didSet{
-            print("age has been set")
-        }
-    }
-    var hips : String? {
-        didSet{
-            print("hips has been set")
-        }
-    }
-    var waistAndThigh : String? {
-        didSet{
-            print("waistAndThigh has been set")
-        }
-    }
-    var forarmAndCalf : String? {
-        didSet{
-            print("forarmAndCalf has been set")
-        }
-    }
-    var wrist: String? {
-        didSet{
-            print("wrist has been set")
-        }
-    }
-    
-    var fatPercentage: String?{
-        didSet{
-            print("fatPercentage has been set")
-        }
-    }
+    var age : String?
+    var hips : String?
+    var waistAndThigh : String?
+    var forarmAndCalf : String?
+    var wrist: String?
+    var fatPercentage: String?
     
     var gender : String = "Male" {
         didSet {
@@ -86,6 +61,14 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         fifthTextField.delegate = self
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        firstTextField.text = ""
+        secondTextField.text = ""
+        thirdTextField.text = ""
+        fourthTextField.text = ""
+        fifthTextField.text = ""
     }
    
     @IBAction func genderChanged(_ sender: UISegmentedControl) {

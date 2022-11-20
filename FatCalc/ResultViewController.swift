@@ -38,6 +38,11 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func savePressed(_ sender: UIButton) {
+        guard let resultFloat = Float(result!) else {fatalError("could not convert result into Float")}
+        
+        //save fatPercentage
+        Funcs.shared.saveToCoreData(nil, fatPercentage: resultFloat)
+        dismiss(animated: true)
     }
     
     @IBAction func againPressed(_ sender: UIButton) {
