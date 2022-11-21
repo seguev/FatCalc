@@ -16,7 +16,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var thirdTextField: UITextField!
     @IBOutlet weak var fourthTextField: UITextField!
-    
+    #warning("add mendatory weight textfield")
     
     var age : String?
     var genderUniqueFold : String?
@@ -70,16 +70,8 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
     }
-    override func viewWillLayoutSubviews() {
-        print(#function)
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        print(#function)
-//        firstTextField.text = ""
-//        secondTextField.text = ""
-//        thirdTextField.text = ""
-//        fourthTextField.text = ""
-    }
+  
+   
     
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {

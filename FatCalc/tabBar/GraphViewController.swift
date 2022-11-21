@@ -7,23 +7,34 @@
 
 import UIKit
 import Charts
+/*
+ 1. read how to change xAxis values V
+ 2. figure out how to connect weight to fat% V
+ 3. delete left axis, you have values at each point anyway V
+ 4. find a way to connect graph touch to Entry info V
+ 5. update chart when data is being saved
+ */
+
+
 
 class GraphViewController: UIViewController, ChartViewDelegate {
-
-    var sets : [LineChartDataSet] = [] //global var for lines
-
-    lazy var lineChartView: LineChartView = {
-        let chartView = LineChartView()
-        chartView.leftAxis.axisLineColor = .black
-        
-        return chartView
-    }()
+    @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var infoPopUp: UIView!
+    
+    var sets : [LineChartDataSet] = []
+    var globalArray : [Entry] = []
+    
+    //init lineChartView
+    var lineChartView = LineChartView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         Funcs.shared.addGradient(view: self.view)
         lineChartView.delegate = self
         chartSetup()
+        
+        fetchAllEntries()
+        
 
     }
     
@@ -34,8 +45,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         //title = currentControllerName
         print("current controller is \(currentControllerName)")
         
-        loadWeight()
-        loadFats()
+        
     }
 
     private func chartSetup () {
@@ -47,109 +57,92 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         lineChartView.pinchZoomEnabled = false
         lineChartView.dragEnabled = false
         lineChartView.xAxis.labelFont = .systemFont(ofSize: 12)
-        lineChartView.leftAxis.labelFont = .boldSystemFont(ofSize: 12)
         lineChartView.center = view.center
-
+        lineChartView.leftAxis.axisLineColor = .black
+        lineChartView.rightAxis.axisLineColor = .black
+        lineChartView.leftAxis.drawLabelsEnabled = false
+        
         view.addSubview(lineChartView) //add chart to view
         
         
         
     }
     
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print(entry.y)
-    }
-    
-    func loadWeight () {
-        var chartEntries : [ChartDataEntry] = []
-        var entryIndex : Double = 0.0
-        if let loadedData = Funcs.shared.loadFromCoreData() {
-            for i in loadedData {
-                entryIndex += 1
-                let weight = Double(i.weight)
-                let weightChartEntry = ChartDataEntry(x: entryIndex, y: weight)
-                chartEntries.append(weightChartEntry)
-            }
-            #warning("specify set")
-            setData(chartEntries, name: "weight", color: .white)
-        } else {print("No weight data")}
-    }
-    
-    func loadFats () {
-        var chartEntries : [ChartDataEntry] = []
-        var entryIndex : Double = 0.0
-        if let loadedData = Funcs.shared.loadFromCoreData() {
-            for i in loadedData {
-                entryIndex += 1
-                let fat = Double(i.fatPercentage)
-                let fatsChartEntry = ChartDataEntry(x: entryIndex, y: fat)
-                chartEntries.append(fatsChartEntry)
-            }
-            #warning("specify set")
-            setData(chartEntries, name: "Fat %", color: .gray)
+    func fetchAllEntries() {
+        var weightEntriesArray : [ChartDataEntry] = []
+        var fatEntriesArray : [ChartDataEntry] = []
 
-        } else {print("No fats data")}
-    }
-   
-    /*private func loadAll () {
-        //1. "everytime theres value in [Entry], it also load all weights"
-        //2. "show dates insted of numbers at bottom axis"
-        //3. "attach weight to fats if on the same date"
-        //4. "set different line for weights and fats"
-        //5. "hide chart net"
-        //6. "set bottom values to Intergers"
-        //7. "hide left axis"
-        
-        //load all entries
-        if let loadedEntries = Funcs.shared.loadFromCoreData() {
+        //create safe loaded data if exist
+        if let loadedData = Funcs.shared.loadFromCoreData() {
+
+        //add data from coreData to global array for us to fetch later if needed
+        globalArray.append(contentsOf: loadedData )
             
-            //every load, let an index for each (later will be used for x value)
+            //set starting index
             var entryIndex : Double = 0.0
             
-            //init empty chartDataEntry array
-            var fatsArray : [ChartDataEntry] = []
-            
-            //for each entry from array
-            for entry in loadedEntries {
-                
-                //set + 1 index from previous
+            //for each entry, seperate fat and weight for ChartDataSets
+            for entry in globalArray {
+                let fat = Double(entry.fatPercentage)
+                let weight = Double(entry.weight)
                 entryIndex += 1
                 
-                //isolate the weight from the intire Entry
-                let weightEntry = Double(entry.fatPercentage)
+                //set weightEntry
+                let weightChartEntry = ChartDataEntry(x: entryIndex, y: weight)
+                weightEntriesArray.append(weightChartEntry) //add to local array
                 
-                //create new ChartDataEntry from index and weight
-                let newEntry = ChartDataEntry(x: entryIndex, y: weightEntry)
-                
-                //append to an array of ChartDataEntries
-                fatsArray.append(newEntry)
+                //set fatEntry
+                let fatChartEntry = ChartDataEntry(x: entryIndex, y: fat)
+                fatEntriesArray.append(fatChartEntry) //add to local array
+                //export to local array
             }
+            //fetch from local array after beings set
+            let weightSet = LineChartDataSet(entries: weightEntriesArray, label: "weight")
+            let fatSet = LineChartDataSet(entries: fatEntriesArray, label: "fat%")
             
-            //procied to next func
-            setData(fatsArray)
+            //go to next func and setup each line
+            setData(weightSet, set2: fatSet)
         } else {
-            print("Chart has no entries to load!")
+            print("Could not load from core data")
         }
-    }*/
+    }
     
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        let index = Int(entry.x)
+        let selectedEntry = globalArray[index - 1]
+        print("""
+            weight: \(selectedEntry.weight)
+            fat: \(selectedEntry.fatPercentage)
+            date: \(selectedEntry.date ?? "no date")
+            """)
+    }
    
     //2. set data to chart
-    private func setData (_ chartDataEntryArray: [ChartDataEntry], name: String, color:UIColor) {
+    private func setData (_ set1:LineChartDataSet,set2:LineChartDataSet) {
         //add chart data to a new set everytime func is called
         
-        //take the entries and insert into a data set and name it.
-        let newSet = LineChartDataSet(entries: chartDataEntryArray, label: name)
         
         //set the set's attributes
-        newSet.mode = .horizontalBezier //line style
-        newSet.circleHoleRadius = 0.03 //circle radius
-        newSet.drawFilledEnabled = true //add fill
-        newSet.fillColor = color //fill color
-        newSet.fillAlpha = 0.4 //fill alpha
+        set1.mode = .linear //line style
+        set1.circleHoleRadius = 0.02 //circle radius
+        set1.drawFilledEnabled = true //add fill
+        set1.fillColor = .green //fill color
+        set1.fillAlpha = 0.4 //fill alpha
         
-        sets.append(newSet)
+        sets.append(set1) //add to global setsArray, so we can pass several sets to data
         
-        //make LineChartData from the data set. (LineData specificly)
+        //set the set's attributes
+        set2.mode = .linear //line style
+        set2.circleHoleRadius = 0.02 //circle radius
+        set2.drawFilledEnabled = true //add fill
+        set2.fillColor = .cyan //fill color
+        set2.fillAlpha = 0.4 //fill alpha
+        
+        sets.append(set2) //add to global setsArray, so we can pass several sets to data
+        
+        
+        //make data from global setsArray
         let newData = LineChartData(dataSets: sets)
         
         //attach data to chart

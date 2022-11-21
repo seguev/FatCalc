@@ -134,7 +134,7 @@ class Funcs {
         
         //create new entry when saving data
         let newEntry = Entry(context: context)
-        newEntry.date = Date()
+        newEntry.date = Date().formatted(date: .abbreviated, time: .omitted)
         
         //if weight is being saved
         if let weightSaving = weight {
@@ -164,9 +164,13 @@ class Funcs {
         }
     }*/
     
-    func loadFromCoreData () -> [Entry]? {
+    func loadFromCoreData (with predicate:NSPredicate? = nil) -> [Entry]? {
+        let request = NSFetchRequest<Entry>(entityName: "Entry")
+        if let pred = predicate {
+            request.predicate = pred
+        }
         do {
-            return try context.fetch(NSFetchRequest<Entry>(entityName: "Entry"))
+            return try context.fetch(request)
         } catch {
             print("ERROR while \(#function): \(error)")
         }

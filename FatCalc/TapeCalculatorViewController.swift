@@ -18,7 +18,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var thirdTextField: UITextField!
     @IBOutlet weak var fourthTextField: UITextField!
     @IBOutlet weak var fifthTextField: UITextField!
-   
+#warning("add mendatory weight textfield")
     
     
     var age : String?
@@ -63,13 +63,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
          view.addGestureRecognizer(tapGesture)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        firstTextField.text = ""
-        secondTextField.text = ""
-        thirdTextField.text = ""
-        fourthTextField.text = ""
-        fifthTextField.text = ""
-    }
+
    
     @IBAction func genderChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {

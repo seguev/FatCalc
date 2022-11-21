@@ -462,8 +462,38 @@
                         <gestureRecognizers/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="graph" image="chart.xyaxis.line" catalog="system" id="4LK-xb-y87"/>
+                    <connections>
+                        <outlet property="infoLabel" destination="rLI-4h-l7o" id="mIs-dx-PRZ"/>
+                        <outlet property="infoPopUp" destination="6so-SS-bq1" id="0y7-Ew-gAl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kkv-Ab-SoR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="avZ-YP-J3j">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="6so-SS-bq1">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rLI-4h-l7o">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="rLI-4h-l7o" secondAttribute="trailing" id="3ko-eX-27y"/>
+                                <constraint firstItem="rLI-4h-l7o" firstAttribute="leading" secondItem="6so-SS-bq1" secondAttribute="leading" id="Cg3-LM-kKY"/>
+                                <constraint firstItem="rLI-4h-l7o" firstAttribute="top" secondItem="6so-SS-bq1" secondAttribute="top" id="hLG-dP-6gZ"/>
+                                <constraint firstAttribute="bottom" secondItem="rLI-4h-l7o" secondAttribute="bottom" id="pYq-kS-ahh"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="hts-wJ-yCy"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="4100" y="80.33175355450237"/>
         </scene>
