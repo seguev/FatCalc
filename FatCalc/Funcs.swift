@@ -64,7 +64,14 @@ class Funcs {
   }
     
     func makeButtonRound (_ button:UIButton) {
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        button.titleLabel?.textColor = .cyan
+        let layer = CAGradientLayer()
+        layer.frame = button.bounds
+        let colors = [UIColor.blue.cgColor, UIColor.systemBlue.cgColor]
+        layer.colors = colors
+        button.layer.insertSublayer(layer, at: 0)
     }
     
     func addGradient (firstColor:UIColor = #colorLiteral(red: 0.01960784314, green: 0.8509803922, blue: 1, alpha: 1), secondColor:UIColor =  #colorLiteral(red: 0.05490196078, green: 0.4549019608, blue: 0.9882352941, alpha: 1), view:UIView) {
@@ -73,7 +80,6 @@ class Funcs {
         layer.colors = colors
         layer.transform = CATransform3DMakeRotation(CGFloat.pi, 0, 0, 1)
         layer.frame = view.frame
-        
         view.layer.insertSublayer(layer, at: 0)
         
     }

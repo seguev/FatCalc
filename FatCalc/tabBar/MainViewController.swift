@@ -14,9 +14,10 @@ class MainViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .cyan
-        Funcs.shared.makeButtonRound(caliperButton)
+        view.backgroundColor = .systemCyan
         Funcs.shared.makeButtonRound(tapeButton)
+        Funcs.shared.makeButtonRound(caliperButton)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
