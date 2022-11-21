@@ -135,6 +135,9 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    @IBAction func quitButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
     
     
     

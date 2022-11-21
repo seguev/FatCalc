@@ -21,13 +21,11 @@ class Funcs {
     func fetchNameFromCurrent (_ controller:UIViewController) -> String {
         switch controller.tabBarItem.tag {
         case 1:
-            return "main"
+            return "Main"
         case 2:
-            return "fat"
+            return "Graph"
         case 3:
-            return "weight"
-        case 4:
-            return "photos"
+            return "Album"
         default:
             return "mmm I dunno' this one"
         }
@@ -35,16 +33,14 @@ class Funcs {
     
     
     
-    func fechNameFromInt (_ tagNum:Int) -> String {
+    func fetchNameFromInt (_ tagNum:Int) -> String {
         switch tagNum {
         case 1:
-            return "main"
+            return "Main"
         case 2:
-            return "fat"
+            return "Graph"
         case 3:
-            return "weight"
-        case 4:
-            return "photos"
+            return "Album"
         default:
             return "mmm I dunno' this one"
         }

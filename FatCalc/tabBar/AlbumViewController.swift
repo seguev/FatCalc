@@ -79,8 +79,10 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setDefaultImage()
-
-    }
+        let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
+        title = currentControllerName
+        
+        print("current controller is \(currentControllerName)")    }
     
     @IBAction func setPressed(_ sender: UIButton) {
         

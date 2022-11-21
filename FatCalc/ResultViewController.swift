@@ -13,15 +13,16 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
-    var result : String?
-    var gender : String?
+    var result : String = ""
+    var weight: String = ""
+    var gender : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard result != nil else {fatalError()}
-        resultLabel.text = result!+"%"
-        guard let availableResult = Float(result!) else {fatalError()}
+        //guard result != nil else {fatalError()}
+        resultLabel.text = result+"%"
+        guard let availableResult = Float(result) else {fatalError()}
         if Float(availableResult) < 0 {
             resultLabel.text = "this is below 0. check yourself (:"
             categoryLabel.isHidden = true
@@ -33,15 +34,16 @@ class ResultViewController: UIViewController {
             womenHealthFat()
         } else {
             present(Funcs.shared.somthingsWrongAlertController(), animated: true)
-            print("ERROR, gender = \(gender ?? "nil") ")
+            print("ERROR, gender = \(gender) ")
         }
     }
     
     @IBAction func savePressed(_ sender: UIButton) {
-        guard let resultFloat = Float(result!) else {fatalError("could not convert result into Float")}
-        
+        guard let resultFloat = Float(result) else {fatalError("could not convert result into Float")}
+        guard let weightFloat = Float(weight) else {fatalError("could not convert weight into Float")}
+
         //save fatPercentage
-        Funcs.shared.saveToCoreData(nil, fatPercentage: resultFloat)
+        Funcs.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
         dismiss(animated: true)
     }
     
@@ -50,7 +52,7 @@ class ResultViewController: UIViewController {
     }
 
     func menHealthFat () {
-        if let resultFloat = Float(result!) {
+        if let resultFloat = Float(result) {
             switch resultFloat{
             case 2..<6:
                 //add label Essential Fat
@@ -83,7 +85,7 @@ class ResultViewController: UIViewController {
     }
     
     func womenHealthFat () {
-        if let resultFloat = Float(result!) {
+        if let resultFloat = Float(result) {
             switch resultFloat{
             case 10..<14:
                 view.backgroundColor = .green

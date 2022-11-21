@@ -12,7 +12,13 @@ import Charts
  2. figure out how to connect weight to fat% V
  3. delete left axis, you have values at each point anyway V
  4. find a way to connect graph touch to Entry info V
- 5. update chart when data is being saved
+ 5. update chart when data is being saved V
+ 6. add mendatory weight insertion when fat is calculated V
+ 7. present popup when pressed with entry's information
+ 8. add picture page
+ 9. swiping option, maybe not scroll view?
+ 10. add coreModel that shows privious position 
+ 
  */
 
 
@@ -32,10 +38,8 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         Funcs.shared.addGradient(view: self.view)
         lineChartView.delegate = self
         chartSetup()
-        
-        fetchAllEntries()
-        
 
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +49,9 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         //title = currentControllerName
         print("current controller is \(currentControllerName)")
         
+        
+        fetchAllEntries()
+
         
     }
 
@@ -67,8 +74,14 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         
         
     }
+    func reloadData () {
+        
+    }
     
     func fetchAllEntries() {
+        sets = []
+        globalArray = []
+
         var weightEntriesArray : [ChartDataEntry] = []
         var fatEntriesArray : [ChartDataEntry] = []
 
@@ -102,6 +115,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
             
             //go to next func and setup each line
             setData(weightSet, set2: fatSet)
+            
         } else {
             print("Could not load from core data")
         }
@@ -148,7 +162,6 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         //attach data to chart
         lineChartView.data = newData
     
-     
     }
     
     

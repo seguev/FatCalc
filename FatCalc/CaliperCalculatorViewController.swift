@@ -12,16 +12,18 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var thirdLabel: UILabel!
     @IBOutlet weak var fourthLabel: UILabel!
+    @IBOutlet weak var fifthLabel: UILabel!
     @IBOutlet weak var firstTextField: UITextField!
     @IBOutlet weak var secondTextField: UITextField!
     @IBOutlet weak var thirdTextField: UITextField!
     @IBOutlet weak var fourthTextField: UITextField!
-    #warning("add mendatory weight textfield")
+    @IBOutlet weak var fifthTextField: UITextField!
     
     var age : String?
     var genderUniqueFold : String?
     var abdominalFold : String?
     var thighFold : String?
+    var weight: String?
     
     var fatPercentage: String?
     
@@ -31,15 +33,17 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
             if gender == "Male" {
                 print("male has been set")
                 firstLabel.text = "Age"
-                secondLabel.text = "Chest"
-                thirdLabel.text = "Abdominal"
-                fourthLabel.text = "Mid thigh"
+                secondLabel.text = "Weight"
+                thirdLabel.text = "Chest"
+                fourthLabel.text = "Abdominal"
+                fifthLabel.text = "Mid thigh"
             } else if gender == "Female" {
                 print("female has been set")
                 firstLabel.text = "Age"
-                secondLabel.text = "Triceps"
-                thirdLabel.text = "Suprailiac"
-                fourthLabel.text = "Mid thigh"
+                secondLabel.text = "Weight"
+                thirdLabel.text = "Triceps"
+                fourthLabel.text = "Suprailiac"
+                fifthLabel.text = "Mid thigh"
             } else {
                 print("error while setting gender")
                 fatalError()
@@ -66,6 +70,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         secondTextField.delegate = self
         thirdTextField.delegate = self
         fourthTextField.delegate = self
+        fifthTextField.delegate = self
         Funcs.shared.addGradient(view: self.view)
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
@@ -82,10 +87,12 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
             case "1":
                 age = availableText
             case "2":
-                genderUniqueFold = availableText
+                weight = availableText
             case "3":
-                abdominalFold = availableText
+                genderUniqueFold = availableText
             case "4":
+                abdominalFold = availableText
+            case "5":
                 thighFold = availableText
             default:
                 print("da fuck did you just do")
@@ -98,11 +105,11 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func calculatePressed(_ sender: UIButton) {
         view.endEditing(true) //end editing for all textfields and save values
 
-        if let safeFirst = age, let safeSecond = genderUniqueFold, let safeThird = abdominalFold, let safeFourh = thighFold {
+        if let safeFirst = age, let safeSecond = weight, let safeThird = genderUniqueFold, let safeFourh = abdominalFold, let safeFifth = thighFold {
             if gender == "Male" {
-               fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeSecond, abdominal: safeThird, thigh: safeFourh)
+               fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeThird, abdominal: safeFourh, thigh: safeFifth)
             } else if gender == "Female" {
-                fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeSecond, suprailiac: safeThird, thigh: safeFourh)
+                fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeThird, suprailiac: safeFourh, thigh: safeFifth)
             }
         }
         
@@ -114,14 +121,18 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier ?? "nil")
-        print(segue.destination)
+       
         let destinationVC = segue.destination as! ResultViewController
         destinationVC.result = fatPercentage!
+        destinationVC.weight = weight!
         destinationVC.gender = gender
     }
     
     
+    @IBAction func quitButtonPressed(_ sender: UIButton) {
+        print(#function)
+        dismiss(animated: true)
+    }
     
     
     
