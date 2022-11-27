@@ -11,7 +11,8 @@
 		60017A442924205600768028 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60017A432924205600768028 /* ResultViewController.swift */; };
 		6043554F291D75BC0023AA5B /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043554E291D75BC0023AA5B /* AlbumViewController.swift */; };
 		60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* GraphViewController.swift */; };
-		60435555291D7C680023AA5B /* Funcs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435554291D7C680023AA5B /* Funcs.swift */; };
+		60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435554291D7C680023AA5B /* CoreDataModel.swift */; };
+		605E2A7B2933D23C009E95B4 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605E2A7A2933D23C009E95B4 /* ImageViewModel.swift */; };
 		60808645291D676700DAC7BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60808644291D676700DAC7BE /* MainViewController.swift */; };
 		608F1EEE2927F180001B98DE /* TapeCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */; };
 		6097B9E7291976B700773892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9E6291976B700773892 /* AppDelegate.swift */; };
@@ -28,7 +29,8 @@
 		60017A432924205600768028 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		6043554E291D75BC0023AA5B /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		60435550291D75CC0023AA5B /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
-		60435554291D7C680023AA5B /* Funcs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Funcs.swift; sourceTree = "<group>"; };
+		60435554291D7C680023AA5B /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		605E2A7A2933D23C009E95B4 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		60808644291D676700DAC7BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeCalculatorViewController.swift; sourceTree = "<group>"; };
 		6097B9E3291976B700773892 /* FatCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FatCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,28 +72,38 @@
 				EECBBD44B5FEF1603E9D4840 /* Pods-FatCalc.debug.xcconfig */,
 				F4430FDC28BDFBDBAF1FCE74 /* Pods-FatCalc.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		60017A422924091200768028 /* Calculators */ = {
+		60435556291D7E8F0023AA5B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				60017A402924090A00768028 /* CaliperCalculatorViewController.swift */,
 				608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */,
 				60017A432924205600768028 /* ResultViewController.swift */,
-			);
-			name = Calculators;
-			sourceTree = "<group>";
-		};
-		60435556291D7E8F0023AA5B /* tabBar */ = {
-			isa = PBXGroup;
-			children = (
 				60808644291D676700DAC7BE /* MainViewController.swift */,
 				60435550291D75CC0023AA5B /* GraphViewController.swift */,
 				6043554E291D75BC0023AA5B /* AlbumViewController.swift */,
 			);
-			path = tabBar;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		605E2A7C2933D32E009E95B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				60435554291D7C680023AA5B /* CoreDataModel.swift */,
+				605E2A7A2933D23C009E95B4 /* ImageViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		605E2A7D2933D35C009E95B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6097B9EC291976B700773892 /* Main.storyboard */,
+				6097B9F4291976B800773892 /* LaunchScreen.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6097B9DA291976B700773892 = {
@@ -117,12 +129,10 @@
 			children = (
 				6097B9E6291976B700773892 /* AppDelegate.swift */,
 				6097B9E8291976B700773892 /* SceneDelegate.swift */,
-				60435556291D7E8F0023AA5B /* tabBar */,
-				60435554291D7C680023AA5B /* Funcs.swift */,
-				6097B9EC291976B700773892 /* Main.storyboard */,
-				60017A422924091200768028 /* Calculators */,
+				605E2A7C2933D32E009E95B4 /* Model */,
+				605E2A7D2933D35C009E95B4 /* View */,
+				60435556291D7E8F0023AA5B /* Controller */,
 				6097B9F2291976B800773892 /* Assets.xcassets */,
-				6097B9F4291976B800773892 /* LaunchScreen.storyboard */,
 				6097B9F7291976B800773892 /* Info.plist */,
 				6097B9EF291976B700773892 /* FatCalc.xcdatamodeld */,
 			);
@@ -244,7 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60435555291D7C680023AA5B /* Funcs.swift in Sources */,
+				60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */,
 				60017A412924090A00768028 /* CaliperCalculatorViewController.swift in Sources */,
 				6097B9E7291976B700773892 /* AppDelegate.swift in Sources */,
 				608F1EEE2927F180001B98DE /* TapeCalculatorViewController.swift in Sources */,
@@ -253,6 +263,7 @@
 				6043554F291D75BC0023AA5B /* AlbumViewController.swift in Sources */,
 				60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */,
 				6097B9E9291976B700773892 /* SceneDelegate.swift in Sources */,
+				605E2A7B2933D23C009E95B4 /* ImageViewModel.swift in Sources */,
 				60017A442924205600768028 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
