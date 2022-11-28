@@ -1,9 +1,10 @@
-//
-//  mainViewController.swift
-//  FatCalc
-//
-//  Created by segev perets on 10/11/2022.
-//
+
+/*
+ add buttons V
+ add controllers V
+ add segues V
+ add calculation funcs V
+ */
 
 import UIKit
 

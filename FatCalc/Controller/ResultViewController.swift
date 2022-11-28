@@ -1,9 +1,3 @@
-//
-//  ResultViewController.swift
-//  FatCalc
-//
-//  Created by segev perets on 15/11/2022.
-//
 
 import UIKit
 
@@ -13,9 +7,20 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
-    var result : String = ""
-    var weight: String = ""
-    var gender : String = ""
+    
+    var result : String = "" {
+        didSet {
+            print(result)
+        }
+    }
+    var weight: String = "" {
+        didSet {
+            print(weight)
+        }
+    }
+    var gender : CaliperCalcModel.Gender = .Male
+    
+    var model = ResultModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +33,9 @@ class ResultViewController: UIViewController {
             categoryLabel.isHidden = true
             return
         }
-        if gender == "Male" {
+        if gender == .Male {
             menHealthFat()
-        } else if gender == "Female" {
+        } else if gender == .Female {
             womenHealthFat()
         } else {
             present(Funcs.shared.somthingsWrongAlertController(), animated: true)

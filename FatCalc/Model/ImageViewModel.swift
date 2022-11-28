@@ -11,22 +11,23 @@ import UIKit
 
 class ImageViewModel {
     
-    var controller : AlbumViewController? {
-        didSet {
-            print("ImageViewModel has a delegate : \(controller!)")
-        }
-    }
+    var currentIndex = 0
+    var currentPicture : UIImageView?
+    var isActive = false
+    var imageArray = [UIImage]()
+
+    var album : AlbumViewController?
 
     /**
      sets "nosign" system image if imageArray is empty and removes it when its not .
      */
     func setDefaultImage () {
-        if controller!.imageArray.isEmpty {
+        if imageArray.isEmpty {
             let defaultImage = UIImage(systemName: "nosign")!
-            controller!.imageArray.append(defaultImage)
+            imageArray.append(defaultImage)
         } else {
-            if controller!.imageArray.contains(UIImage(systemName: "nosign")!){
-                controller!.imageArray.remove(at: 0)
+            if imageArray.contains(UIImage(systemName: "nosign")!){
+               imageArray.remove(at: 0)
             }
         }
     }
@@ -35,7 +36,7 @@ class ImageViewModel {
   some random cute dog images.
   */
     func addDogImages () {
-        controller!.imageArray = [#imageLiteral(resourceName: "dog2"), #imageLiteral(resourceName: "dog3"), #imageLiteral(resourceName: "dog1")]
+        imageArray = [#imageLiteral(resourceName: "dog2"), #imageLiteral(resourceName: "dog3"), #imageLiteral(resourceName: "dog1")]
         
     }
     
@@ -49,34 +50,34 @@ class ImageViewModel {
      - seting imageView to global object
      - if index is out of range, set index to 0 and start over
      */
-    func setImage () {
-        guard let controller = controller else {fatalError("no controller")}
-        guard !controller.imageArray.isEmpty else {
+    func setImage (_ view:UIView) {
+        guard !imageArray.isEmpty else {
             print("No pictures for now")
             return
         }
         
-        if let currentImage = createImage() {
-            controller.currentPicture = currentImage
-            showPicture(currentImage)
+        if let currentImage = createImage(view: view) {
+            currentPicture = currentImage
+            showPicture(currentImage, view: view)
+            self.currentIndex += 1
         } else { //if index is out of range, make it zero and cycle func
-            controller.currentIndex = 0
-            setImage()
+            currentIndex = 0
+            setImage(view)
         }
     }
     
 
-    private func createImage() -> UIImageView? {
+    private func createImage(view:UIView) -> UIImageView? {
         
         
         
-        guard controller!.currentIndex < controller!.imageArray.count else {return nil}
+        guard currentIndex < imageArray.count else {return nil}
         
-        let imageView = UIImageView(image: controller!.imageArray[controller!.currentIndex])
+        let imageView = UIImageView(image: imageArray[currentIndex])
                 
-        imageView.frame = CGRect(x: controller!.view.frame.width, y: controller!.view.center.y-130, width: 200, height: 260)
+        imageView.frame = CGRect(x: view.frame.width, y: view.center.y-130, width: 200, height: 260)
         
-        let  pickUpGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(_:)))
+        let pickUpGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(_:)))
         
         imageView.addGestureRecognizer(pickUpGesture)
         
@@ -84,7 +85,7 @@ class ImageViewModel {
         
         imageView.isUserInteractionEnabled = true
         
-        controller!.currentPicture = imageView
+        currentPicture = imageView
         
         return imageView
      }
@@ -98,10 +99,11 @@ class ImageViewModel {
      - when dragging is ended, removes shadow
      */
     @objc func drag (_ sender: UIPanGestureRecognizer) {
-        guard let currentPicture = controller!.currentPicture else {fatalError()}
- 
-//        print(sender.location(in: controller!.view))
-        let location = sender.location(in: controller!.view)
+        guard let currentPicture = currentPicture else {fatalError()}
+        
+        guard let view = album?.view else {fatalError()}
+
+        let location = sender.location(in: view)
         
 
         switch sender.state{
@@ -120,11 +122,11 @@ class ImageViewModel {
             
             //cant do an action here cause this is called like 9000 times per second
             if location.x < 90 {
-                controller!.currentPicture?.layer.shadowColor = UIColor.green.cgColor
+                currentPicture.layer.shadowColor = UIColor.green.cgColor
             } else if location.x > 300 {
-                    controller!.currentPicture?.layer.shadowColor = UIColor.red.cgColor
+                    currentPicture.layer.shadowColor = UIColor.red.cgColor
             } else {
-                controller!.currentPicture?.layer.shadowColor = UIColor.gray.cgColor
+                currentPicture.layer.shadowColor = UIColor.gray.cgColor
             }
 
         
@@ -137,9 +139,9 @@ class ImageViewModel {
             }
             if currentPicture.center.x < 90 {
                 animateOut()
-                self.setNextImage()
+                setImage(view)
             } else {
-                controller!.currentPicture?.layer.shadowColor = UIColor.gray.cgColor
+                currentPicture.layer.shadowColor = UIColor.gray.cgColor
             }
          
             break
@@ -149,36 +151,26 @@ class ImageViewModel {
         }
     }
     
-    /**
-     call showImage to activate this func!
-     */
-    private func animateIn(_ imageView:UIImageView) {
-        
-        UIView.animate(withDuration: 0.3) {
-            
-            imageView.center = self.controller!.view.center
-        }
-    }
+ 
     
     /**
      add the imageView as a subView to the view and then animates it in.
      */
-    func showPicture (_ imageView:UIImageView) {
+    func showPicture (_ imageView:UIImageView, view:UIView) {
         
-        controller!.view.addSubview(imageView)
-
-        animateIn(imageView)
+        view.addSubview(imageView)
+                
+        UIView.animate(withDuration: 0.3) {
+            
+            imageView.center = view.center
+        }
     }
     
-    private func setNextImage () {
-        controller!.currentIndex += 1
-        setImage()
-        
-    }
+
     
     
     private func animateOut() {
-        guard let currentPicture = controller!.currentPicture else {return}
+        guard let currentPicture = currentPicture else {return}
         UIView.animate(withDuration: 0.3) {
             currentPicture.frame.origin.x = -currentPicture.frame.width
 

@@ -19,47 +19,38 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fourthTextField: UITextField!
     @IBOutlet weak var fifthTextField: UITextField!
     
-    var age : String?
-    var genderUniqueFold : String?
-    var abdominalFold : String?
-    var thighFold : String?
-    var weight: String?
+    var model = CaliperCalcModel()
     
-    var fatPercentage: String?
     
-    var gender : String = "Male" {
-        didSet {
-            print("gender setter")
-            if gender == "Male" {
-                print("male has been set")
-                firstLabel.text = "Age"
-                secondLabel.text = "Weight"
-                thirdLabel.text = "Chest"
-                fourthLabel.text = "Abdominal"
-                fifthLabel.text = "Mid thigh"
-            } else if gender == "Female" {
-                print("female has been set")
-                firstLabel.text = "Age"
-                secondLabel.text = "Weight"
-                thirdLabel.text = "Triceps"
-                fourthLabel.text = "Suprailiac"
-                fifthLabel.text = "Mid thigh"
-            } else {
-                print("error while setting gender")
-                fatalError()
-            }
-        }
+    func changeLabelsToMale () {
+        firstLabel.text = "Age"
+        secondLabel.text = "Weight"
+        thirdLabel.text = "Chest"
+        fourthLabel.text = "Abdominal"
+        fifthLabel.text = "Mid thigh"
+    }
+    
+    func changeLabelsToFemale () {
+        firstLabel.text = "Age"
+        secondLabel.text = "Weight"
+        thirdLabel.text = "Triceps"
+        fourthLabel.text = "Suprailiac"
+        fifthLabel.text = "Mid thigh"
     }
     
     
+    /**
+     toggle male and female
+     - male index is 0
+     - female index is 1
+     */
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        //0=Male, 1=Female
-        if sender.selectedSegmentIndex == 0 { //Male
-            print("Male selected")
-            gender = "Male"
-        } else if sender.selectedSegmentIndex == 1 { //Female
-            print("female selected")
-            gender = "Female"
+        if sender.selectedSegmentIndex == 0 {
+            changeLabelsToMale()
+            model.gender = .Male
+        } else if sender.selectedSegmentIndex == 1 {
+            changeLabelsToFemale()
+            model.gender = .Female
         }
     }
    
@@ -72,28 +63,29 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         fourthTextField.delegate = self
         fifthTextField.delegate = self
         Funcs.shared.addGradient(view: self.view)
+        closeTextFieldsWhenTappedAround()
+    }
+  
+    private func closeTextFieldsWhenTappedAround () {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
     }
-  
-   
     
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
-        print(textField.restorationIdentifier)
         if let availableText = textField.text{
             switch textField.restorationIdentifier{
             case "1":
-                age = availableText
+                model.age = availableText
             case "2":
-                weight = availableText
+                model.weight = availableText
             case "3":
-                genderUniqueFold = availableText
+                model.genderUniqueFold = availableText
             case "4":
-                abdominalFold = availableText
+                model.abdominalFold = availableText
             case "5":
-                thighFold = availableText
+                model.thighFold = availableText
             default:
                 print("da fuck did you just do")
             }
@@ -105,27 +97,30 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func calculatePressed(_ sender: UIButton) {
         view.endEditing(true) //end editing for all textfields and save values
 
-        if let safeFirst = age, let safeSecond = weight, let safeThird = genderUniqueFold, let safeFourh = abdominalFold, let safeFifth = thighFold {
-            if gender == "Male" {
-               fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeThird, abdominal: safeFourh, thigh: safeFifth)
-            } else if gender == "Female" {
-                fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeThird, suprailiac: safeFourh, thigh: safeFifth)
+        if let safeFirst = model.age, let safeSecond = model.weight, let safeThird = model.genderUniqueFold, let safeFourh = model.abdominalFold, let safeFifth = model.thighFold {
+            if model.gender == .Male {
+                model.fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeThird, abdominal: safeFourh, thigh: safeFifth)
+                model.weight = safeSecond
+            } else if model.gender == .Female {
+                model.fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeThird, suprailiac: safeFourh, thigh: safeFifth)
+                model.weight = safeSecond
             }
         }
         
-        if fatPercentage != nil {
+        if model.fatPercentage != nil {
             performSegue(withIdentifier: "caliperToResult", sender: self)
         } else {
-            print("fatPercentage is nil! \(fatPercentage ?? "nil")")
+            print("fatPercentage is nil! \(model.fatPercentage ?? "nil")")
             self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
         }
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
         let destinationVC = segue.destination as! ResultViewController
-        destinationVC.result = fatPercentage!
-        destinationVC.weight = weight!
-        destinationVC.gender = gender
+        destinationVC.result = model.fatPercentage!
+        destinationVC.weight = model.weight!
+        destinationVC.gender = model.gender
     }
     
     
