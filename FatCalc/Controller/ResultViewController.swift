@@ -3,6 +3,11 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
+    /*
+     seld to root after saving V
+     show a quick label that says "Entry saved", can write it by code
+     add isPresentingLabel Boolian var to prevent twho labels at once
+     */
     
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -49,7 +54,11 @@ class ResultViewController: UIViewController {
 
         //save fatPercentage
         Funcs.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
-        dismiss(animated: true)
+        if let rootController = view.window?.rootViewController {
+            rootController.dismiss(animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: true)
+        }
     }
     
     @IBAction func againPressed(_ sender: UIButton) {

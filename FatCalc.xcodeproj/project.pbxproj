@@ -16,7 +16,7 @@
 		6043554F291D75BC0023AA5B /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6043554E291D75BC0023AA5B /* AlbumViewController.swift */; };
 		60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* GraphViewController.swift */; };
 		60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435554291D7C680023AA5B /* CoreDataModel.swift */; };
-		605E2A7B2933D23C009E95B4 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605E2A7A2933D23C009E95B4 /* ImageViewModel.swift */; };
+		605E2A7B2933D23C009E95B4 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605E2A7A2933D23C009E95B4 /* AlbumViewModel.swift */; };
 		60808645291D676700DAC7BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60808644291D676700DAC7BE /* MainViewController.swift */; };
 		608F1EEE2927F180001B98DE /* TapeCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */; };
 		6097B9E7291976B700773892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9E6291976B700773892 /* AppDelegate.swift */; };
@@ -38,7 +38,7 @@
 		6043554E291D75BC0023AA5B /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		60435550291D75CC0023AA5B /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		60435554291D7C680023AA5B /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
-		605E2A7A2933D23C009E95B4 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		605E2A7A2933D23C009E95B4 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		60808644291D676700DAC7BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeCalculatorViewController.swift; sourceTree = "<group>"; };
 		6097B9E3291976B700773892 /* FatCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FatCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				60435554291D7C680023AA5B /* CoreDataModel.swift */,
-				605E2A7A2933D23C009E95B4 /* ImageViewModel.swift */,
+				605E2A7A2933D23C009E95B4 /* AlbumViewModel.swift */,
 				603E00BF2934D1F9003BDBCB /* GraphModel.swift */,
 				603E00C12934DDF7003BDBCB /* ResultModel.swift */,
 				603E00C32934DE57003BDBCB /* CaliperCalcModel.swift */,
@@ -279,7 +279,7 @@
 				60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */,
 				6097B9E9291976B700773892 /* SceneDelegate.swift in Sources */,
 				603E00C22934DDF7003BDBCB /* ResultModel.swift in Sources */,
-				605E2A7B2933D23C009E95B4 /* ImageViewModel.swift in Sources */,
+				605E2A7B2933D23C009E95B4 /* AlbumViewModel.swift in Sources */,
 				60017A442924205600768028 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

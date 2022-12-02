@@ -7,6 +7,10 @@
 
 import Foundation
 
+/*
+ move result model to here
+ */
+
 struct ResultModel {
 
     

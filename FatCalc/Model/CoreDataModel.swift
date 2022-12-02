@@ -12,6 +12,10 @@ import CoreData
 class Funcs {
     static let shared = Funcs()
     
+    /*
+     add saving photo function to core data
+     */
+    
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     /*var isLoged : Bool?
