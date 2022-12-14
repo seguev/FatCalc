@@ -1,4 +1,4 @@
-//
+
 //  ImageViewModel.swift
 //  FatCalc
 //
@@ -22,140 +22,198 @@
 import Foundation
 import UIKit
 
-struct AlbumViewModel {
+class AlbumViewModel {
     
-    var album : AlbumViewController?
+    weak var delegate : AlbumViewController? {
+        didSet {
+            print("Album delegate has been set!")
+        }
+    }
     
     var currentImageView : UIImageView?
     
-    var imagesArray : [UIImage] = []
-    
-    var currentIndex : Int = 0
-    
+    var imagesArray = [UIImage]()
+    var arrayIsDefault = true
+    var currentIndex = 0
+
 
     enum Direction {
         case right
         case left
     }
-    
 
-    
     /**
-     sets "nosign" system image if imageArray is empty and removes it when its not .
+     If func is being called and array is empty, it adds noSign image.
+     - call this func again to delete sign image.
      */
-    mutating func setDefaultImage () {
-            
+    func manageDefaultImage (_ view:UIView) {
+        
         if imagesArray.isEmpty {
-            let defaultImage = UIImage(systemName: "nosign")!
-            imagesArray.append(defaultImage)
-        } else {
-            if imagesArray.contains(UIImage(systemName: "nosign")!){
-                imagesArray.remove(at: 0)
+            
+        arrayIsDefault = true
+            
+            for i in 1...7 {
+                imagesArray.append(UIImage(named: "cat\(i)")!)
             }
+            
         }
     }
     
-    /**
-     some random cute dog images.
-     */
-    mutating func addDefaultPhotos () {
+   
 
-        for i in 1...7 {
-            imagesArray.append(UIImage(named: "cat\(i)")!)
-        }
-        //        let firstDog = UIImage(named: "dog1")
-        //        imageArray.append(firstDog!)
-        
-        
-    }
     
     /**
-     checks if index is in range and sets currentPicture global var accordingly
-     - call this func to validate
-     - and then use currentPicture var to continue
+     takes an image[index] from imageArray, initialize it, add to screen outside of view and asign global var to eat to be refered from next func.
+     - dont forget to check is index isn't out of range before calling this func.
+     - set index to the desired image in the array before calling this func.
+     - adds pan gesture
+     - add animation.
      */
-    mutating func makeSureIndexIsValid (andAddTo view:UIView) {
-        
-        var isFirstloading = true
-        
-        if let validImageView = createImage(view: view) {
+    func createImage(_ view:UIView) {
 
-            currentImageView = validImageView
-            if isFirstloading {
-                currentIndex += 1
-                animateIn(what: validImageView, from: .left)
-                isFirstloading = false
-                print("currentIndex is \(currentIndex)")
-            }
-        } else {
-            currentIndex = 0
-            makeSureIndexIsValid(andAddTo: view)
-        }
-    }
-    
-    /**
-     creates an imageView from the next UIImage in array accurding to currrent index
-     - return nil if index is out of range and the privous func should handle it
-     - adds panGesture to the new imageView
-     - takes image(i) from array
-     */
-    func createImage(view:UIView) -> UIImageView? {
-        guard let album = album else {fatalError()}
-
-        guard currentIndex < imagesArray.count else {
-            print("\(#function) returning nil")
-            return nil
-        }
-  
+        guard !imagesArray.isEmpty else {fatalError("you need to have photos to call this func")}
         
         let imageView = UIImageView(image: imagesArray[currentIndex])
         
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.8)
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width*0.6, height: view.frame.height*0.7)
         
         imageView.center = view.center
         
-        let pickUpGesture = UIPanGestureRecognizer(target: self, action: #selector(album.drag(_:)))
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(drag(_:)))
         
-        imageView.addGestureRecognizer(pickUpGesture)
+        imageView.addGestureRecognizer(pan)
         
         imageView.contentMode = .scaleAspectFill
         
         imageView.isUserInteractionEnabled = true
 
-        return imageView
+        view.addSubview(imageView)
+        
+        addAnimation(imageView, animator: delegate!.animator)
+        
+        currentImageView = imageView //so I can refer to it globaly
+        
+        #warning("add photos undernith eatch other at a later stage")
+        
+//        view.insertSubview(<#T##view: UIView##UIView#>, belowSubview: <#T##UIView#>)
+        
     }
     
-    /**
-     gets the current picture into screen
-     - sets new index according to swipe direction
-     - creates image from index
-     - animate ot inside screen
-     */
-    mutating func animateIn (what imageView: UIImageView, from direction:Direction) {
-        guard let album = album else {fatalError()}
+    private func addAnimation (_ imageView:UIImageView, animator: UIViewPropertyAnimator) {
+        guard let view = imageView.superview else {fatalError("first add to superView!")}
         
-        if direction == .right { //left swipe! = next picture
-            currentIndex += 1
-            if let nextPic = createImage(view: album.view) {
-                album.view.insertSubview(nextPic, at: 1)
-                
-                
-                
-            } else {
-                
-            }
-            UIView.animate(withDuration: 0.3) {
-                imageView.center = album.view.center
-            }
-        } else if direction == .left {
-            currentIndex -= 1
-            createImage(view: album.view)
+        animator.addAnimations { //end animation
+            imageView.alpha = 0
+        }
+        
+        //if image is left from center
+        if imageView.center.x < view.frame.width/2 {
+            #warning("add rotation")
+        //if image is right from center
+        } else if imageView.center.x > view.frame.width/2 {
+            #warning("add rotation")
+        } else {
+            print("Where the fuck is the image?? go to line 121")
+        }
+        
+    }
+    
+    
+    /**
+     the draging animation
+     - checks if currentPic object isn't nil
+     - switch sender.state
+     - if began or changed: set shadow (looks like picking it up)
+     - and set currentImage object's center as the draging finger's location.
+     - when dragging is ended, removes shadow
+     */
+    @objc func drag (_ sender: UIPanGestureRecognizer) {
+        guard let imageView = sender.view else {fatalError()}
+        guard let superView = imageView.superview else {fatalError("no superView")}
+        
+        //let location on screen and speed
+        let location = sender.location(in: superView)
+        let speed = sender.velocity(in: superView)
+        
+        imageView.center.x = location.x
+        
+        switch sender.state {
             
-            //set image to left off screen and then set to center
-            imageView.center = CGPoint(x: 0-(album.view.frame.width/2), y: imageView.center.y)
-            imageView.center = album.view.center
+        case .began,.changed:
+            
+            let midPoint =  superView.frame.width/2
+            
+            let distanceFromMid = sender.location(in: superView).x - midPoint
+            
+            let percestFromMid = abs ( distanceFromMid / midPoint )
+            
+            print(percestFromMid)
+            
+            guard let animator = delegate?.animator else {fatalError("couldn't find animator")}
+            
+            animator.fractionComplete = percestFromMid
+            
+            if speed.x < -1500 {
+                next(imageView as! UIImageView)
+            } else if speed.x > 1500 {
+                #warning("swipe right")
+            }
+            
+            //if pic is at edge, swipe
+        case .ended,.failed:
+            if imageView.center.x < superView.frame.width*0.2 {
+                #warning("swipe left")
+                next(imageView as! UIImageView)
+            } else if imageView.center.x > superView.frame.width*0.8 {
+                #warning("swipe right")
+            }
+                        
+        default: break
             
         }
+    }
+    
+    
+    /**
+     - animates out the input UIImageView
+     - sets new index
+     - creates a new instance of the current
+     */
+    private func next (_ image:UIImageView) {
+        guard let view = image.superview else {fatalError("no superView?")}
+        animateOut(to: .left, image: image) //send left
+        currentImageView!.removeFromSuperview() //delete
+        setNewIndex(next: true) //sets index + 1
+        createImage(view) //create new image from new index and sets global var to it.
+        guard let currentImage = currentImageView else {fatalError("currentImageView is nil!")} //unwrap global var
+        sendToScreen(what: currentImage, from: .right) //send it to screen
+    }
+    
+    
+    /**
+     Sends UIImage into the screen so the use can see it.
+     - this func assume the image is outside of the screen from the right.
+     */
+    private func sendToScreen (what imageView: UIImageView, from direction:Direction) {
+        guard let view = imageView.superview else {fatalError()}
+        
+        if direction == .right {
+            UIView.animate(withDuration: 0.2) {
+                imageView.center.x = view.center.x
+            }
+        } else if direction == .left {
+            
+            //send image to left
+            let halfImageSize = imageView.frame.width/2
+            
+            imageView.center.x = 0 - halfImageSize //sets right outside of the screed
+            UIView.animate(withDuration: 0.2) {
+
+                //animate to screen
+                imageView.center.x = view.center.x
+            }
+        }
+        
     }
     
     
@@ -163,56 +221,45 @@ struct AlbumViewModel {
      animates out currentPicture if exist and then removes it from superView.
      - does NOT call next image. should call it after this func.
      */
-    mutating func animateOut(to direction: Direction) {
-        guard let currentImageView = currentImageView, let album = album else {fatalError()}
-
-        if direction == .left {
+    private func animateOut(to direction: Direction, image:UIImageView) {
+        let halfImage = image.frame.width/2
+        guard let view = image.superview else {fatalError("WTF")}
+        
+        if direction == .right {
             UIView.animate(withDuration: 0.3) {
-                currentImageView.frame.origin.x = 0-currentImageView.frame.width
-            } completion: { [weak self] _ in
-                guard var strongSelf = self else {fatalError()}
-                currentImageView.removeFromSuperview()
-                strongSelf.currentIndex += 1
-                strongSelf.animateIn(what: currentImageView, from: .right)
+                image.frame.origin.x = view.frame.width
             }
-        } else if direction == .right {
+        } else if direction == .left {
             UIView.animate(withDuration: 0.3) {
-                currentImageView.frame.origin.x = album.view.frame.width+currentImageView.frame.width
-            } completion: { [weak self] _ in
-                guard var strongSelf = self else {fatalError()}
-                currentImageView.removeFromSuperview()
-                strongSelf.currentIndex -= 1
-                strongSelf.animateIn(what: currentImageView, from: .left)
+                image.center.x = 0 - halfImage
             }
-            } else {
-                fatalError("WTF")
-            }
+        } else {
+            fatalError("WTF")
         }
         
-    
-    
-        
+    }
+            
+    private func setNewIndex (next:Bool = false,previous:Bool = false) {
+        if next {
+            print("index was \(currentIndex)")
+            currentIndex += 1
+            print("and now its \(currentIndex)")
+        } else if previous{
+            print("index was \(currentIndex)")
+            currentIndex -= 1
+            print("and now its \(currentIndex)")
+        } else {
+            fatalError("this is not supposed to happed!")
+        }
+    }
+  
 
-    
-    
-    
-    
-    mutating func nextImage () {
-        guard let album = album else {fatalError()}
-        
-        makeSureIndexIsValid(andAddTo: album.view)
-        animateOut(to: .left)
-        animateIn(what: currentImageView!, from: .right)
+    init(delegate: AlbumViewController? = nil, currentImageView: UIImageView? = nil, imagesArray: [UIImage] = [UIImage](), currentIndex: Int = 0) {
+        self.delegate = delegate
+        self.currentImageView = currentImageView
+        self.imagesArray = imagesArray
+        self.currentIndex = currentIndex
     }
-    
-    mutating func priviousImage () {
-        guard let album = album else {fatalError()}
-        makeSureIndexIsValid(andAddTo: album.view)
-        animateOut(to: .right)
-        animateIn(what: currentImageView!, from: .left)
-    }
-    
-    
     
 }
 

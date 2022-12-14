@@ -68,9 +68,8 @@ class Funcs {
   }
     
     func makeButtonRound (_ button:UIButton) {
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.titleLabel?.textColor = .cyan
         let layer = CAGradientLayer()
         layer.frame = button.bounds
         let colors = [UIColor.blue.cgColor, UIColor.systemBlue.cgColor]
