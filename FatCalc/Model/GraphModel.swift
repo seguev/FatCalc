@@ -14,6 +14,11 @@ struct GraphModel {
     
     var sets : [LineChartDataSet] = []
     var globalArray : [Entry] = []
+    weak var delegate : GraphViewController? {
+        didSet {
+            print("graph delegate has been set")
+        }
+    }
     
     func fetchMaxWeight () -> Double {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -48,7 +53,7 @@ struct GraphModel {
         chart.leftAxis.labelPosition = .outsideChart
         chart.doubleTapToZoomEnabled = false
         chart.pinchZoomEnabled = false
-        chart.dragEnabled = false
+        chart.dragEnabled = true ; #warning("might wanna change this later")
         chart.leftAxis.axisMaximum = fetchMaxWeight() * 1.3 //set graph flexible height
         chart.leftAxis.axisMinimum = 5
         chart.xAxis.labelFont = .systemFont(ofSize: 12)
@@ -157,7 +162,10 @@ struct GraphModel {
     
     
     
-    func createInfoLabel (for seconds: Int, x:Double, y:Double, text:String, view:UIView) {
+    func globalLabelSetup (for seconds: Int, hightLight: Highlight, text:String, view:UIView)  {
+        
+        let x = hightLight.xPx
+        let y = hightLight.yPx
         let origin = CGPoint(x: x, y: y-20)
         let temporaryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 80))
         temporaryLabel.center = origin
@@ -169,10 +177,12 @@ struct GraphModel {
         temporaryLabel.textAlignment = .center
         temporaryLabel.layer.cornerRadius = 10
         temporaryLabel.clipsToBounds = true
-        
         view.addSubview(temporaryLabel)
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-            temporaryLabel.removeFromSuperview()
+        temporaryLabel.isHidden = false
+        
+        //deletes label after X seconds
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(seconds), repeats: false) { _ in
+            temporaryLabel.isHidden = true
         }
         
         //prevent label from going off screen
@@ -194,7 +204,26 @@ struct GraphModel {
             print("label fit's screen")
         }
         
+        delegate?.label = temporaryLabel
         
     }
+    
+    func fetchEntryInfo (_ entry:ChartDataEntry, highlight: Highlight) -> String {
+        let index = Int(entry.x)
+        let selectedEntry = globalArray[index - 1]
+        
+        let info = """
+            weight: \(selectedEntry.weight)
+            fat: \(selectedEntry.fatPercentage)
+            date: \(selectedEntry.date ?? "no date")
+            """
+
+        
+        
+        return info
+    }
+    
+    
+    
     
 }

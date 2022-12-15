@@ -24,7 +24,7 @@ import UIKit
 
 class AlbumViewModel {
     
-    weak var delegate : AlbumViewController? {
+    var delegate : AlbumViewController? {
         didSet {
             print("Album delegate has been set!")
         }
@@ -75,17 +75,21 @@ class AlbumViewModel {
         
         let imageView = UIImageView(image: imagesArray[currentIndex])
         
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width*0.6, height: view.frame.height*0.7)
+        imageView.contentMode = .scaleAspectFill
         
-        imageView.center = view.center
+        imageView.isUserInteractionEnabled = true
+        
+        imageView.frame = CGRect(x: 0, y: 200, width: 300, height: 200)
+        
+        imageView.layer.cornerRadius = 20
+        
+        imageView.clipsToBounds = true
+        
+        imageView.frame.origin.x = view.frame.width
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(drag(_:)))
         
         imageView.addGestureRecognizer(pan)
-        
-        imageView.contentMode = .scaleAspectFill
-        
-        imageView.isUserInteractionEnabled = true
 
         view.addSubview(imageView)
         
@@ -113,7 +117,7 @@ class AlbumViewModel {
         } else if imageView.center.x > view.frame.width/2 {
             #warning("add rotation")
         } else {
-            print("Where the fuck is the image?? go to line 121")
+            print("Where the fuck is the image???")
         }
         
     }
@@ -136,6 +140,9 @@ class AlbumViewModel {
         let speed = sender.velocity(in: superView)
         
         imageView.center.x = location.x
+        
+        
+        printState(sender.state)
         
         switch sender.state {
             
@@ -160,18 +167,47 @@ class AlbumViewModel {
             }
             
             //if pic is at edge, swipe
-        case .ended,.failed:
+        case .ended,.failed ,.cancelled:
+            
             if imageView.center.x < superView.frame.width*0.2 {
+                
                 #warning("swipe left")
                 next(imageView as! UIImageView)
+                
             } else if imageView.center.x > superView.frame.width*0.8 {
+                
                 #warning("swipe right")
+                print("should swipe right")
+                
+            } else {
+                print("should do nothing")
             }
-                        
-        default: break
+            print(sender)
+            
+        default:
+            print("ok")
             
         }
     }
+    
+    func printState (_ state:UITapGestureRecognizer.State) {
+        switch state {
+        case .cancelled:
+            print("cancelled")
+        case .began:
+            print("began")
+        case .changed:
+            print("changed")
+        case .ended:
+            print("ended")
+        case .failed:
+            print("failed")
+        case .possible:
+            print("possible")
+        default: print("Couldn't recognize state!")
+        }
+    }
+    
     
     
     /**
@@ -180,13 +216,18 @@ class AlbumViewModel {
      - creates a new instance of the current
      */
     private func next (_ image:UIImageView) {
+        
         guard let view = image.superview else {fatalError("no superView?")}
+        
         animateOut(to: .left, image: image) //send left
-        currentImageView!.removeFromSuperview() //delete
+        
+        image.removeFromSuperview() //delete
+        
         setNewIndex(next: true) //sets index + 1
+        
         createImage(view) //create new image from new index and sets global var to it.
-        guard let currentImage = currentImageView else {fatalError("currentImageView is nil!")} //unwrap global var
-        sendToScreen(what: currentImage, from: .right) //send it to screen
+        
+        sendToScreen(what: currentImageView!, from: .right) //send it to screen
     }
     
     
@@ -194,11 +235,11 @@ class AlbumViewModel {
      Sends UIImage into the screen so the use can see it.
      - this func assume the image is outside of the screen from the right.
      */
-    private func sendToScreen (what imageView: UIImageView, from direction:Direction) {
+    func sendToScreen (what imageView: UIImageView, from direction:Direction) {
         guard let view = imageView.superview else {fatalError()}
         
         if direction == .right {
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.5) {
                 imageView.center.x = view.center.x
             }
         } else if direction == .left {
@@ -207,7 +248,7 @@ class AlbumViewModel {
             let halfImageSize = imageView.frame.width/2
             
             imageView.center.x = 0 - halfImageSize //sets right outside of the screed
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.5) {
 
                 //animate to screen
                 imageView.center.x = view.center.x
@@ -226,11 +267,11 @@ class AlbumViewModel {
         guard let view = image.superview else {fatalError("WTF")}
         
         if direction == .right {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.5) {
                 image.frame.origin.x = view.frame.width
             }
         } else if direction == .left {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.5) {
                 image.center.x = 0 - halfImage
             }
         } else {
@@ -240,16 +281,20 @@ class AlbumViewModel {
     }
             
     private func setNewIndex (next:Bool = false,previous:Bool = false) {
-        if next {
-            print("index was \(currentIndex)")
-            currentIndex += 1
-            print("and now its \(currentIndex)")
-        } else if previous{
-            print("index was \(currentIndex)")
-            currentIndex -= 1
-            print("and now its \(currentIndex)")
-        } else {
-            fatalError("this is not supposed to happed!")
+        if currentIndex < imagesArray.count - 1 { #warning("change this when adding right swipe")
+            if next {
+                print("index was \(currentIndex)")
+                currentIndex += 1
+                print("and now its \(currentIndex)")
+            } else if previous{
+                print("index was \(currentIndex)")
+                currentIndex -= 1
+                print("and now its \(currentIndex)")
+            } else {
+                fatalError("this is not supposed to happed!")
+            }
+        } else { //index is out of range
+            currentIndex = 0 //reset
         }
     }
   
@@ -259,6 +304,10 @@ class AlbumViewModel {
         self.currentImageView = currentImageView
         self.imagesArray = imagesArray
         self.currentIndex = currentIndex
+    }
+    
+    deinit {
+        print("deinit")
     }
     
 }

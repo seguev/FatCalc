@@ -31,6 +31,7 @@ class AlbumViewController: UIViewController, UIScrollViewDelegate {
         //creates the first image
         model.createImage(view)
         
+        model.sendToScreen(what: model.currentImageView!, from: .right)
     }
     
     @IBAction func addNewImage(_ sender: UIButton) {

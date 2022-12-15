@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 import Charts
 /*
 add graph cocoapod V
@@ -27,13 +28,15 @@ class GraphViewController: UIViewController, ChartViewDelegate {
     var model = GraphModel()
     let lineChartView = LineChartView()
     
+    var label = UILabel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         Funcs.shared.addGradient(view: self.view)
         lineChartView.delegate = self
         model.chartSetup(self.view, chart: lineChartView)
-        
+        model.delegate = self
   
     }
     
@@ -46,21 +49,12 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         model.fetchAllEntries(to: lineChartView)
     }
 
+
     // MARK: - delegate func
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
-        let index = Int(entry.x)
-        let selectedEntry = model.globalArray[index - 1]
-        
-        let info = """
-            weight: \(selectedEntry.weight)
-            fat: \(selectedEntry.fatPercentage)
-            date: \(selectedEntry.date ?? "no date")
-            """
-        let xPosition = highlight.xPx
-        let yPosition = highlight.yPx
-        
-        model.createInfoLabel(for: 5, x: xPosition, y: yPosition, text: info, view: view)
+        let info = model.fetchEntryInfo(entry, highlight: highlight)
+        label.isHidden = true
+        model.globalLabelSetup(for: 2, hightLight: highlight, text: info, view: view)
     }
     
     
