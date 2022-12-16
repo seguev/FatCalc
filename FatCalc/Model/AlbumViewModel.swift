@@ -30,6 +30,10 @@ class AlbumViewModel {
         }
     }
     
+#warning("animator is not attacing itself to new views, sometimes")
+#warning("if image is stated moving, it is being deleted when leaving screen")
+#warning("tap gesture is bailing out mid session")
+    
     var currentImageView : UIImageView?
     
     var imagesArray = [UIImage]()
@@ -95,29 +99,28 @@ class AlbumViewModel {
         
         addAnimation(imageView, animator: delegate!.animator)
         
-        currentImageView = imageView //so I can refer to it globaly
-        
-        #warning("add photos undernith eatch other at a later stage")
-        
-//        view.insertSubview(<#T##view: UIView##UIView#>, belowSubview: <#T##UIView#>)
+        currentImageView = imageView
+                
         
     }
     
     private func addAnimation (_ imageView:UIImageView, animator: UIViewPropertyAnimator) {
         guard let view = imageView.superview else {fatalError("first add to superView!")}
         
-        animator.addAnimations { //end animation
-            imageView.alpha = 0
+        animator.addAnimations {
+            imageView.alpha = 0.011
         }
         
-        //if image is left from center
-        if imageView.center.x < view.frame.width/2 {
-            #warning("add rotation")
-        //if image is right from center
-        } else if imageView.center.x > view.frame.width/2 {
-            #warning("add rotation")
+        let viewCenter = view.frame.width/2
+
+        if imageView.center.x < viewCenter {
+            print("Left from center")
+
+        } else if imageView.center.x > viewCenter {
+            print("Right from center")
+
         } else {
-            print("Where the fuck is the image???")
+            print("Could not find image")
         }
         
     }
@@ -141,43 +144,38 @@ class AlbumViewModel {
         
         imageView.center.x = location.x
         
+        let midPoint =  superView.frame.width/2
         
-        printState(sender.state)
+        let distanceFromMid = sender.location(in: superView).x - midPoint
+        
+        let percestFromMid = abs ( distanceFromMid / midPoint )
+        
+        print(percestFromMid)
+
+        guard let animator = delegate?.animator else {fatalError("couldn't find animator")}
+        
+        animator.fractionComplete = percestFromMid
         
         switch sender.state {
             
         case .began,.changed:
-            
-            let midPoint =  superView.frame.width/2
-            
-            let distanceFromMid = sender.location(in: superView).x - midPoint
-            
-            let percestFromMid = abs ( distanceFromMid / midPoint )
-            
-            print(percestFromMid)
-            
-            guard let animator = delegate?.animator else {fatalError("couldn't find animator")}
-            
-            animator.fractionComplete = percestFromMid
-            
+    
             if speed.x < -1500 {
                 next(imageView as! UIImageView)
             } else if speed.x > 1500 {
-                #warning("swipe right")
+                print("Swiping right")
             }
-            
+
             //if pic is at edge, swipe
         case .ended,.failed ,.cancelled:
             
             if imageView.center.x < superView.frame.width*0.2 {
-                
-                #warning("swipe left")
+
                 next(imageView as! UIImageView)
                 
             } else if imageView.center.x > superView.frame.width*0.8 {
                 
-                #warning("swipe right")
-                print("should swipe right")
+                print("Swiping right")
                 
             } else {
                 print("should do nothing")
@@ -185,10 +183,13 @@ class AlbumViewModel {
             print(sender)
             
         default:
-            print("ok")
+            break
             
         }
     }
+    
+    
+    
     
     func printState (_ state:UITapGestureRecognizer.State) {
         switch state {
