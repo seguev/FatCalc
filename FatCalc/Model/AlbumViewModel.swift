@@ -33,7 +33,24 @@ class AlbumViewModel {
 #warning("animator is not attacing itself to new views, sometimes")
 #warning("if image is stated moving, it is being deleted when leaving screen")
 #warning("tap gesture is bailing out mid session")
+    let animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+
+    var side : Side = .center {
+        willSet{
+            let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
+            impactGenerator.prepare()
+            if newValue != side   {
+                if newValue == .right || newValue == .left{
+                    print("new value : \(newValue)")
+                    impactGenerator.impactOccurred()
+                }
+            }
+        }
+    }
     
+    enum Side {
+        case center; case right; case left
+    }
     var currentImageView : UIImageView?
     
     var imagesArray = [UIImage]()
@@ -45,6 +62,8 @@ class AlbumViewModel {
         case right
         case left
     }
+    
+
 
     /**
      If func is being called and array is empty, it adds noSign image.
@@ -55,9 +74,10 @@ class AlbumViewModel {
         if imagesArray.isEmpty {
             
         arrayIsDefault = true
-            
+
             for i in 1...7 {
                 imagesArray.append(UIImage(named: "cat\(i)")!)
+                
             }
             
         }
@@ -77,13 +97,27 @@ class AlbumViewModel {
 
         guard !imagesArray.isEmpty else {fatalError("you need to have photos to call this func")}
         
+
         let imageView = UIImageView(image: imagesArray[currentIndex])
+        
+        animator.addAnimations {
+            imageView.alpha = 0.1
+        }
+        animator.addCompletion { position in
+            print("Completed!")
+        }
+        
+        animator.pausesOnCompletion = true
+        
+        
+        
+        imageView.alpha = 1
         
         imageView.contentMode = .scaleAspectFill
         
         imageView.isUserInteractionEnabled = true
         
-        imageView.frame = CGRect(x: 0, y: 200, width: 300, height: 200)
+        imageView.frame = CGRect(x: 0, y: 100, width: 300, height: 550)
         
         imageView.layer.cornerRadius = 20
         
@@ -97,33 +131,12 @@ class AlbumViewModel {
 
         view.addSubview(imageView)
         
-        addAnimation(imageView, animator: delegate!.animator)
         
         currentImageView = imageView
                 
         
     }
-    
-    private func addAnimation (_ imageView:UIImageView, animator: UIViewPropertyAnimator) {
-        guard let view = imageView.superview else {fatalError("first add to superView!")}
-        
-        animator.addAnimations {
-            imageView.alpha = 0.011
-        }
-        
-        let viewCenter = view.frame.width/2
 
-        if imageView.center.x < viewCenter {
-            print("Left from center")
-
-        } else if imageView.center.x > viewCenter {
-            print("Right from center")
-
-        } else {
-            print("Could not find image")
-        }
-        
-    }
     
     
     /**
@@ -137,10 +150,11 @@ class AlbumViewModel {
     @objc func drag (_ sender: UIPanGestureRecognizer) {
         guard let imageView = sender.view else {fatalError()}
         guard let superView = imageView.superview else {fatalError("no superView")}
+                
+        let impactGenerator = UIImpactFeedbackGenerator(style: .medium)
+        impactGenerator.prepare()
         
-        //let location on screen and speed
         let location = sender.location(in: superView)
-        let speed = sender.velocity(in: superView)
         
         imageView.center.x = location.x
         
@@ -150,30 +164,43 @@ class AlbumViewModel {
         
         let percestFromMid = abs ( distanceFromMid / midPoint )
         
-        print(percestFromMid)
-
-        guard let animator = delegate?.animator else {fatalError("couldn't find animator")}
-        
+//        print(percestFromMid)
+        print(animator.fractionComplete)
         animator.fractionComplete = percestFromMid
+        
+        if animator.state == .inactive || animator.state == .stopped {
+            print("animator stopped!")
+        } else if animator.state == .active {
+//            print("still active")
+        }
         
         switch sender.state {
             
         case .began,.changed:
     
-            if speed.x < -1500 {
-                next(imageView as! UIImageView)
-            } else if speed.x > 1500 {
-                print("Swiping right")
+            if imageView.center.x < superView.frame.width*0.3 {
+                
+                side = .left
+                
+            } else if imageView.center.x > superView.frame.width*0.7 {
+                
+                side = .right
+                
+            } else {
+                
+                side = .center
             }
+            
+            
 
-            //if pic is at edge, swipe
+
         case .ended,.failed ,.cancelled:
             
-            if imageView.center.x < superView.frame.width*0.2 {
+            if imageView.center.x < superView.frame.width*0.3 {
 
                 next(imageView as! UIImageView)
                 
-            } else if imageView.center.x > superView.frame.width*0.8 {
+            } else if imageView.center.x > superView.frame.width*0.7 {
                 
                 print("Swiping right")
                 
@@ -191,23 +218,6 @@ class AlbumViewModel {
     
     
     
-    func printState (_ state:UITapGestureRecognizer.State) {
-        switch state {
-        case .cancelled:
-            print("cancelled")
-        case .began:
-            print("began")
-        case .changed:
-            print("changed")
-        case .ended:
-            print("ended")
-        case .failed:
-            print("failed")
-        case .possible:
-            print("possible")
-        default: print("Couldn't recognize state!")
-        }
-    }
     
     
     
@@ -220,16 +230,17 @@ class AlbumViewModel {
         
         guard let view = image.superview else {fatalError("no superView?")}
         
-        animateOut(to: .left, image: image) //send left
-        
-        image.removeFromSuperview() //delete
-        
+        animateOut(to: .left, image: image)
+                
         setNewIndex(next: true) //sets index + 1
         
         createImage(view) //create new image from new index and sets global var to it.
         
         sendToScreen(what: currentImageView!, from: .right) //send it to screen
+        
     }
+    
+    
     
     
     /**
@@ -268,13 +279,20 @@ class AlbumViewModel {
         guard let view = image.superview else {fatalError("WTF")}
         
         if direction == .right {
+ 
             UIView.animate(withDuration: 0.5) {
                 image.frame.origin.x = view.frame.width
+            } completion: { _ in
+                image.removeFromSuperview()
             }
+
         } else if direction == .left {
             UIView.animate(withDuration: 0.5) {
                 image.center.x = 0 - halfImage
+            } completion: { _ in
+                image.removeFromSuperview()
             }
+
         } else {
             fatalError("WTF")
         }

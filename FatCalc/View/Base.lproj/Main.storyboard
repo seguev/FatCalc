@@ -22,12 +22,12 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="mWw-iI-hbW">
                                         <rect key="frame" x="100" y="0.0" width="190" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="ymc-pk-d6B"/>
+                                            <constraint firstAttribute="height" constant="50" id="dGl-bI-WqK"/>
                                         </constraints>
                                         <color key="tintColor" systemColor="secondarySystemBackgroundColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Caliper" titleAlignment="center">
-                                            <fontDescription key="titleFontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="20"/>
+                                            <fontDescription key="titleFontDescription" name="SinhalaSangamMN-Bold" family="Sinhala Sangam MN" pointSize="25"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="calcWithCaliper:" destination="H3s-Hl-jx2" eventType="touchUpInside" id="bhr-jt-lPb"/>
@@ -36,12 +36,12 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="LgN-3s-JM8">
                                         <rect key="frame" x="100" y="116" width="190" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="q5O-JF-NpL"/>
+                                            <constraint firstAttribute="height" constant="50" id="QV9-pr-GWk"/>
                                         </constraints>
                                         <color key="tintColor" systemColor="secondarySystemBackgroundColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Tape measure" titleAlignment="center">
-                                            <fontDescription key="titleFontDescription" name="Rockwell-Bold" family="Rockwell" pointSize="20"/>
+                                            <fontDescription key="titleFontDescription" name="SinhalaSangamMN-Bold" family="Sinhala Sangam MN" pointSize="25"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="calcWithTape:" destination="H3s-Hl-jx2" eventType="touchUpInside" id="G82-vE-eSN"/>
