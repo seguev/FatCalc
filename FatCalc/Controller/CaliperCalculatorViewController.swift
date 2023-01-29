@@ -62,7 +62,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         thirdTextField.delegate = self
         fourthTextField.delegate = self
         fifthTextField.delegate = self
-        Funcs.shared.addGradient(view: self.view)
+        CoreDataModel.shared.addGradient(view: self.view)
         closeTextFieldsWhenTappedAround()
     }
   
@@ -71,6 +71,12 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
          view.addGestureRecognizer(tapGesture)
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "." && textField.text!.contains(".") {
+            return false
+        }
+        return true
+    }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         
@@ -99,10 +105,10 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
 
         if let safeFirst = model.age, let safeSecond = model.weight, let safeThird = model.genderUniqueFold, let safeFourh = model.abdominalFold, let safeFifth = model.thighFold {
             if model.gender == .Male {
-                model.fatPercentage = Funcs.shared.calcMenBodyFat(age: safeFirst, chest: safeThird, abdominal: safeFourh, thigh: safeFifth)
+                model.fatPercentage = Calculator.shared.calcMenBodyFat(age: safeFirst, chest: safeThird, abdominal: safeFourh, thigh: safeFifth)
                 model.weight = safeSecond
             } else if model.gender == .Female {
-                model.fatPercentage = Funcs.shared.calcWomenBodyFat(age: safeFirst, triceps: safeThird, suprailiac: safeFourh, thigh: safeFifth)
+                model.fatPercentage = Calculator.shared.calcWomenBodyFat(age: safeFirst, triceps: safeThird, suprailiac: safeFourh, thigh: safeFifth)
                 model.weight = safeSecond
             }
         }
@@ -111,7 +117,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
             performSegue(withIdentifier: "caliperToResult", sender: self)
         } else {
             print("fatPercentage is nil! \(model.fatPercentage ?? "nil")")
-            self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
+            self.present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     

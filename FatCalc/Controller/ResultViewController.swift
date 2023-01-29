@@ -43,7 +43,7 @@ class ResultViewController: UIViewController {
         } else if gender == .Female {
             womenHealthFat()
         } else {
-            present(Funcs.shared.somthingsWrongAlertController(), animated: true)
+            present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
             print("ERROR, gender = \(gender) ")
         }
     }
@@ -53,7 +53,7 @@ class ResultViewController: UIViewController {
         guard let weightFloat = Float(weight) else {fatalError("could not convert weight into Float")}
 
         //save fatPercentage
-        Funcs.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
+        CoreDataModel.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
         if let rootController = view.window?.rootViewController {
             rootController.dismiss(animated: true, completion: nil)
         } else {

@@ -27,7 +27,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Funcs.shared.addGradient(view: self.view)
+        CoreDataModel.shared.addGradient(view: self.view)
         firstTextField.delegate = self
         secondTextField.delegate = self
         thirdTextField.delegate = self
@@ -45,7 +45,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         } else if sender.selectedSegmentIndex == 1 {
             setFemaleLabels()
         } else {
-            present(Funcs.shared.somthingsWrongAlertController(), animated: true)
+            present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     
@@ -90,22 +90,28 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string == "." && textField.text!.contains(".") {
+            return false
+        }
+        return true
+    }
+    
     @IBAction func calculatePressed(_ sender: UIButton) {
         view.endEditing(true)
         if let safeFirst = model.age, let safeSecond = model.weight, let safeThird = model.hips, let safeFourh = model.waistAndThigh, let safeFifth = model.forarmAndCalf, let safeSixth = model.wrist{
             if model.gender == .Male {
-                model.fatPercentage = Funcs.shared.tapeFatCalcMen(age: safeFirst, hips: safeThird, waist: safeFourh, forearm: safeFifth, wrist: safeSixth)
+                model.fatPercentage = Calculator.shared.tapeFatCalcMen(age: safeFirst, hips: safeThird, waist: safeFourh, forearm: safeFifth, wrist: safeSixth)
                 model.weight = safeSecond
             } else if model.gender == .Female {
-                model.fatPercentage = Funcs.shared.tapeFatCalcWomen(age: safeFirst, hips: safeThird, thigh: safeThird, calf: safeFourh, wrist: safeSixth)
+                model.fatPercentage = Calculator.shared.tapeFatCalcWomen(age: safeFirst, hips: safeThird, thigh: safeThird, calf: safeFourh, wrist: safeSixth)
                 model.weight = safeSecond
             }
         }
         if model.fatPercentage != nil {
             performSegue(withIdentifier: "tapeToResult", sender: self)
         } else {
-            self.present(Funcs.shared.somthingsWrongAlertController(), animated: true)
+            self.present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     

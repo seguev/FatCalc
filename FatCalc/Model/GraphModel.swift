@@ -13,35 +13,14 @@ import CoreData
 struct GraphModel {
     
     var sets : [LineChartDataSet] = []
-    var globalArray : [Entry] = []
+    var entriesArray : [Entry] = []
     weak var delegate : GraphViewController? {
         didSet {
             print("graph delegate has been set")
         }
     }
     
-    func fetchMaxWeight () -> Double {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let predicate = NSPredicate(format: "weight LIKE %@", "*")
-        let request = NSFetchRequest<Entry>(entityName: "Entry")
-        request.predicate = predicate
-        var weightDoubles : [Double] = []
-        do {
-            let weights = try context.fetch(request)
-            for weight in weights {
-                weightDoubles.append(Double(weight.weight))
-            }
-            guard let maxResult = weightDoubles.max() else {
-                print(#function+"FAILED")
-                return 0.0
-            }
-            return maxResult
-        } catch {
-            print(error)
-        }
-        print(#function+"FAILED")
-        return 0.0
-    }
+
     
     /**
      chart setup
@@ -54,7 +33,7 @@ struct GraphModel {
         chart.doubleTapToZoomEnabled = false
         chart.pinchZoomEnabled = false
         chart.dragEnabled = true ; #warning("might wanna change this later")
-        chart.leftAxis.axisMaximum = fetchMaxWeight() * 1.3 //set graph flexible height
+        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.3 //set graph flexible height
         chart.leftAxis.axisMinimum = 5
         chart.xAxis.labelFont = .systemFont(ofSize: 12)
         chart.center = view.center
@@ -80,24 +59,26 @@ struct GraphModel {
      - add set as a data set to chart
      - calls setData() that sets each line properties
      */
-    mutating func fetchAllEntries(to chart:LineChartView) {
+    mutating func updateChart(to chart:LineChartView) {
         sets = []
-        globalArray = []
-        
+        entriesArray = []
+        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.3 //set graph flexible height
+
+
         var weightEntriesArray : [ChartDataEntry] = []
         var fatEntriesArray : [ChartDataEntry] = []
         
         //create safe loaded data if exist
-        if let loadedData = Funcs.shared.loadFromCoreData() {
+        if let loadedData = CoreDataModel.shared.loadFromCoreData() {
             
             //add data from coreData to global array for us to fetch later if needed
-            globalArray.append(contentsOf: loadedData )
+            entriesArray.append(contentsOf: loadedData )
             
             //set starting index
             var entryIndex : Double = 0.0
             
             //for each entry, seperate fat and weight for ChartDataSets
-            for entry in globalArray {
+            for entry in entriesArray {
                 let fat = Double(entry.fatPercentage)
                 let weight = Double(entry.weight)
                 entryIndex += 1
@@ -160,70 +141,74 @@ struct GraphModel {
         
     }
     
-    
-    
-    func globalLabelSetup (for seconds: Int, hightLight: Highlight, text:String, view:UIView)  {
-        
-        let x = hightLight.xPx
-        let y = hightLight.yPx
-        let origin = CGPoint(x: x, y: y-20)
-        let temporaryLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 80))
-        temporaryLabel.center = origin
-        temporaryLabel.backgroundColor = .black
-        temporaryLabel.textColor = .white
-        temporaryLabel.alpha = 0.8
-        temporaryLabel.numberOfLines = 0
-        temporaryLabel.text = text
-        temporaryLabel.textAlignment = .center
-        temporaryLabel.layer.cornerRadius = 10
-        temporaryLabel.clipsToBounds = true
-        view.addSubview(temporaryLabel)
-        temporaryLabel.isHidden = false
-        
-        //deletes label after X seconds
-        Timer.scheduledTimer(withTimeInterval: TimeInterval(seconds), repeats: false) { _ in
-            temporaryLabel.isHidden = true
-        }
-        
-        //prevent label from going off screen
-       let labelLeftCorner = temporaryLabel.frame.origin.x
-        let labelWidth = temporaryLabel.frame.width
-        let screenWidth = view.frame.width
-        
-        if labelLeftCorner < 0 { //if label is off screen
-            print("off screen! (left)")      //make it's x origin 0 + 5 (fit screen + padding)
-            let origin = CGPoint(x: 0+5, y: temporaryLabel.frame.minY)
-            temporaryLabel.frame = CGRect(origin: origin, size: temporaryLabel.frame.size)
-            
-        } else if labelLeftCorner+labelWidth > screenWidth {
-            print("off screen! (right)") //if label is off screen, send it left with 5px padding
-            let origin = CGPoint(x: screenWidth-(labelWidth)-5, y: temporaryLabel.frame.minY)
-            temporaryLabel.frame = CGRect(origin: origin, size: temporaryLabel.frame.size)
-            
-        } else {
-            print("label fit's screen")
-        }
-        
-        delegate?.label = temporaryLabel
-        
-    }
-    
-    func fetchEntryInfo (_ entry:ChartDataEntry, highlight: Highlight) -> String {
+    /**
+     "weight":Float,
+     "fat":Float,
+     "date":String
+     */
+    func fetchEntryInfo (_ entry:ChartDataEntry) -> [String:Any] {
         let index = Int(entry.x)
-        let selectedEntry = globalArray[index - 1]
+        let selectedEntry = entriesArray[index - 1]
         
-        let info = """
-            weight: \(selectedEntry.weight)
-            fat: \(selectedEntry.fatPercentage)
-            date: \(selectedEntry.date ?? "no date")
-            """
-
+        let weight = selectedEntry.weight
+        let fat = selectedEntry.fatPercentage
+        let date = selectedEntry.date ?? "no date"
         
-        
-        return info
+        return ["weight":weight,"fat":fat,"date":date]
     }
     
+    func handleOffScreen(_ view:UIView,_ popUP:UIView) {
+        
+        if popUP.frame.origin.x < 0 {
+            popUP.frame.origin.x = 5
+            
+        } else if popUP.frame.maxX > view.frame.width {
+            popUP.frame.origin.x = view.frame.width - popUP.frame.width - 5
+            
+        } else if popUP.frame.origin.y < 0 {
+            popUP.frame.origin.y = 5
+            
+        } else if popUP.frame.maxY > view.frame.height {
+            popUP.frame.origin.y = view.frame.height - popUP.frame.height - 5
+        } else {
+            print("popUp is fine!")
+        }
+    }
     
+    func popUpConfig(_ popUP:UIView) {
+        popUP.backgroundColor = .systemGray6
+        popUP.layer.shadowColor = UIColor.darkGray.cgColor
+        popUP.layer.shadowOffset = .init(width: 4, height: 4)
+        popUP.layer.shadowRadius = 5
+        popUP.layer.shadowOpacity = 0.7
+        popUP.layer.cornerRadius = 10
+    }
+    
+    func showNoDataPopUp (_ popUp:UIView, blur: UIVisualEffectView,in view:UIView) {
+        
+        popUp.alpha = 0        
+        blur.frame = view.frame
+        blur.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        view.addSubview(blur)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5) {
+            popUp.frame = .init(x: view.center.x, y: 50, width: 200, height: 150)
+            popUp.center = .init(x: view.center.x, y: view.center.y - 100 )
+            popUp.backgroundColor = .systemGray6
+            popUp.layer.cornerRadius = 10
+            popUp.layer.shadowColor = UIColor.black.cgColor
+            popUp.layer.shadowRadius = 20
+            popUp.layer.shadowOffset = .init(width: 4, height: 4)
+            popUp.layer.shadowOpacity = 0.5
+            popUp.alpha = 1
+                        
+            view.addSubview(popUp)
+        }
+    }
+    func hideNoDataPopUp (_ popUp:UIView, blur:UIVisualEffectView) {
+        popUp.removeFromSuperview()
+        blur.removeFromSuperview()
+    }
     
     
 }

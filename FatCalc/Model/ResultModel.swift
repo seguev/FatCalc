@@ -7,12 +7,9 @@
 
 import Foundation
 
-/*
- move result model to here
- */
-
 struct ResultModel {
 
-    
+    #warning("move result model to here")
+
     
 }

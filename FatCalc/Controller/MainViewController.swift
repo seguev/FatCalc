@@ -16,14 +16,14 @@ class MainViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemCyan
-        Funcs.shared.makeButtonRound(tapeButton)
-        Funcs.shared.makeButtonRound(caliperButton)
+        CoreDataModel.shared.makeButtonRound(tapeButton)
+        CoreDataModel.shared.makeButtonRound(caliperButton)
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         //get current name from shared func
-        let currentControllerName = Funcs.shared.fetchNameFromCurrent(self)
+        let currentControllerName = CoreDataModel.shared.fetchNameFromCurrent(self)
         title = currentControllerName
         
         
@@ -44,7 +44,7 @@ class MainViewController: UIViewController  {
         
     }
     private func comingSoon () {
-        self.present(Funcs.shared.comingSoonAlertController(), animated: true)
+        self.present(CoreDataModel.shared.comingSoonAlertController(), animated: true)
     }
     
 }
