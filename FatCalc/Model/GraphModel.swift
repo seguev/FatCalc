@@ -46,7 +46,12 @@ struct GraphModel {
         chart.scaleYEnabled = false
         chart.scaleXEnabled = false
         chart.drawMarkers = false
-                
+        chart.minOffset = 0
+        chart.extraTopOffset = 200
+        chart.noDataText = "Not enough entries"
+        chart.noDataFont = .systemFont(ofSize: 30)
+        
+//        chart.textInputContextIdentifier
         view.addSubview(chart) //add chart to view
         
         
@@ -63,7 +68,7 @@ struct GraphModel {
     mutating func updateChart(to chart:LineChartView) {
         sets = []
         entriesArray = []
-        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.6 //set graph flexible height
+//        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.6 //set graph flexible height
 
 
         var weightEntriesArray : [ChartDataEntry] = []
@@ -112,31 +117,34 @@ struct GraphModel {
     private mutating func setData (_ set1:LineChartDataSet,set2:LineChartDataSet ,chart:LineChartView) {
         //add chart data to a new set everytime func is called
         
-        
-        //set the set's attributes
-        set1.mode = .linear //line style
-        set1.circleHoleRadius = 0.02 //circle radius
-        set1.drawFilledEnabled = true //add fill
         set1.fillColor = .systemBlue
         set1.colors = [NSUIColor.systemBlue]
-        set1.fillAlpha = 0.4 //fill alpha
         
-        set1.drawHorizontalHighlightIndicatorEnabled = false
-
+        let fM = DefaultValueFormatter()
+//        fM.decimals = 1
+        fM.decimals = 6
+        set1.valueFormatter = fM
+        
         sets.append(set1) //add to global setsArray, so we can pass several sets to data
         
-        //set the set's attributes
-        set2.mode = .linear //line style
-        set2.circleHoleRadius = 0.02 //circle radius
-        set2.drawFilledEnabled = true //add fill
         set2.fillColor = .systemBlue
         set2.colors = [NSUIColor.blue]
-        set2.fillAlpha = 0.4 //fill alpha
-        set2.drawHorizontalHighlightIndicatorEnabled = false
-        
+
         sets.append(set2) //add to global setsArray, so we can pass several sets to data
         
-        
+        sets.forEach { uniSet in
+            uniSet.highlightColor = .systemGray3
+            uniSet.mode = .linear
+            uniSet.circleRadius = 4
+            uniSet.drawFilledEnabled = true
+            uniSet.fillAlpha = 0.4
+//            uniSet.valueFont = .systemFont(ofSize: 10)
+            uniSet.valueTextColor = .clear
+            uniSet.valueFont = .systemFont(ofSize: 15)
+            
+            uniSet.drawHorizontalHighlightIndicatorEnabled = false
+            
+        }
         //make data from global setsArray
         let newData = LineChartData(dataSets: sets)
         

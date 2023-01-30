@@ -61,10 +61,6 @@ class GraphViewController: UIViewController, ChartViewDelegate {
 
     // MARK: - delegate func
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print(chartView.getMarkerPosition(highlight: highlight))
-        
-        
-
 
         selectedEntry = model.entriesArray[Int(entry.x - 1)]
         
