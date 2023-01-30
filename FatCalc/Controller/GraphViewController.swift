@@ -39,6 +39,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         CoreDataModel.shared.addGradient(view: self.view)
         lineChartView.delegate = self
+        
         model.chartSetup(self.view, chart: lineChartView)
         model.delegate = self
   
@@ -60,7 +61,11 @@ class GraphViewController: UIViewController, ChartViewDelegate {
 
     // MARK: - delegate func
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        print(chartView.getMarkerPosition(highlight: highlight))
         
+        
+
+
         selectedEntry = model.entriesArray[Int(entry.x - 1)]
         
         let entryInfo = model.fetchEntryInfo(entry)
@@ -68,10 +73,14 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         presentPopUp(highlight, info: entryInfo)
     }
     
+    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
+        
+    }
+    
     private func presentPopUp (_ hightLight: Highlight, info:[String:Any])  {
         
         //popUp position & size
-        let position = CGPoint(x: hightLight.xPx, y: hightLight.yPx-20)
+        let position = CGPoint(x: hightLight.xPx, y: view.frame.height * 0.2)
         let size = CGSize(width: 160, height: 120)
         popUP.frame = .init(origin: .zero, size: size)
         popUP.center = position
@@ -135,7 +144,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
             textField.delegate = self
         }
         present(alert, animated: true)
-        if let error {self.flickerTextField(textField: textField)}
+        if error != nil {self.flickerTextField(textField: textField)}
     }
     
     private func flickerTextField (textField:UITextField){

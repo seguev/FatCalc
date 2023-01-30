@@ -32,8 +32,7 @@ struct GraphModel {
         chart.leftAxis.labelPosition = .outsideChart
         chart.doubleTapToZoomEnabled = false
         chart.pinchZoomEnabled = false
-        chart.dragEnabled = true ; #warning("might wanna change this later")
-        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.3 //set graph flexible height
+        chart.dragEnabled = true
         chart.leftAxis.axisMinimum = 5
         chart.xAxis.labelFont = .systemFont(ofSize: 12)
         chart.center = view.center
@@ -46,6 +45,8 @@ struct GraphModel {
         chart.drawGridBackgroundEnabled = false
         chart.scaleYEnabled = false
         chart.scaleXEnabled = false
+        chart.drawMarkers = false
+                
         view.addSubview(chart) //add chart to view
         
         
@@ -62,7 +63,7 @@ struct GraphModel {
     mutating func updateChart(to chart:LineChartView) {
         sets = []
         entriesArray = []
-        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.3 //set graph flexible height
+        chart.leftAxis.axisMaximum = CoreDataModel.shared.fetchMaxWeight() * 1.6 //set graph flexible height
 
 
         var weightEntriesArray : [ChartDataEntry] = []
@@ -116,10 +117,11 @@ struct GraphModel {
         set1.mode = .linear //line style
         set1.circleHoleRadius = 0.02 //circle radius
         set1.drawFilledEnabled = true //add fill
-        set1.fillColor = .systemGreen
-        set1.colors = [NSUIColor.systemGreen]
+        set1.fillColor = .systemBlue
+        set1.colors = [NSUIColor.systemBlue]
         set1.fillAlpha = 0.4 //fill alpha
-
+        
+        set1.drawHorizontalHighlightIndicatorEnabled = false
 
         sets.append(set1) //add to global setsArray, so we can pass several sets to data
         
@@ -130,6 +132,8 @@ struct GraphModel {
         set2.fillColor = .systemBlue
         set2.colors = [NSUIColor.blue]
         set2.fillAlpha = 0.4 //fill alpha
+        set2.drawHorizontalHighlightIndicatorEnabled = false
+        
         sets.append(set2) //add to global setsArray, so we can pass several sets to data
         
         
@@ -163,15 +167,7 @@ struct GraphModel {
             popUP.frame.origin.x = 5
             
         } else if popUP.frame.maxX > view.frame.width {
-            popUP.frame.origin.x = view.frame.width - popUP.frame.width - 5
-            
-        } else if popUP.frame.origin.y < 0 {
-            popUP.frame.origin.y = 5
-            
-        } else if popUP.frame.maxY > view.frame.height {
-            popUP.frame.origin.y = view.frame.height - popUP.frame.height - 5
-        } else {
-            print("popUp is fine!")
+            popUP.frame.origin.x = view.frame.width - popUP.frame.width - 5            
         }
     }
     
