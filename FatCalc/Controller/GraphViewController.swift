@@ -62,15 +62,21 @@ class GraphViewController: UIViewController, ChartViewDelegate {
     // MARK: - delegate func
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
 
+        let generator = UISelectionFeedbackGenerator()
+        generator.prepare()
+        generator.selectionChanged()
+        
+        
         selectedEntry = model.entriesArray[Int(entry.x - 1)]
         
         let entryInfo = model.fetchEntryInfo(entry)
         
         presentPopUp(highlight, info: entryInfo)
     }
+
     
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-        
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        popUP.removeFromSuperview()
     }
     
     private func presentPopUp (_ hightLight: Highlight, info:[String:Any])  {

@@ -131,7 +131,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func quitButtonPressed(_ sender: UIButton) {
-        print(#function)
+        
         dismiss(animated: true)
     }
     
