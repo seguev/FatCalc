@@ -24,7 +24,7 @@ class MainViewController: UIViewController  {
     override func viewDidAppear(_ animated: Bool) {
         //get current name from shared func
         let currentControllerName = CoreDataModel.shared.fetchNameFromCurrent(self)
-        title = "Fat Calc"
+
         
         
         print("current controller is \(currentControllerName)")

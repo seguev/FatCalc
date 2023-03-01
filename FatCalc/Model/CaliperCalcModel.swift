@@ -13,7 +13,6 @@ struct CaliperCalcModel {
     var genderUniqueFold : String?
     var abdominalFold : String?
     var thighFold : String?
-    var weight: String?
     var fatPercentage: String?
     var gender : Gender = .Male
     enum Gender {

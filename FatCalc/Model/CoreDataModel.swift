@@ -12,6 +12,8 @@ import CoreData
 class CoreDataModel {
     static let shared = CoreDataModel()
     
+    
+    
     /*
      add saving photo function to core data
      */

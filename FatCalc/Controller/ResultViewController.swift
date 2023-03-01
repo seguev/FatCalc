@@ -13,16 +13,13 @@ class ResultViewController: UIViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     
     
+    
     var result : String = "" {
         didSet {
             print(result)
         }
     }
-    var weight: String = "" {
-        didSet {
-            print(weight)
-        }
-    }
+
     var gender : CaliperCalcModel.Gender = .Male
     
     var model = ResultModel()
@@ -50,10 +47,10 @@ class ResultViewController: UIViewController {
     
     @IBAction func savePressed(_ sender: UIButton) {
         guard let resultFloat = Float(result) else {fatalError("could not convert result into Float")}
-        guard let weightFloat = Float(weight) else {fatalError("could not convert weight into Float")}
-
-        //save fatPercentage
-        CoreDataModel.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
+        
+        NotificationCenter.default.post(name: fatUpdateNotification, object: resultFloat)
+        
+//        CoreDataModel.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
         if let rootController = view.window?.rootViewController {
             rootController.dismiss(animated: true, completion: nil)
         } else {

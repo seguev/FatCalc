@@ -16,7 +16,6 @@ struct TapeCalcModel {
     var wrist: String?
     var fatPercentage: String?
     var gender : CaliperCalcModel.Gender = .Male
-    var weight : String?
     
     
 }

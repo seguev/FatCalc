@@ -13,7 +13,6 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var thirdLabel: UILabel!
     @IBOutlet weak var fourthLabel: UILabel!
     @IBOutlet weak var fifthLabel: UILabel!
-    @IBOutlet weak var sixthLabel: UILabel!
     
     @IBOutlet weak var firstTextField: UITextField!
     @IBOutlet weak var secondTextField: UITextField!
@@ -21,19 +20,17 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fourthTextField: UITextField!
     @IBOutlet weak var fifthTextField: UITextField!
     
-    @IBOutlet weak var sixthTextField: UITextField!
     
     var model = TapeCalcModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CoreDataModel.shared.addGradient(view: self.view)
+//        CoreDataModel.shared.addGradient(view: self.view)
         firstTextField.delegate = self
         secondTextField.delegate = self
         thirdTextField.delegate = self
         fourthTextField.delegate = self
         fifthTextField.delegate = self
-        sixthTextField.delegate = self
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
     }
@@ -51,17 +48,17 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     func setMaleLabels () {
         print("male has been set")
-        thirdLabel.text = "Hips"
-        fourthLabel.text = "Waist"
-        fifthLabel.text = "Forearm"
-        sixthLabel.text = "Wrist"
+        secondLabel.text = "Hips"
+        thirdLabel.text = "Waist"
+        fourthLabel.text = "Forearm"
+        fifthLabel.text = "Wrist"
     }
     
     func setFemaleLabels () {
-        thirdLabel.text = "Hips"
-        fourthLabel.text = "Thigh"
-        fifthLabel.text = "Calf"
-        sixthLabel.text = "Wrist"
+        secondLabel.text = "Hips"
+        thirdLabel.text = "Thigh"
+        fourthLabel.text = "Calf"
+        fifthLabel.text = "Wrist"
     }
     
     // MARK: - textField delegate funcs
@@ -75,14 +72,12 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
             case "1":
                 model.age = availableText
             case "2":
-                model.weight = availableText
-            case "3":
                 model.hips = availableText
-            case "4":
+            case "3":
                 model.waistAndThigh = availableText
-            case "5":
+            case "4":
                 model.forarmAndCalf = availableText
-            case "6":
+            case "5":
                 model.wrist = availableText
             default:
                 print("da fuck did you just do")
@@ -99,13 +94,28 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         view.endEditing(true)
-        if let safeFirst = model.age, let safeSecond = model.weight, let safeThird = model.hips, let safeFourh = model.waistAndThigh, let safeFifth = model.forarmAndCalf, let safeSixth = model.wrist{
+        if let safeFirst = model.age,
+           let safeSecond = model.hips,
+           let safeThird = model.waistAndThigh,
+           let safeFourh = model.forarmAndCalf,
+           let safeFifth = model.wrist {
+            
             if model.gender == .Male {
-                model.fatPercentage = Calculator.shared.tapeFatCalcMen(age: safeFirst, hips: safeThird, waist: safeFourh, forearm: safeFifth, wrist: safeSixth)
-                model.weight = safeSecond
+                model.fatPercentage = Calculator.shared.tapeFatCalcMen(age: safeFirst,
+                                                                       hips: safeSecond,
+                                                                       waist: safeThird,
+                                                                       forearm: safeFourh,
+                                                                       wrist: safeFifth
+                )
+                
             } else if model.gender == .Female {
-                model.fatPercentage = Calculator.shared.tapeFatCalcWomen(age: safeFirst, hips: safeThird, thigh: safeThird, calf: safeFourh, wrist: safeSixth)
-                model.weight = safeSecond
+                model.fatPercentage = Calculator.shared.tapeFatCalcWomen(age: safeFirst,
+                                                                         hips: safeSecond,
+                                                                         thigh: safeThird,
+                                                                         calf: safeFourh,
+                                                                         wrist: safeFifth
+                )
+                
             }
         }
         if model.fatPercentage != nil {
@@ -119,7 +129,6 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         let destinationVC = segue.destination as! ResultViewController
         destinationVC.result = model.fatPercentage!
         destinationVC.gender = model.gender
-        destinationVC.weight = model.weight!
     }
     
     

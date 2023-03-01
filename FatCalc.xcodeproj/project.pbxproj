@@ -16,6 +16,8 @@
 		60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* GraphViewController.swift */; };
 		60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435554291D7C680023AA5B /* CoreDataModel.swift */; };
 		604CACFB298699040093CA7F /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604CACFA298699040093CA7F /* Calculator.swift */; };
+		604E86E829AE2E770026F6A0 /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604E86E729AE2E770026F6A0 /* WeekViewController.swift */; };
+		604E86EA29AF5D830026F6A0 /* WeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604E86E929AF5D830026F6A0 /* WeightViewController.swift */; };
 		60808645291D676700DAC7BE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60808644291D676700DAC7BE /* MainViewController.swift */; };
 		608F1EEE2927F180001B98DE /* TapeCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */; };
 		6097B9E7291976B700773892 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9E6291976B700773892 /* AppDelegate.swift */; };
@@ -37,6 +39,8 @@
 		60435550291D75CC0023AA5B /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		60435554291D7C680023AA5B /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
 		604CACFA298699040093CA7F /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		604E86E729AE2E770026F6A0 /* WeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
+		604E86E929AF5D830026F6A0 /* WeightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightViewController.swift; sourceTree = "<group>"; };
 		60808644291D676700DAC7BE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeCalculatorViewController.swift; sourceTree = "<group>"; };
 		6097B9E3291976B700773892 /* FatCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FatCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,8 @@
 		60435556291D7E8F0023AA5B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				604E86E729AE2E770026F6A0 /* WeekViewController.swift */,
+				604E86E929AF5D830026F6A0 /* WeightViewController.swift */,
 				60017A402924090A00768028 /* CaliperCalculatorViewController.swift */,
 				608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */,
 				60017A432924205600768028 /* ResultViewController.swift */,
@@ -263,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				604E86E829AE2E770026F6A0 /* WeekViewController.swift in Sources */,
 				60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */,
 				603E00C42934DE57003BDBCB /* CaliperCalcModel.swift in Sources */,
 				60017A412924090A00768028 /* CaliperCalculatorViewController.swift in Sources */,
@@ -276,6 +283,7 @@
 				60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */,
 				6097B9E9291976B700773892 /* SceneDelegate.swift in Sources */,
 				603E00C22934DDF7003BDBCB /* ResultModel.swift in Sources */,
+				604E86EA29AF5D830026F6A0 /* WeightViewController.swift in Sources */,
 				60017A442924205600768028 /* ResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
