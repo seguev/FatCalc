@@ -13,6 +13,7 @@ let fatUpdateNotification = Notification.Name("fatUpdate")
 
 class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
     
+    @IBOutlet weak var weekNumberLabel: UILabel!
     @IBOutlet weak var completeButtonOutlet: UIButton!
     @IBOutlet weak var sundayButton : UIButton!
     @IBOutlet weak var mondayButton : UIButton!
@@ -30,6 +31,8 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
         
         addGradient(view: view)
 
+        updateTitleLabel(isDone: false)
+        
         model.delegate = self
         
         observersSetup()
@@ -146,6 +149,15 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
         fatPercentBox.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
     }
 
+    func updateTitleLabel (isDone:Bool) {
+        let weekNum = StorageModel.shared.currentDateComponents().weekNum
+        
+        if isDone {
+            weekNumberLabel.text = "Week number : \(weekNum) ✔"
+        } else {
+            weekNumberLabel.text = "Week number : \(weekNum)"
+        }
+    }
     
  
 }

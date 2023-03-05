@@ -11,6 +11,7 @@ protocol WeeklyWeightModelDelegate : UIViewController {
     func showButton ()
     func updateCheckmarks(_ day:Day)
     func checkFatBox()
+    func updateTitleLabel(isDone:Bool)
 }
 
 class WeeklyWeightModel {
@@ -51,6 +52,7 @@ class WeeklyWeightModel {
             let currentWeekNum = StorageModel.shared.currentDateComponents().weekNum
             
             CoreDataModel.shared.saveToCoreData(newAverage, fatPercentage: updatedStorageData.fatPercentage, weekNum: currentWeekNum)
+            delegate?.updateTitleLabel(isDone: true)
         }
         
         
@@ -77,6 +79,8 @@ class WeeklyWeightModel {
         if StorageModel.shared.weeklyData.fatPercentage != nil {
             delegate?.checkFatBox()
         }
+        
+        checkEnoughDataToSave()
     }
     
 

@@ -271,6 +271,7 @@
                         <outlet property="thursdayButton" destination="hl3-pg-Ink" id="EbU-s0-W3k"/>
                         <outlet property="tuesdayButton" destination="iyg-eS-FH2" id="zlK-eU-3i2"/>
                         <outlet property="wednesdayButton" destination="2aB-eo-jyh" id="FAR-4h-DQd"/>
+                        <outlet property="weekNumberLabel" destination="Lg6-Rx-2BN" id="8LP-LP-hlQ"/>
                         <segue destination="NRS-uO-0Ug" kind="presentation" identifier="toWeight" id="gRA-Bx-RxQ"/>
                     </connections>
                 </viewController>
