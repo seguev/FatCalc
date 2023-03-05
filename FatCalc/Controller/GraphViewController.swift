@@ -46,16 +46,17 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         model.chartSetup(self.view, chart: lineChartView)
         model.delegate = self
   
-        
+        if model.entriesArray.count <= 1 {
+            model.showNoDataPopUp(noDataPopUp,blur: blurView,in: view)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         model.updateChart(to: lineChartView)
-        if model.entriesArray.isEmpty || model.entriesArray.count == 1 {
-            model.showNoDataPopUp(noDataPopUp,blur: blurView,in: view)
-        } else {
+
+        if model.entriesArray.count > 1 {
             model.hideNoDataPopUp(noDataPopUp, blur: blurView)
         }
     }

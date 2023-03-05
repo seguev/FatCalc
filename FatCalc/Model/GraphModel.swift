@@ -187,24 +187,28 @@ struct GraphModel {
     
     func showNoDataPopUp (_ popUp:UIView, blur: UIVisualEffectView,in view:UIView) {
         
-        popUp.alpha = 0        
         blur.frame = view.frame
         blur.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        view.addSubview(blur)
         
-        UIView.animate(withDuration: 0.5, delay: 0.5) {
-            popUp.frame = .init(x: view.center.x, y: 50, width: 200, height: 150)
-            popUp.center = .init(x: view.center.x, y: view.center.y - 100 )
+        
+        popUp.alpha = 0
+        view.addSubview(blur)
+        view.addSubview(popUp)
+        popUp.frame = .init(x: view.center.x, y: 50, width: 200, height: 150)
+        popUp.center = .init(x: view.center.x, y: view.center.y - 100 )
+        
+        UIView.animate(withDuration: 0.5,delay: 0.2) {
+            
+            popUp.alpha = 1
+
             popUp.backgroundColor = .systemGray6
             popUp.layer.cornerRadius = 10
             popUp.layer.shadowColor = UIColor.black.cgColor
             popUp.layer.shadowRadius = 20
             popUp.layer.shadowOffset = .init(width: 4, height: 4)
             popUp.layer.shadowOpacity = 0.5
-            popUp.alpha = 1
-                        
-            view.addSubview(popUp)
         }
+
     }
     func hideNoDataPopUp (_ popUp:UIView, blur:UIVisualEffectView) {
         popUp.removeFromSuperview()
