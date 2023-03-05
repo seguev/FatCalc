@@ -14,15 +14,22 @@ class WeightViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var weightTextField: UITextField!
     
+    let model = WeeklyWeightModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        weightTextField.delegate = self
-        weightTextField.keyboardType = .decimalPad
-        weightTextField.returnKeyType = .done
         dayLabel.text = title
         
+        setObservers()
+        
+        guard let currentDayString = title else {fatalError()}
+        weightTextField.placeholder = model.fetchPlaceHolder(currentDayString)
+
+    }
+    
+    private func setObservers () {
         view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
     }
     
@@ -59,30 +66,21 @@ class WeightViewController: UIViewController, UITextFieldDelegate {
         if let text = weightTextField.text, !text.isEmpty, (Float(text)) != nil {
             let n = Float(text)!
             let isValid = n > 30 && n < 200
+            
+            NotificationCenter.default.post(name: weightUpdateNotification, object: n)
+
             guard isValid else {
-                #warning("flicker textfield in red and change placseholder")
+                weightTextField.placeholder = "real weight please.. :)"
+                weightTextField.text = ""
                 return
             }
 
-//            save(text)
             weightTextField.text = ""
             weightTextField.resignFirstResponder()
             self.dismiss(animated: true)
-            NotificationCenter.default.post(name: weightUpdateNotification, object: nil)
         }
     }
-    
-//    private func save(_ text:String) {
-//        let touch = UIImpactFeedbackGenerator(style: .medium)
-//        touch.prepare()
-//        touch.impactOccurred()
-//        Task {
-//            if let newEntry = await CloudManager.shared.saveToCloud(Float(text)!) {
-//                NotificationCenter.default.post(name: newEntryNotification, object: newEntry)
-//            }
-//
-//        }
-//    }
+
     
 }
 

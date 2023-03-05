@@ -37,7 +37,8 @@ class GraphViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CoreDataModel.shared.addGradient(view: self.view)
+//        CoreDataModel.shared.addGradient(view: self.view)
+        view.backgroundColor = .systemGray6
         lineChartView.delegate = self
         
         model.chartSetup(self.view, chart: lineChartView)
@@ -48,10 +49,8 @@ class GraphViewController: UIViewController, ChartViewDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        let currentControllerName = CoreDataModel.shared.fetchNameFromCurrent(self)
-        title = currentControllerName
         model.updateChart(to: lineChartView)
-        if model.entriesArray.isEmpty || model.entriesArray.count == 1 {
+        if model.entriesArray.isEmpty  {
             model.showNoDataPopUp(noDataPopUp,blur: blurView,in: view)
         } else {
             model.hideNoDataPopUp(noDataPopUp, blur: blurView)
@@ -79,7 +78,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         popUP.removeFromSuperview()
     }
     
-    private func presentPopUp (_ hightLight: Highlight, info:[String:Any])  {
+    private func presentPopUp (_ hightLight: Highlight, info:(avWeight: Float, fatPer: Float, weekNum: Int16))  {
         
         //popUp position & size
         let position = CGPoint(x: hightLight.xPx, y: view.frame.height * 0.2)
@@ -88,21 +87,18 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         popUP.center = position
         
         //label config
-        popUpFirstLabel.text = info["date"] as? String
-        popUpSecondLabel.text = String(info["weight"] as! Float)+" kg"
-        popUpThirdLabel.text = String(info["fat"] as! Float)+"% Body fat"
+        popUpFirstLabel.text = "week number: \(info.weekNum)"
+        popUpSecondLabel.text = "Average weight: \(Int(info.avWeight))"
+        popUpThirdLabel.text = "fat percentage \(info.fatPer)"
         
         model.popUpConfig(popUP)
         
         view.addSubview(popUP)
-
+        
         model.handleOffScreen(view,popUP)
     }
-    
-    @IBAction func popUpExitPressed(_ sender: UIButton) {
-        popUP.removeFromSuperview()
-    }
-    
+
+    /*
     @IBAction func editButtonPressed(_ sender: UIButton) {
         let alert = UIAlertController(title: "Choose action", message: nil, preferredStyle: .actionSheet)
         
@@ -132,9 +128,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
             guard let self = self else {return}
             
             if let newWeight = Float(textField.text!), newWeight < 200 {
-                
-                CoreDataModel.shared.updateWeight(self.selectedEntry!, to: newWeight)
-                
+                                
                 self.model.updateChart(to: self.lineChartView)
             } else {
                 self.showEditWeightAlert(error: true)
@@ -148,6 +142,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         present(alert, animated: true)
         if error != nil {self.flickerTextField(textField: textField)}
     }
+    */
     
     private func flickerTextField (textField:UITextField){
         UIView.animate(withDuration: 1, delay: 2) {

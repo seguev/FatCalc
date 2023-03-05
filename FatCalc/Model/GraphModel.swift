@@ -86,7 +86,7 @@ struct GraphModel {
             //for each entry, seperate fat and weight for ChartDataSets
             for entry in entriesArray {
                 let fat = Double(entry.fatPercentage)
-                let weight = Double(entry.weight)
+                let weight = Double(entry.weightAverage)
                 entryIndex += 1
                 
                 //set weightEntry
@@ -117,7 +117,8 @@ struct GraphModel {
     private mutating func setData (_ set1:LineChartDataSet,set2:LineChartDataSet ,chart:LineChartView) {
         //add chart data to a new set everytime func is called
         
-        set1.fillColor = .systemBlue
+//        set1.fillColor = .systemBlue
+        
         set1.colors = [NSUIColor.systemBlue]
         
         let fM = DefaultValueFormatter()
@@ -127,7 +128,7 @@ struct GraphModel {
         
         sets.append(set1) //add to global setsArray, so we can pass several sets to data
         
-        set2.fillColor = .systemBlue
+//        set2.fillColor = .systemBlue
         set2.colors = [NSUIColor.blue]
 
         sets.append(set2) //add to global setsArray, so we can pass several sets to data
@@ -158,15 +159,12 @@ struct GraphModel {
      "fat":Float,
      "date":String
      */
-    func fetchEntryInfo (_ entry:ChartDataEntry) -> [String:Any] {
+    func fetchEntryInfo (_ entry:ChartDataEntry) -> (avWeight:Float,fatPer:Float,weekNum:Int16) {
         let index = Int(entry.x)
         let selectedEntry = entriesArray[index - 1]
         
-        let weight = selectedEntry.weight
-        let fat = selectedEntry.fatPercentage
-        let date = selectedEntry.date ?? "no date"
-        
-        return ["weight":weight,"fat":fat,"date":date]
+        let entry = (avWeight:selectedEntry.weightAverage,fatPer:selectedEntry.fatPercentage,weekNum:selectedEntry.weekNum)
+        return entry
     }
     
     func handleOffScreen(_ view:UIView,_ popUP:UIView) {

@@ -16,21 +16,12 @@ class MainViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemCyan
-        CoreDataModel.shared.makeButtonRound(tapeButton)
-        CoreDataModel.shared.makeButtonRound(caliperButton)
+        makeButtonRound(tapeButton)
+        makeButtonRound(caliperButton)
 
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        //get current name from shared func
-        let currentControllerName = CoreDataModel.shared.fetchNameFromCurrent(self)
-
-        
-        
-        print("current controller is \(currentControllerName)")
-        
-    }
-    
+ 
     
     @IBAction func calcWithCaliper(_ sender: UIButton) {
      
@@ -43,8 +34,6 @@ class MainViewController: UIViewController  {
         performSegue(withIdentifier: "toTape", sender: self)
         
     }
-    private func comingSoon () {
-        self.present(CoreDataModel.shared.comingSoonAlertController(), animated: true)
-    }
+
     
 }

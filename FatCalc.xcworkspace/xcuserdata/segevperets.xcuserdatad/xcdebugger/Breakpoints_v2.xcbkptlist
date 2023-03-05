@@ -3,4 +3,182 @@
    uuid = "867152ED-04EC-4642-882E-845D7D2C0DE8"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B993604C-AD09-4BC6-BF04-4B8435B2827B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FatCalc/Model/CoreDataModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "saveToCoreData(_:fatPercentage:weekNum:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B993604C-AD09-4BC6-BF04-4B8435B2827B - fe94b2b53d0f0a70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FatCalc.CoreDataModel.saveToCoreData(_: Swift.Optional&lt;Swift.Float&gt;, fatPercentage: Swift.Optional&lt;Swift.Float&gt;, weekNum: Swift.Int) -&gt; ()"
+                  moduleName = "FatCalc"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/segevperets/Desktop/MyProjects/FatCalc/FatCalc/Model/CoreDataModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  uuid = "B993604C-AD09-4BC6-BF04-4B8435B2827B - fe94b2b53d0f0a70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FatCalc.CoreDataModel.saveToCoreData(_: Swift.Optional&lt;Swift.Float&gt;, fatPercentage: Swift.Optional&lt;Swift.Float&gt;, weekNum: Swift.Int) -&gt; ()"
+                  moduleName = "FatCalc"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/segevperets/Desktop/MyProjects/FatCalc/FatCalc/Model/CoreDataModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "404">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF78FFFC-6F3E-451D-8E6E-8A24BFDA71AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FatCalc/Model/CoreDataModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "fetchCurrentWeekEntry(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CF78FFFC-6F3E-451D-8E6E-8A24BFDA71AE - 8e20daaa0abaaee1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FatCalc.CoreDataModel.fetchCurrentWeekEntry(Swift.Int16) -&gt; Swift.Optional&lt;FatCalc.Entry&gt;"
+                  moduleName = "FatCalc"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/segevperets/Desktop/MyProjects/FatCalc/FatCalc/Model/CoreDataModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "240">
+               </Location>
+               <Location
+                  uuid = "CF78FFFC-6F3E-451D-8E6E-8A24BFDA71AE - 8e20daaa0abaaee1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FatCalc.CoreDataModel.fetchCurrentWeekEntry(Swift.Int16) -&gt; Swift.Optional&lt;FatCalc.Entry&gt;"
+                  moduleName = "FatCalc"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/segevperets/Desktop/MyProjects/FatCalc/FatCalc/Model/CoreDataModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "300">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B791D602-7D16-4ACD-9864-0AE4D2DBC81E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FatCalc/Model/CoreDataModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "fetchCurrentWeekEntry(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B791D602-7D16-4ACD-9864-0AE4D2DBC81E - 8e20daaa0abaae80"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FatCalc.CoreDataModel.fetchCurrentWeekEntry(Swift.Int16) -&gt; Swift.Optional&lt;FatCalc.Entry&gt;"
+                  moduleName = "FatCalc"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/segevperets/Desktop/MyProjects/FatCalc/FatCalc/Model/CoreDataModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "356">
+               </Location>
+               <Location
+                  uuid = "B791D602-7D16-4ACD-9864-0AE4D2DBC81E - 8e20daaa0abaae80"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FatCalc.CoreDataModel.fetchCurrentWeekEntry(Swift.Int16) -&gt; Swift.Optional&lt;FatCalc.Entry&gt;"
+                  moduleName = "FatCalc"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/segevperets/Desktop/MyProjects/FatCalc/FatCalc/Model/CoreDataModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "388">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A5657C9D-3C89-43C1-AB58-1F459537AFD2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FatCalc/Model/CoreDataModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "fetchCurrentWeekEntry(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "25C81AD4-DA6C-4F8D-83FF-F1B0D603D9CC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FatCalc/Model/CoreDataModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "saveToCoreData(_:fatPercentage:weekNum:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

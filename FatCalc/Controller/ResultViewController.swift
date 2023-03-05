@@ -22,7 +22,7 @@ class ResultViewController: UIViewController {
 
     var gender : CaliperCalcModel.Gender = .Male
     
-    var model = ResultModel()
+    var model = WeeklyWeightModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,6 @@ class ResultViewController: UIViewController {
         } else if gender == .Female {
             womenHealthFat()
         } else {
-            present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
             print("ERROR, gender = \(gender) ")
         }
     }
@@ -51,6 +50,8 @@ class ResultViewController: UIViewController {
         NotificationCenter.default.post(name: fatUpdateNotification, object: resultFloat)
         
 //        CoreDataModel.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
+//        StorageModel.shared.save(fat: resultFloat)
+        
         if let rootController = view.window?.rootViewController {
             rootController.dismiss(animated: true, completion: nil)
         } else {

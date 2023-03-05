@@ -41,8 +41,6 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
             setMaleLabels()
         } else if sender.selectedSegmentIndex == 1 {
             setFemaleLabels()
-        } else {
-            present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     
@@ -120,9 +118,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         }
         if model.fatPercentage != nil {
             performSegue(withIdentifier: "tapeToResult", sender: self)
-        } else {
-            self.present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
-        }
+        } 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -123,7 +123,6 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
             performSegue(withIdentifier: "caliperToResult", sender: self)
         } else {
             print("fatPercentage is nil! \(model.fatPercentage ?? "nil")")
-            self.present(CoreDataModel.shared.somthingsWrongAlertController(), animated: true)
         }
     }
     
