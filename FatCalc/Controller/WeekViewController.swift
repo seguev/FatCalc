@@ -28,8 +28,8 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemGray6
-        
+        addGradient(view: view)
+
         model.delegate = self
         
         observersSetup()
@@ -60,24 +60,24 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
         
             switch day {
             case .Sunday:
-                sundayButton.configuration?.background.backgroundColor = .blue
+                sundayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
             case .Monday:
-                mondayButton.configuration?.background.backgroundColor = .blue
+                mondayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
                 
             case .Tuesday:
-                tuesdayButton.configuration?.background.backgroundColor = .blue
+                tuesdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
                 
             case .Wednesday:
-                wednesdayButton.configuration?.background.backgroundColor = .blue
+                wednesdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
                 
             case .Thursday:
-                thursdayButton.configuration?.background.backgroundColor = .blue
+                thursdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
                 
             case .Friday:
-                fridayButton.configuration?.background.backgroundColor = .blue
+                fridayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
                 
             case .Saturday:
-                saturdayButton.configuration?.background.backgroundColor = .blue
+                saturdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
             }
 
 
@@ -143,7 +143,7 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
     }
     
     func checkFatBox () {
-        fatPercentBox.configuration?.background.backgroundColor = .blue
+        fatPercentBox.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
     }
 
     

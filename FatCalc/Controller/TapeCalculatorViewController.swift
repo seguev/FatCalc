@@ -33,6 +33,9 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         fifthTextField.delegate = self
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
          view.addGestureRecognizer(tapGesture)
+        
+        addGradient(view: view)
+
     }
 
     

@@ -38,19 +38,22 @@ class GraphViewController: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        CoreDataModel.shared.addGradient(view: self.view)
-        view.backgroundColor = .systemGray6
+        
+        addGradient(view: view)
+        
         lineChartView.delegate = self
         
         model.chartSetup(self.view, chart: lineChartView)
         model.delegate = self
   
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         model.updateChart(to: lineChartView)
-        if model.entriesArray.isEmpty  {
+        if model.entriesArray.isEmpty || model.entriesArray.count == 1 {
             model.showNoDataPopUp(noDataPopUp,blur: blurView,in: view)
         } else {
             model.hideNoDataPopUp(noDataPopUp, blur: blurView)

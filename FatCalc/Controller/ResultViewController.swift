@@ -42,6 +42,9 @@ class ResultViewController: UIViewController {
         } else {
             print("ERROR, gender = \(gender) ")
         }
+        
+        addGradient(view: view)
+
     }
     
     @IBAction func savePressed(_ sender: UIButton) {

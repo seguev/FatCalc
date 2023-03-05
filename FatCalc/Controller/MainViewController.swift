@@ -15,7 +15,7 @@ class MainViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemCyan
+        addGradient(view: view)
         makeButtonRound(tapeButton)
         makeButtonRound(caliperButton)
 

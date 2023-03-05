@@ -20,6 +20,19 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     var model = CaliperCalcModel()
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        firstTextField.delegate = self
+        secondTextField.delegate = self
+        thirdTextField.delegate = self
+        fourthTextField.delegate = self
+        
+        addGradient(view: view)
+        
+//        CoreDataModel.shared.addGradient(view: self.view)
+        closeTextFieldsWhenTappedAround()
+    }
+
     func changeLabelsToMale () {
         firstLabel.text = "Age"
         secondLabel.text = "Chest"
@@ -27,7 +40,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         fourthLabel.text = "Mid thigh"
         
     }
-    
+
     func changeLabelsToFemale () {
         firstLabel.text = "Age"
         secondLabel.text = "Triceps"
@@ -53,16 +66,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     }
    
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        firstTextField.delegate = self
-        secondTextField.delegate = self
-        thirdTextField.delegate = self
-        fourthTextField.delegate = self
-        
-//        CoreDataModel.shared.addGradient(view: self.view)
-        closeTextFieldsWhenTappedAround()
-    }
+
   
     private func closeTextFieldsWhenTappedAround () {
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))

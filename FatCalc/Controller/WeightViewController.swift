@@ -19,7 +19,8 @@ class WeightViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        addGradient(view: view)
+
         dayLabel.text = title
         
         setObservers()
@@ -50,7 +51,7 @@ class WeightViewController: UIViewController, UITextFieldDelegate {
          } else if isDeleting {
              counter -= 1
          } else {
-             if counter > 4 {return false} ;#warning("debug")
+             if counter > 4 {return false}
             counter += 1
          }
              

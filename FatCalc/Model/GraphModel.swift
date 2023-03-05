@@ -117,9 +117,9 @@ struct GraphModel {
     private mutating func setData (_ set1:LineChartDataSet,set2:LineChartDataSet ,chart:LineChartView) {
         //add chart data to a new set everytime func is called
         
-//        set1.fillColor = .systemBlue
-        
-        set1.colors = [NSUIColor.systemBlue]
+        set1.fillColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
+        set1.colors = [NSUIColor(cgColor: #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1).cgColor)]
+        set1.circleColors = [NSUIColor(cgColor: #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1).cgColor)]
         
         let fM = DefaultValueFormatter()
 //        fM.decimals = 1
@@ -128,13 +128,16 @@ struct GraphModel {
         
         sets.append(set1) //add to global setsArray, so we can pass several sets to data
         
-//        set2.fillColor = .systemBlue
-        set2.colors = [NSUIColor.blue]
+        set2.fillColor = #colorLiteral(red: 0.2431372549, green: 0.3294117647, blue: 0.6745098039, alpha: 1)
+        set2.colors = [NSUIColor(cgColor: #colorLiteral(red: 0.2431372549, green: 0.3294117647, blue: 0.6745098039, alpha: 1).cgColor)]
+        set2.circleColors = [NSUIColor(cgColor: #colorLiteral(red: 0.2431372549, green: 0.3294117647, blue: 0.6745098039, alpha: 1).cgColor)]
+        
 
+        
         sets.append(set2) //add to global setsArray, so we can pass several sets to data
         
         sets.forEach { uniSet in
-            uniSet.highlightColor = .systemGray3
+            uniSet.highlightColor = #colorLiteral(red: 0.9254901961, green: 0.901304543, blue: 1, alpha: 1)
             uniSet.mode = .linear
             uniSet.circleRadius = 4
             uniSet.drawFilledEnabled = true
@@ -154,11 +157,7 @@ struct GraphModel {
         
     }
     
-    /**
-     "weight":Float,
-     "fat":Float,
-     "date":String
-     */
+
     func fetchEntryInfo (_ entry:ChartDataEntry) -> (avWeight:Float,fatPer:Float,weekNum:Int16) {
         let index = Int(entry.x)
         let selectedEntry = entriesArray[index - 1]
@@ -178,7 +177,7 @@ struct GraphModel {
     }
     
     func popUpConfig(_ popUP:UIView) {
-        popUP.backgroundColor = .systemGray6
+        popUP.backgroundColor = #colorLiteral(red: 0.9254901961, green: 0.9490196078, blue: 1, alpha: 1)
         popUP.layer.shadowColor = UIColor.darkGray.cgColor
         popUP.layer.shadowOffset = .init(width: 4, height: 4)
         popUP.layer.shadowRadius = 5
