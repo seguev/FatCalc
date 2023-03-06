@@ -51,7 +51,7 @@ class WeightViewController: UIViewController, UITextFieldDelegate {
          } else if isDeleting {
              counter -= 1
          } else {
-             if counter > 4 {return false}
+             if counter > 3 {return false}
             counter += 1
          }
              
@@ -68,13 +68,14 @@ class WeightViewController: UIViewController, UITextFieldDelegate {
             let n = Float(text)!
             let isValid = n > 30 && n < 200
             
-            NotificationCenter.default.post(name: weightUpdateNotification, object: n)
 
             guard isValid else {
                 weightTextField.placeholder = "real weight please.. :)"
                 weightTextField.text = ""
                 return
             }
+            
+            NotificationCenter.default.post(name: weightUpdateNotification, object: n)
 
             weightTextField.text = ""
             weightTextField.resignFirstResponder()

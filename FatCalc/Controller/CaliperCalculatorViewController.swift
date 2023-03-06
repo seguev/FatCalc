@@ -18,7 +18,7 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fourthTextField: UITextField!
     
     var model = CaliperCalcModel()
-    
+    var infoLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,15 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         
 //        CoreDataModel.shared.addGradient(view: self.view)
         closeTextFieldsWhenTappedAround()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideLabel)))
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
     }
-
+    @objc func hideLabel () {
+        view.endEditing(true)
+        if let infoLabel {
+            infoLabel.removeFromSuperview()
+        }
+    }
     func changeLabelsToMale () {
         firstLabel.text = "Age"
         secondLabel.text = "Chest"
@@ -137,6 +144,33 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         destinationVC.gender = model.gender
     }
     
+
+    @IBAction func infoPressed(_ sender: UIButton) {
+        let info = Info()
+        if let infoLabel {infoLabel.removeFromSuperview()}
+        switch sender.tag {
+        case 0:
+            if model.gender == .Male {
+                infoLabel = info.showInfoLabel(view, text: info.caliperMaleInfo.Chest)
+            } else if model.gender == .Female {
+                infoLabel = info.showInfoLabel(view, text: info.caliperFemaleInfo.Tricep)
+            }
+        case 1:
+            if model.gender == .Male {
+                infoLabel = info.showInfoLabel(view, text: info.caliperMaleInfo.Abdominal)
+            } else if model.gender == .Female {
+                infoLabel = info.showInfoLabel(view, text: info.caliperFemaleInfo.Suprailiac)
+            }
+        case 2:
+            if model.gender == .Male {
+                infoLabel = info.showInfoLabel(view, text: info.caliperMaleInfo.Thigh)
+            } else if model.gender == .Female {
+                infoLabel = info.showInfoLabel(view, text: info.caliperFemaleInfo.Thigh)
+            }
+        default:
+            fatalError()
+        }
+    }
     
     @IBAction func quitButtonPressed(_ sender: UIButton) {
         

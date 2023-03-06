@@ -489,12 +489,22 @@
                                     <action selector="quitButtonPressed:" destination="DOO-bY-LdS" eventType="touchUpInside" id="klY-B7-HnU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lxi-EN-CN6">
+                                <rect key="frame" x="324.33333333333331" y="47" width="49.666666666666686" height="34.333333333333343"/>
+                                <color key="tintColor" name="Color 2"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="infoPressed:" destination="DOO-bY-LdS" eventType="touchUpInside" id="O6d-oV-Ng4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kic-L5-REQ"/>
                         <color key="backgroundColor" name="Color 1"/>
                         <constraints>
                             <constraint firstItem="eVo-gW-tZx" firstAttribute="centerY" secondItem="o5R-yl-mwd" secondAttribute="centerY" constant="-100" id="FNH-p6-3N2"/>
+                            <constraint firstItem="kic-L5-REQ" firstAttribute="trailing" secondItem="Lxi-EN-CN6" secondAttribute="trailing" constant="16" id="RxK-uZ-at1"/>
                             <constraint firstItem="eVo-gW-tZx" firstAttribute="centerX" secondItem="o5R-yl-mwd" secondAttribute="centerX" id="agF-vG-Zzl"/>
+                            <constraint firstItem="Lxi-EN-CN6" firstAttribute="top" secondItem="kic-L5-REQ" secondAttribute="top" id="bQ7-Kh-Oct"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tape Measure" id="Ewg-Qd-lxs">
@@ -638,14 +648,41 @@
                                     <action selector="quitButtonPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="pjJ-ZH-bL0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV1-s4-kHo">
+                                <rect key="frame" x="33.333333333333343" y="358.66666666666669" width="49.666666666666657" height="34.333333333333314"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="infoPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="dNz-xV-V3h"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czk-M9-3We">
+                                <rect key="frame" x="30.333333333333332" y="288.33333333333331" width="49.666666666666671" height="34.333333333333314"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="infoPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="yLi-sc-Jm9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmM-BL-izg">
+                                <rect key="frame" x="30.333333333333332" y="218" width="49.666666666666671" height="34.333333333333343"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="infoPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="YIC-BK-ANU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mrF-RK-zPY"/>
                         <color key="backgroundColor" name="Color 1"/>
                         <constraints>
                             <constraint firstItem="0K3-Pk-b15" firstAttribute="centerX" secondItem="PSb-xK-9Sy" secondAttribute="centerX" id="0W3-AS-ajq"/>
+                            <constraint firstItem="dV8-cf-z8b" firstAttribute="leading" secondItem="mV1-s4-kHo" secondAttribute="trailing" constant="2" id="6UI-XW-vYp"/>
+                            <constraint firstItem="WmM-BL-izg" firstAttribute="centerY" secondItem="yvo-f3-go8" secondAttribute="centerY" id="Fge-ob-AdF"/>
                             <constraint firstItem="0K3-Pk-b15" firstAttribute="leading" secondItem="mrF-RK-zPY" secondAttribute="leading" id="GNO-fd-48t"/>
+                            <constraint firstItem="yvo-f3-go8" firstAttribute="leading" secondItem="WmM-BL-izg" secondAttribute="trailing" constant="5" id="Gap-Dm-3H6"/>
+                            <constraint firstItem="mV1-s4-kHo" firstAttribute="centerY" secondItem="dV8-cf-z8b" secondAttribute="centerY" id="Glf-bB-QwB"/>
                             <constraint firstItem="0K3-Pk-b15" firstAttribute="centerY" secondItem="PSb-xK-9Sy" secondAttribute="centerY" constant="-150" id="NqN-Ae-bNH"/>
+                            <constraint firstItem="Czk-M9-3We" firstAttribute="centerY" secondItem="Bt8-4x-v19" secondAttribute="centerY" id="Y0V-Q3-ljJ"/>
                             <constraint firstItem="0K3-Pk-b15" firstAttribute="trailing" secondItem="mrF-RK-zPY" secondAttribute="trailing" id="fBO-Hg-KyQ"/>
+                            <constraint firstItem="Bt8-4x-v19" firstAttribute="leading" secondItem="Czk-M9-3We" secondAttribute="trailing" constant="5" id="lK2-Ai-CQ6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Caliper" id="GJ0-3M-ENW">
@@ -665,7 +702,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JA8-TW-YkG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5215" y="-781"/>
+            <point key="canvasLocation" x="5213.8461538461534" y="-781.27962085308059"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="IMo-Ry-qpG">
@@ -910,12 +947,12 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTd-CO-9rt">
                                         <rect key="frame" x="94.666666666666657" y="224.66666666666669" width="61" height="34.333333333333314"/>
-                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="titleShadowOffset" width="3" height="3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Save" cornerStyle="large">
                                             <backgroundConfiguration key="background">
-                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <color key="backgroundColor" name="Color 3"/>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
                                         <connections>
@@ -934,6 +971,8 @@
                         <constraints>
                             <constraint firstItem="7ua-PG-7Bc" firstAttribute="trailing" secondItem="fbn-UL-oQn" secondAttribute="trailing" constant="70" id="3dG-GX-EKw"/>
                             <constraint firstItem="fbn-UL-oQn" firstAttribute="leading" secondItem="7ua-PG-7Bc" secondAttribute="leading" constant="70" id="KqA-gV-YfJ"/>
+                            <constraint firstItem="fbn-UL-oQn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7ua-PG-7Bc" secondAttribute="top" id="dt3-Bc-S9D"/>
+                            <constraint firstItem="7ua-PG-7Bc" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fbn-UL-oQn" secondAttribute="bottom" id="qBB-kI-n7J"/>
                             <constraint firstItem="fbn-UL-oQn" firstAttribute="centerX" secondItem="Qpn-MX-kdz" secondAttribute="centerX" id="qPg-Gx-ICV"/>
                             <constraint firstItem="fbn-UL-oQn" firstAttribute="centerY" secondItem="Qpn-MX-kdz" secondAttribute="centerY" constant="-100" id="qRQ-KC-Wqa"/>
                             <constraint firstItem="7ua-PG-7Bc" firstAttribute="trailing" secondItem="dJu-fQ-NCj" secondAttribute="trailing" constant="90" id="yoc-bd-7Wq"/>
@@ -959,9 +998,6 @@
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
         <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Color 1">
             <color red="0.92549019607843142" green="0.94901960784313721" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

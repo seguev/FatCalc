@@ -25,9 +25,10 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
     @IBOutlet weak var fatPercentBox: UIButton!
     
     let model = WeeklyWeightModel()
-
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         addGradient(view: view)
 

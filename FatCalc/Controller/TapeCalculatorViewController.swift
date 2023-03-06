@@ -22,6 +22,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     
     var model = TapeCalcModel()
+    var infoLabel : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +32,18 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         thirdTextField.delegate = self
         fourthTextField.delegate = self
         fifthTextField.delegate = self
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-         view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(screenPressed)))
+         
         
         addGradient(view: view)
 
     }
-
+    @objc private func screenPressed () {
+        view.endEditing(true)
+        if let infoLabel {
+            infoLabel.removeFromSuperview()
+        }
+    }
     
     @IBAction func genderChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
@@ -129,6 +135,14 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         destinationVC.result = model.fatPercentage!
         destinationVC.gender = model.gender
     }
+    
+    @IBAction func infoPressed(_ sender: UIButton) {
+        let info = Info()
+        infoLabel?.removeFromSuperview()
+        infoLabel = info.showInfoLabel(view, text: info.tapeInfo)
+    }
+    
+
     
     
     @IBAction func quitButtonPressed(_ sender: UIButton) {

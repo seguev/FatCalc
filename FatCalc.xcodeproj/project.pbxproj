@@ -10,6 +10,7 @@
 		60017A412924090A00768028 /* CaliperCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60017A402924090A00768028 /* CaliperCalculatorViewController.swift */; };
 		60017A442924205600768028 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60017A432924205600768028 /* ResultViewController.swift */; };
 		600C612E29B1065900C2A84A /* StorageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 600C612D29B1065900C2A84A /* StorageModel.swift */; };
+		603C88AD29B609D7008E126F /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603C88AC29B609D7008E126F /* Info.swift */; };
 		603E00C02934D1F9003BDBCB /* GraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E00BF2934D1F9003BDBCB /* GraphModel.swift */; };
 		603E00C22934DDF7003BDBCB /* WeeklyWeightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E00C12934DDF7003BDBCB /* WeeklyWeightModel.swift */; };
 		603E00C42934DE57003BDBCB /* CaliperCalcModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E00C32934DE57003BDBCB /* CaliperCalcModel.swift */; };
@@ -34,6 +35,7 @@
 		60017A402924090A00768028 /* CaliperCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliperCalculatorViewController.swift; sourceTree = "<group>"; };
 		60017A432924205600768028 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		600C612D29B1065900C2A84A /* StorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModel.swift; sourceTree = "<group>"; };
+		603C88AC29B609D7008E126F /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		603E00BF2934D1F9003BDBCB /* GraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphModel.swift; sourceTree = "<group>"; };
 		603E00C12934DDF7003BDBCB /* WeeklyWeightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWeightModel.swift; sourceTree = "<group>"; };
 		603E00C32934DE57003BDBCB /* CaliperCalcModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliperCalcModel.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				600C612D29B1065900C2A84A /* StorageModel.swift */,
 				60435554291D7C680023AA5B /* CoreDataModel.swift */,
 				604CACFA298699040093CA7F /* Calculator.swift */,
+				603C88AC29B609D7008E126F /* Info.swift */,
 				603E00BF2934D1F9003BDBCB /* GraphModel.swift */,
 			);
 			path = Model;
@@ -275,6 +278,7 @@
 				604E86E829AE2E770026F6A0 /* WeekViewController.swift in Sources */,
 				60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */,
 				603E00C42934DE57003BDBCB /* CaliperCalcModel.swift in Sources */,
+				603C88AD29B609D7008E126F /* Info.swift in Sources */,
 				600C612E29B1065900C2A84A /* StorageModel.swift in Sources */,
 				60017A412924090A00768028 /* CaliperCalculatorViewController.swift in Sources */,
 				603E00C02934D1F9003BDBCB /* GraphModel.swift in Sources */,
