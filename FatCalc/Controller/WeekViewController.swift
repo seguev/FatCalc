@@ -24,12 +24,13 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
     @IBOutlet weak var fridayButton : UIButton!
     @IBOutlet weak var saturdayButton : UIButton!
     @IBOutlet weak var fatPercentBox: UIButton!
+    var infoLabel : UILabel?
     
     let model = WeeklyWeightModel()
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         addGradient(view: view)
 
@@ -195,6 +196,11 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
         }
     }
     
- 
+    @IBAction func infoPressed(_ sender: UIBarButtonItem) {
+        infoLabel?.removeFromSuperview()
+        let i = Info()
+        infoLabel = i.showInfoLabel(view, text: i.weeklyWeightInfo)
+    }
+    
 }
 

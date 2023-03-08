@@ -33,7 +33,7 @@ struct GraphModel {
         chart.doubleTapToZoomEnabled = false
         chart.pinchZoomEnabled = false
         chart.dragEnabled = true
-        chart.leftAxis.axisMinimum = 5
+        chart.leftAxis.axisMinimum = 0
         chart.xAxis.labelFont = .systemFont(ofSize: 12)
         chart.center = view.center
         chart.leftAxis.enabled = false

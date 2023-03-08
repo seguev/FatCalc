@@ -260,6 +260,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="0sN-Ve-MXl">
                         <barButtonItem key="backBarButtonItem" title="back" id="gPT-LM-Qt0"/>
+                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="vwf-Vp-baY">
+                            <color key="tintColor" name="Color 2"/>
+                            <connections>
+                                <action selector="infoPressed:" destination="jR4-2R-ScX" id="5qn-QZ-773"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -634,6 +640,7 @@
                             </stackView>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV1-s4-kHo">
                                 <rect key="frame" x="33.333333333333343" y="358.66666666666669" width="49.666666666666657" height="34.333333333333314"/>
+                                <color key="tintColor" name="Color 2"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="infoPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="dNz-xV-V3h"/>
@@ -641,6 +648,7 @@
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Czk-M9-3We">
                                 <rect key="frame" x="30.333333333333332" y="288.33333333333331" width="49.666666666666671" height="34.333333333333314"/>
+                                <color key="tintColor" name="Color 2"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="infoPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="yLi-sc-Jm9"/>
@@ -648,6 +656,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmM-BL-izg">
                                 <rect key="frame" x="30.333333333333332" y="218" width="49.666666666666671" height="34.333333333333343"/>
+                                <color key="tintColor" name="Color 2"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="infoPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="YIC-BK-ANU"/>
@@ -986,6 +995,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aka-Oe-UXV">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="Color 2"/>
                         <connections>
                             <outlet property="delegate" destination="UKZ-dq-ZVC" id="1YY-XM-ZZL"/>
                         </connections>
@@ -1001,7 +1011,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UnU-6b-ZqV"/>
+        <segue reference="YTs-Su-zvW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.left" catalog="system" width="128" height="104"/>

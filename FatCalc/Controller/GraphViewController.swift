@@ -58,6 +58,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         model.updateChart(to: lineChartView)
 
         if model.entriesArray.count > 1 {
+            backGroundDefaultGraph.removeFromSuperview()
             model.hideNoDataPopUp(noDataPopUp, blur: blurView)
             lineChartView.isUserInteractionEnabled = true
         }

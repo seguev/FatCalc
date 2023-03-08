@@ -38,7 +38,7 @@ struct Info {
                                  Suprailiac: "diagonal fold parallel and superior to the iliac crest.",
                                  Thigh: "midpoint of the anterior side of the upper leg between the patella and top of thigh.")
                                 
-    
+    let weeklyWeightInfo = "You need to log your weight for a minimum of 4 days and measure your fat percentage at least once per week."
     
     func showInfoLabel (_ view:UIView, text:String) -> UILabel {
         let infoLabel = UILabel(frame: .init(origin: .zero, size: .init(width: 300, height: 120)))
