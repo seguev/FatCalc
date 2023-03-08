@@ -13,6 +13,7 @@ let fatUpdateNotification = Notification.Name("fatUpdate")
 
 class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
     
+    @IBOutlet var todayArrow: UIImageView!
     @IBOutlet weak var weekNumberLabel: UILabel!
     @IBOutlet weak var completeButtonOutlet: UIButton!
     @IBOutlet weak var sundayButton : UIButton!
@@ -40,11 +41,46 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
         
         model.checkSavedWeightBoxes()
         
+        todayArraySetup()
     }
     
     private func observersSetup () {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNewWeight(_:)), name: weightUpdateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fatUpdate(_:)), name: fatUpdateNotification, object: nil)
+        
+    }
+    
+    private func todayArraySetup () {
+        
+        todayArrow.tintColor =  #colorLiteral(red: 0.3960784314, green: 0.3647058824, blue: 0.7333333333, alpha: 1)
+        todayArrow.frame = .init(origin: .zero, size: .init(width: 25, height: 25))
+        todayArrow.transform = .init(rotationAngle: .pi / 2)
+        view.addSubview(todayArrow)
+
+        let buttonsSuperView = sundayButton.superview
+        let halfButtonHeight = sundayButton.frame.height / 2
+        
+        var f : CGRect?
+        
+        switch model.today {
+        case .Sunday:
+            f = view.convert(sundayButton.frame, from: buttonsSuperView)
+        case .Monday:
+            f = view.convert(mondayButton.frame, from: buttonsSuperView)
+        case .Tuesday:
+            f = view.convert(tuesdayButton.frame, from: buttonsSuperView)
+        case .Wednesday:
+            f = view.convert(wednesdayButton.frame, from: buttonsSuperView)
+        case .Thursday:
+            f = view.convert(thursdayButton.frame, from: buttonsSuperView)
+        case .Friday:
+            f = view.convert(fridayButton.frame, from: buttonsSuperView)
+        case .Saturday:
+            f = view.convert(saturdayButton.frame, from: buttonsSuperView)
+        }
+        
+        todayArrow.center.y = f!.maxY + halfButtonHeight
+        todayArrow.center.x = f!.maxX - halfButtonHeight
     }
     
     /**
@@ -55,7 +91,6 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
         
         model.updateWeightEntry (updatedWeight)
     }
-    
     
     /**
      Being called from model after saveNewWeight()

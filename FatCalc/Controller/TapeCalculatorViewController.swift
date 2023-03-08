@@ -32,9 +32,9 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         thirdTextField.delegate = self
         fourthTextField.delegate = self
         fifthTextField.delegate = self
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(screenPressed)))
          
-        
         addGradient(view: view)
 
     }
@@ -96,6 +96,10 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         if string == "." && textField.text!.contains(".") {
             return false
         }
+        let isTooMuch = textField.text!.count > 2
+        let delete = string == ""
+        
+        if isTooMuch && !delete {return false}
         return true
     }
     
@@ -136,20 +140,12 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         destinationVC.gender = model.gender
     }
     
-    @IBAction func infoPressed(_ sender: UIButton) {
+    @IBAction func infoPressed(_ sender: UIBarButtonItem) {
         let info = Info()
         infoLabel?.removeFromSuperview()
         infoLabel = info.showInfoLabel(view, text: info.tapeInfo)
     }
-    
 
-    
-    
-    @IBAction func quitButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true)
-    }
-    
-    
     
     
     

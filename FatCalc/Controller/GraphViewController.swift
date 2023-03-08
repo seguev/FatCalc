@@ -23,7 +23,7 @@ change colors to something more practical
 
 class GraphViewController: UIViewController, ChartViewDelegate {
  
-    
+    @IBOutlet var backGroundDefaultGraph: UIImageView!
     @IBOutlet var blurView: UIVisualEffectView!
     @IBOutlet var noDataPopUp: UIView!
     @IBOutlet var popUP: UIView!
@@ -47,7 +47,8 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         model.delegate = self
   
         if model.entriesArray.count <= 1 {
-            model.showNoDataPopUp(noDataPopUp,blur: blurView,in: view)
+            model.showNoDataPopUp(noDataPopUp, backGroundDefaultGraph, blurView, in: view)
+            lineChartView.isUserInteractionEnabled = false
         }
     }
     
@@ -58,6 +59,7 @@ class GraphViewController: UIViewController, ChartViewDelegate {
 
         if model.entriesArray.count > 1 {
             model.hideNoDataPopUp(noDataPopUp, blur: blurView)
+            lineChartView.isUserInteractionEnabled = true
         }
     }
 
@@ -102,72 +104,6 @@ class GraphViewController: UIViewController, ChartViewDelegate {
         model.handleOffScreen(view,popUP)
     }
 
-    /*
-    @IBAction func editButtonPressed(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Choose action", message: nil, preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Edit weight", style: .default ,handler: { [weak self] _ in
-            alert.dismiss(animated: true)
-            self?.showEditWeightAlert()
-        }))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive ,handler: { _ in
-            
-            CoreDataModel.shared.deleteFromCoreData(self.selectedEntry!)
-            self.model.updateChart(to: self.lineChartView)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        present(alert, animated: true)
-    }
-    
-    private func showEditWeightAlert (error:Bool? = nil) {
-        var textField = UITextField()
-        
-        let alert = UIAlertController(title: "Edit weight", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        alert.addAction(UIAlertAction(title: "Save", style: .default ,handler: {[weak self] action in
-            action.isEnabled = false
-            
-            guard let self = self else {return}
-            
-            if let newWeight = Float(textField.text!), newWeight < 200 {
-                                
-                self.model.updateChart(to: self.lineChartView)
-            } else {
-                self.showEditWeightAlert(error: true)
-            }
-        }))
-        alert.addTextField { alertTextField in
-            textField = alertTextField
-            textField.keyboardType = .decimalPad
-            textField.delegate = self
-        }
-        present(alert, animated: true)
-        if error != nil {self.flickerTextField(textField: textField)}
-    }
-    */
-    
-    private func flickerTextField (textField:UITextField){
-        UIView.animate(withDuration: 1, delay: 2) {
-            textField.backgroundColor = .systemRed
-        } completion: { _ in
-            UIView.animate(withDuration: 0.2) {
-                textField.backgroundColor = .clear
-            }
-        }
 
-    }
 
-}
-extension GraphViewController : UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if string == "." && textField.text!.contains(".") {
-            return false
-        }
-        return true
-    }
-    
-    
 }

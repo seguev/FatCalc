@@ -185,12 +185,21 @@ struct GraphModel {
         popUP.layer.cornerRadius = 10
     }
     
-    func showNoDataPopUp (_ popUp:UIView, blur: UIVisualEffectView,in view:UIView) {
+    func showNoDataPopUp (_ popUp:UIView,_ backgroundGraphView:UIImageView ,_ blur: UIVisualEffectView, in view:UIView) {
         
+        backgroundGraphView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(backgroundGraphView)
+        NSLayoutConstraint.activate([
+            backgroundGraphView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            backgroundGraphView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            backgroundGraphView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            backgroundGraphView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+        
+
         blur.frame = view.frame
-        blur.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        
-        
+        blur.effect = UIBlurEffect(style: .systemMaterialDark)
+        blur.alpha = 0.9
         popUp.alpha = 0
         view.addSubview(blur)
         view.addSubview(popUp)

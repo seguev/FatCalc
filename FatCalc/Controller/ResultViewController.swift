@@ -30,9 +30,9 @@ class ResultViewController: UIViewController {
         //guard result != nil else {fatalError()}
         resultLabel.text = result+"%"
         guard let availableResult = Float(result) else {fatalError()}
-        if Float(availableResult) < 0 {
-            resultLabel.text = "this is below 0. check yourself (:"
-            categoryLabel.isHidden = true
+        let isValidFatPercentage = availableResult > 2 && availableResult < 60
+        guard isValidFatPercentage else {
+            handleWrongParameters()
             return
         }
         if gender == .Male {
@@ -51,46 +51,43 @@ class ResultViewController: UIViewController {
         guard let resultFloat = Float(result) else {fatalError("could not convert result into Float")}
         
         NotificationCenter.default.post(name: fatUpdateNotification, object: resultFloat)
-        
-//        CoreDataModel.shared.saveToCoreData(weightFloat, fatPercentage: resultFloat)
-//        StorageModel.shared.save(fat: resultFloat)
-        
-        if let rootController = view.window?.rootViewController {
-            rootController.dismiss(animated: true, completion: nil)
-        } else {
-            self.dismiss(animated: true)
-        }
+  
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func againPressed(_ sender: UIButton) {
         dismiss(animated: true)
     }
 
-    func menHealthFat () {
+    private func menHealthFat () {
         if let resultFloat = Float(result) {
+            categoryLabel.layer.cornerRadius = 15
+            categoryLabel.clipsToBounds = true
+            
             switch resultFloat{
             case 2..<6:
                 //add label Essential Fat
-                view.backgroundColor = .green
+                
+                categoryLabel.backgroundColor = .green
                 categoryLabel.text = "Essential Fat"
             case 6..<14:
                 //add label Typical Athletes
-                view.backgroundColor = .blue
+                categoryLabel.backgroundColor = .blue
                 categoryLabel.text = "Typical Athletes"
             case 14..<18:
                 //add label Fitness
-                view.backgroundColor = .yellow
+                categoryLabel.backgroundColor = .yellow
                 categoryLabel.text = "Fitness"
             case 18..<26:
                 //add label Acceptable
-                view.backgroundColor = .orange
+                categoryLabel.backgroundColor = .orange
                 categoryLabel.text = "Acceptable"
             case 26...:
                 //add label Obese
-                view.backgroundColor = .red
+                categoryLabel.backgroundColor = .red
                 categoryLabel.text = "Obese"
             default:
-                view.backgroundColor = .darkGray
+                categoryLabel.backgroundColor = .darkGray
                 categoryLabel.text = "yeah thats probably wrong, please check again..."
 
 
@@ -103,29 +100,36 @@ class ResultViewController: UIViewController {
         if let resultFloat = Float(result) {
             switch resultFloat{
             case 10..<14:
-                view.backgroundColor = .green
+                view.backgroundColor = .systemGreen
                 categoryLabel.text = "Essential Fat"
             case 14..<21:
-                view.backgroundColor = .blue
+                view.backgroundColor = .systemBlue
                 categoryLabel.text = "Typical Athletes"
                
             case 21..<25:
-                view.backgroundColor = .yellow
+                view.backgroundColor = .systemYellow
                 categoryLabel.text = "Fitness"
             case 25..<32:
                 view.backgroundColor = .orange
                 categoryLabel.text = "Acceptable"
             case 32...:
-                view.backgroundColor = .red
+                view.backgroundColor = .systemRed
                 categoryLabel.text = "Obese"
             default:
-                view.backgroundColor = .darkGray
-                categoryLabel.text = "yeah thats probably wrong, please check again..."
+                handleWrongParameters()
             }
         }
        
     }
     
+    private func handleWrongParameters () {
+        categoryLabel.isHidden = true
+        let errorAlert = UIAlertController(title: "wrong parameters", message: "Your result doesn't make sense! please enter your measurements again.", preferredStyle: .alert)
+        errorAlert.addAction(UIAlertAction(title: "Try again", style: .destructive, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        present(errorAlert, animated: true)
+    }
     
     /*
      Essential Fat

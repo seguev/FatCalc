@@ -80,10 +80,17 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
          view.addGestureRecognizer(tapGesture)
     }
     
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if string == "." && textField.text!.contains(".") {
             return false
         }
+        
+        let isTooMuch = textField.text!.count > 2
+        let delete = string == ""
+        
+        if isTooMuch && !delete {return false}
+        
         return true
     }
     
@@ -171,13 +178,6 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
             fatalError()
         }
     }
-    
-    @IBAction func quitButtonPressed(_ sender: UIButton) {
-        
-        dismiss(animated: true)
-    }
-    
-    
     
     
     

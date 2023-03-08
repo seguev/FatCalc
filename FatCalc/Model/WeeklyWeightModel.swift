@@ -26,7 +26,13 @@ class WeeklyWeightModel {
         }
     }
     
-
+    var today : Day {
+        let df = DateFormatter()
+        df.dateFormat = "EEEE"
+        let today = df.string(from: Date())
+        guard let todayDay = Day(rawValue: today) else {fatalError()}
+        return todayDay
+    }
     
     func updateWeightEntry (_ weight:Float) {
         

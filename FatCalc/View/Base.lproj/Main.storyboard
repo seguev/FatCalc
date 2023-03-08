@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--log-->
+        <!--Week View Controller-->
         <scene sceneID="rok-9X-VK4">
             <objects>
                 <viewController id="jR4-2R-ScX" customClass="WeekViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -227,7 +227,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="H3s-Hl-jx2" kind="presentation" id="Ocf-Xc-APf"/>
+                                    <segue destination="H3s-Hl-jx2" kind="show" id="H5j-Oa-Lzu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuY-kd-NCS">
@@ -258,8 +258,9 @@
                             <constraint firstItem="DuY-kd-NCS" firstAttribute="top" secondItem="msK-xg-Tq4" secondAttribute="bottom" constant="150" id="ttP-iY-YW5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="2" title="log" image="list.bullet.clipboard" catalog="system" id="JxA-a9-zxm"/>
-                    <navigationItem key="navigationItem" id="dvn-sc-mW5"/>
+                    <navigationItem key="navigationItem" id="0sN-Ve-MXl">
+                        <barButtonItem key="backBarButtonItem" title="back" id="gPT-LM-Qt0"/>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="completeButtonOutlet" destination="DuY-kd-NCS" id="QoV-Hc-IV0"/>
@@ -269,6 +270,7 @@
                         <outlet property="saturdayButton" destination="347-AQ-ehF" id="8GY-Jb-9Vz"/>
                         <outlet property="sundayButton" destination="WDB-wV-PGx" id="9mf-qE-CbC"/>
                         <outlet property="thursdayButton" destination="hl3-pg-Ink" id="EbU-s0-W3k"/>
+                        <outlet property="todayArrow" destination="0wi-1d-PQZ" id="VmR-mn-LHJ"/>
                         <outlet property="tuesdayButton" destination="iyg-eS-FH2" id="zlK-eU-3i2"/>
                         <outlet property="wednesdayButton" destination="2aB-eo-jyh" id="FAR-4h-DQd"/>
                         <outlet property="weekNumberLabel" destination="Lg6-Rx-2BN" id="8LP-LP-hlQ"/>
@@ -276,22 +278,27 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmX-no-IUX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.left" catalog="system" id="0wi-1d-PQZ">
+                    <rect key="frame" x="0.0" y="0.0" width="49" height="36"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </objects>
-            <point key="canvasLocation" x="3401.5384615384614" y="-370.37914691943126"/>
+            <point key="canvasLocation" x="4330.7692307692305" y="-370.37914691943126"/>
         </scene>
-        <!--Calculator-->
+        <!--Main View Controller-->
         <scene sceneID="o93-pn-OtN">
             <objects>
                 <viewController id="H3s-Hl-jx2" customClass="MainViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rXn-09-aM9">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" axis="vertical" distribution="fillEqually" alignment="center" spacing="66" translatesAutoresizingMaskIntoConstraints="NO" id="NyQ-2T-DuO">
-                                <rect key="frame" x="0.0" y="310.66666666666669" width="390" height="166"/>
+                                <rect key="frame" x="0.0" y="339" width="390" height="166"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="mWw-iI-hbW">
                                         <rect key="frame" x="100" y="0.0" width="190" height="50"/>
+                                        <color key="backgroundColor" name="Color 2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="dGl-bI-WqK"/>
                                         </constraints>
@@ -306,6 +313,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="LgN-3s-JM8">
                                         <rect key="frame" x="100" y="116" width="190" height="50"/>
+                                        <color key="backgroundColor" name="Color 2"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="QV9-pr-GWk"/>
                                         </constraints>
@@ -339,20 +347,19 @@
                             <constraint firstItem="NyQ-2T-DuO" firstAttribute="centerX" secondItem="rXn-09-aM9" secondAttribute="centerX" id="p2g-Nq-MLT"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Calculator" image="list.bullet.rectangle.portrait" catalog="system" id="Fli-eV-CFp"/>
-                    <navigationItem key="navigationItem" id="L8C-y6-byQ"/>
+                    <navigationItem key="navigationItem" id="J5R-Kq-buN"/>
                     <connections>
                         <outlet property="caliperButton" destination="mWw-iI-hbW" id="JO5-LC-D0G"/>
                         <outlet property="tapeButton" destination="LgN-3s-JM8" id="cgN-9k-cLp"/>
-                        <segue destination="2Bk-FN-p0D" kind="presentation" identifier="toCaliper" modalPresentationStyle="overFullScreen" id="Uuw-3C-9EE"/>
-                        <segue destination="DOO-bY-LdS" kind="presentation" identifier="toTape" modalPresentationStyle="overFullScreen" id="obm-2G-gU2"/>
+                        <segue destination="2Bk-FN-p0D" kind="show" identifier="toCaliper" id="Uuw-3C-9EE"/>
+                        <segue destination="DOO-bY-LdS" kind="show" identifier="toTape" id="obm-2G-gU2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h8N-lc-VHJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4358" y="-390"/>
+            <point key="canvasLocation" x="5243.0769230769229" y="-370.37914691943126"/>
         </scene>
-        <!--Tape Measure-->
+        <!--Tape measure-->
         <scene sceneID="I5s-CG-CHZ">
             <objects>
                 <viewController id="DOO-bY-LdS" customClass="TapeCalculatorViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
@@ -422,7 +429,7 @@
                                                             <constraint firstAttribute="height" constant="28" id="Yq6-kf-mvj"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="2" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8OL-V4-Ru6" userLabel="Second Text Field">
                                                         <rect key="frame" x="0.0" y="67" width="100" height="32"/>
@@ -431,7 +438,7 @@
                                                             <constraint firstAttribute="height" constant="32" id="uav-hA-bQz"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="3" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oe3-fm-Hix" userLabel="third Text Field">
                                                         <rect key="frame" x="0.0" y="137.99999999999997" width="100" height="32"/>
@@ -440,7 +447,7 @@
                                                             <constraint firstAttribute="height" constant="32" id="AeZ-ak-Kpv"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="4" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="q2O-bB-dNX" userLabel="fourth Text Field">
                                                         <rect key="frame" x="0.0" y="208.99999999999997" width="100" height="32"/>
@@ -449,7 +456,7 @@
                                                             <constraint firstAttribute="height" constant="32" id="j7Q-MQ-3hs"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="5" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="my8-Oz-OCd" userLabel="fifth Text Field">
                                                         <rect key="frame" x="0.0" y="280" width="100" height="28"/>
@@ -458,7 +465,7 @@
                                                             <constraint firstAttribute="width" constant="100" id="ojz-cZ-Fvc"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -480,35 +487,21 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3f-V4-mTy">
-                                <rect key="frame" x="16" y="46" width="40" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system"/>
-                                <connections>
-                                    <action selector="quitButtonPressed:" destination="DOO-bY-LdS" eventType="touchUpInside" id="klY-B7-HnU"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lxi-EN-CN6">
-                                <rect key="frame" x="324.33333333333331" y="47" width="49.666666666666686" height="34.333333333333343"/>
-                                <color key="tintColor" name="Color 2"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
-                                <connections>
-                                    <action selector="infoPressed:" destination="DOO-bY-LdS" eventType="touchUpInside" id="O6d-oV-Ng4"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kic-L5-REQ"/>
                         <color key="backgroundColor" name="Color 1"/>
                         <constraints>
                             <constraint firstItem="eVo-gW-tZx" firstAttribute="centerY" secondItem="o5R-yl-mwd" secondAttribute="centerY" constant="-100" id="FNH-p6-3N2"/>
-                            <constraint firstItem="kic-L5-REQ" firstAttribute="trailing" secondItem="Lxi-EN-CN6" secondAttribute="trailing" constant="16" id="RxK-uZ-at1"/>
                             <constraint firstItem="eVo-gW-tZx" firstAttribute="centerX" secondItem="o5R-yl-mwd" secondAttribute="centerX" id="agF-vG-Zzl"/>
-                            <constraint firstItem="Lxi-EN-CN6" firstAttribute="top" secondItem="kic-L5-REQ" secondAttribute="top" id="bQ7-Kh-Oct"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tape Measure" id="Ewg-Qd-lxs">
-                        <barButtonItem key="backBarButtonItem" title="Main" id="nsX-gl-GUa"/>
+                    <navigationItem key="navigationItem" title="Tape measure" id="vsU-Qn-2Ig">
+                        <barButtonItem key="backBarButtonItem" title="Tape measure" id="4Jb-Rb-tqn"/>
+                        <barButtonItem key="rightBarButtonItem" image="info.circle" catalog="system" id="AJJ-1Z-QwK">
+                            <connections>
+                                <action selector="infoPressed:" destination="DOO-bY-LdS" id="jig-VZ-z0i"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ageLable" destination="v1H-Kf-fy8" id="mSg-MP-GxX"/>
@@ -521,12 +514,12 @@
                         <outlet property="secondTextField" destination="8OL-V4-Ru6" id="Nty-zZ-soG"/>
                         <outlet property="thirdLabel" destination="lW5-HU-WBw" id="QyY-Lb-qR6"/>
                         <outlet property="thirdTextField" destination="oe3-fm-Hix" id="g5v-yz-bTx"/>
-                        <segue destination="LL9-V0-GOz" kind="presentation" identifier="tapeToResult" id="UnU-6b-ZqV"/>
+                        <segue destination="LL9-V0-GOz" kind="show" identifier="tapeToResult" id="UnU-6b-ZqV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NE8-rD-owR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5263" y="21"/>
+            <point key="canvasLocation" x="6280" y="-18.48341232227488"/>
         </scene>
         <!--Caliper-->
         <scene sceneID="QwA-iI-2e1">
@@ -591,7 +584,7 @@
                                                             <constraint firstAttribute="height" constant="32" id="UK0-UF-YAd"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="2" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="di3-Pv-yHx">
                                                         <rect key="frame" x="0.0" y="71" width="100" height="32"/>
@@ -600,7 +593,7 @@
                                                             <constraint firstAttribute="width" constant="100" id="P0N-OW-OJt"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="3" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-2C-uD7">
                                                         <rect key="frame" x="0.0" y="142" width="100" height="32"/>
@@ -609,7 +602,7 @@
                                                             <constraint firstAttribute="height" constant="32" id="nt0-YB-l8x"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="4" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="tEA-1T-8nD" userLabel="fourth Text Field">
                                                         <rect key="frame" x="0.0" y="213" width="100" height="32"/>
@@ -618,7 +611,7 @@
                                                             <constraint firstAttribute="width" constant="100" id="xpr-tK-Ln3"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -639,15 +632,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cqZ-Lt-CrA">
-                                <rect key="frame" x="21" y="51" width="40" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system"/>
-                                <connections>
-                                    <action selector="quitButtonPressed:" destination="2Bk-FN-p0D" eventType="touchUpInside" id="pjJ-ZH-bL0"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mV1-s4-kHo">
                                 <rect key="frame" x="33.333333333333343" y="358.66666666666669" width="49.666666666666657" height="34.333333333333314"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
@@ -686,7 +670,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Caliper" id="GJ0-3M-ENW">
-                        <barButtonItem key="backBarButtonItem" title="Main" id="0tJ-kd-2jp"/>
+                        <barButtonItem key="backBarButtonItem" title="Caliper" id="0tJ-kd-2jp"/>
                     </navigationItem>
                     <connections>
                         <outlet property="firstLabel" destination="opR-1e-MTg" id="4E2-Gd-eSF"/>
@@ -697,23 +681,23 @@
                         <outlet property="secondTextField" destination="di3-Pv-yHx" id="JpR-R0-7KA"/>
                         <outlet property="thirdLabel" destination="Bt8-4x-v19" id="V51-N5-TST"/>
                         <outlet property="thirdTextField" destination="mhS-2C-uD7" id="vdz-Xj-ulK"/>
-                        <segue destination="LL9-V0-GOz" kind="presentation" identifier="caliperToResult" id="YTs-Su-zvW"/>
+                        <segue destination="LL9-V0-GOz" kind="show" identifier="caliperToResult" id="YTs-Su-zvW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JA8-TW-YkG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5213.8461538461534" y="-781.27962085308059"/>
+            <point key="canvasLocation" x="6280" y="-749.28909952606637"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="IMo-Ry-qpG">
             <objects>
                 <viewController id="LL9-V0-GOz" customClass="ResultViewController" customModule="FatCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WeA-Iv-gsu">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="44" translatesAutoresizingMaskIntoConstraints="NO" id="rRY-DQ-2yb">
-                                <rect key="frame" x="50" y="227.66666666666663" width="290" height="332"/>
+                                <rect key="frame" x="50" y="256" width="290" height="332"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="DTC-Dj-i4H">
                                         <rect key="frame" x="20" y="0.0" width="250" height="50"/>
@@ -724,14 +708,15 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tzm-09-dpi">
-                                        <rect key="frame" x="107" y="94.000000000000028" width="76" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
-                                        <color key="textColor" name="Color 2"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="titleLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tzm-09-dpi">
+                                        <rect key="frame" x="103.66666666666666" y="94" width="82.666666666666657" height="50"/>
+                                        <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
+                                        <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ij3-YF-I8c">
-                                        <rect key="frame" x="0.0" y="188.00000000000003" width="290" height="50"/>
+                                        <rect key="frame" x="0.0" y="188" width="290" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Save" cornerStyle="large">
                                             <backgroundConfiguration key="background">
@@ -776,7 +761,6 @@
                             <constraint firstItem="GoE-ev-3BE" firstAttribute="trailing" secondItem="rRY-DQ-2yb" secondAttribute="trailing" constant="50" id="zmF-uH-xJA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="LHp-rQ-Psj"/>
                     <connections>
                         <outlet property="categoryLabel" destination="Tzm-09-dpi" id="96C-ez-Q4i"/>
                         <outlet property="resultLabel" destination="DTC-Dj-i4H" id="v9x-BJ-0w0"/>
@@ -784,7 +768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBx-8i-Yrz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6252" y="-390"/>
+            <point key="canvasLocation" x="7229.2307692307686" y="-370.37914691943126"/>
         </scene>
         <!--graph-->
         <scene sceneID="kWm-TU-OLs">
@@ -799,6 +783,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" tag="2" title="graph" image="chart.xyaxis.line" catalog="system" id="4LK-xb-y87"/>
                     <connections>
+                        <outlet property="backGroundDefaultGraph" destination="bGS-be-Xou" id="kNf-3O-mwc"/>
                         <outlet property="blurView" destination="Xg3-ru-d8k" id="i6R-gM-DFU"/>
                         <outlet property="noDataPopUp" destination="KPR-wh-YAX" id="bzA-ly-Hqy"/>
                         <outlet property="popUP" destination="avZ-YP-J3j" id="5V2-Yf-mnd"/>
@@ -892,8 +877,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
-                    <blurEffect style="regular"/>
+                    <blurEffect style="extraLight"/>
                 </visualEffectView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backGroundGraph" id="bGS-be-Xou">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </objects>
             <point key="canvasLocation" x="3498" y="496"/>
         </scene>
@@ -912,7 +901,7 @@
                         </tabBarAppearance>
                     </tabBar>
                     <connections>
-                        <segue destination="jR4-2R-ScX" kind="relationship" relationship="viewControllers" id="Y4T-up-8oh"/>
+                        <segue destination="UKZ-dq-ZVC" kind="relationship" relationship="viewControllers" id="Y4T-up-8oh"/>
                         <segue destination="ldK-Ey-ZxW" kind="relationship" relationship="viewControllers" id="55q-ba-Vrs"/>
                     </connections>
                 </tabBarController>
@@ -988,15 +977,38 @@
             </objects>
             <point key="canvasLocation" x="4357" y="-1099"/>
         </scene>
+        <!--log-->
+        <scene sceneID="h6w-uv-o8g">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UKZ-dq-ZVC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="log" image="list.bullet.clipboard" catalog="system" id="JxA-a9-zxm"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aka-Oe-UXV">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="UKZ-dq-ZVC" id="1YY-XM-ZZL"/>
+                        </connections>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jR4-2R-ScX" kind="relationship" relationship="rootViewController" id="Ouz-pD-YSH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hUt-Og-4e6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3401.5384615384614" y="-370.37914691943126"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YTs-Su-zvW"/>
+        <segue reference="UnU-6b-ZqV"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowshape.left" catalog="system" width="128" height="104"/>
+        <image name="backGroundGraph" width="1170" height="2125"/>
         <image name="chart.xyaxis.line" catalog="system" width="128" height="102"/>
-        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
-        <image name="list.bullet.rectangle.portrait" catalog="system" width="115" height="128"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <namedColor name="Color 1">
             <color red="0.92549019607843142" green="0.94901960784313721" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

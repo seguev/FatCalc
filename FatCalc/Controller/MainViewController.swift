@@ -35,5 +35,8 @@ class MainViewController: UIViewController  {
         
     }
 
+    @IBAction func backPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true)
+    }
     
 }

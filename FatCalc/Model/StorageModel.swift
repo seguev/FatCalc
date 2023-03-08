@@ -61,6 +61,7 @@ struct StorageModel {
         let today = Day.allCases[todayIndex]
         let weekOfYear = DateFormatter().calendar.component(.weekOfYear, from: Date())
         return (today:today,weekNum:weekOfYear)
+
         
     }
     
