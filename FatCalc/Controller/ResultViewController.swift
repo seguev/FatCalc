@@ -27,13 +27,9 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resultLabel.text = result+"%"
+        let isValid = checkIfValidResult(result)
         
-        guard let availableResult = Float(result) else {fatalError()}
-        
-        let isValidFatPercentage = availableResult > 2 && availableResult < 60
-        
-        guard isValidFatPercentage else {
+        guard isValid else {
             resultLabel.text = "Error"
             handleWrongParameters()
             return
@@ -50,6 +46,18 @@ class ResultViewController: UIViewController {
 
     }
     
+    private func checkIfValidResult (_ resultString : String ) -> Bool {
+        guard let r = Float(resultString) else {return false}
+        
+        let isValid = r > 2 && r < 60
+        if !isValid {return false}
+        
+        else {
+            resultLabel.text = resultString+"%"
+         return true
+        }
+    }
+    
     @IBAction func savePressed(_ sender: UIButton) {
         guard let resultFloat = Float(result) else {fatalError("could not convert result into Float")}
         
@@ -59,42 +67,38 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func againPressed(_ sender: UIButton) {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
     private func menHealthFat () {
+        
         if let resultFloat = Float(result) {
-            categoryLabel.layer.cornerRadius = 15
             categoryLabel.clipsToBounds = true
+            var c : UIColor?
             
             switch resultFloat{
             case 2..<6:
-                //add label Essential Fat
-                
-                categoryLabel.backgroundColor = .green
+                c = .systemGreen
                 categoryLabel.text = "Essential Fat"
             case 6..<14:
-                //add label Typical Athletes
-                categoryLabel.backgroundColor = .blue
+                c = .systemBlue
                 categoryLabel.text = "Typical Athletes"
             case 14..<18:
-                //add label Fitness
-                categoryLabel.backgroundColor = .yellow
+                c = .systemYellow
                 categoryLabel.text = "Fitness"
             case 18..<26:
-                //add label Acceptable
-                categoryLabel.backgroundColor = .orange
+                c = .systemOrange
                 categoryLabel.text = "Acceptable"
             case 26...:
-                //add label Obese
-                categoryLabel.backgroundColor = .red
+                c = .systemRed
                 categoryLabel.text = "Obese"
             default:
-                categoryLabel.backgroundColor = .darkGray
-                categoryLabel.text = "yeah thats probably wrong, please check again..."
-
-
+                c = .darkGray
+                categoryLabel.text = ""
             }
+            
+            (categoryLabel.superview!).backgroundColor = c!
+            (categoryLabel.superview!).layer.cornerRadius = 15
         }
        
     }
