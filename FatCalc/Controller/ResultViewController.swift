@@ -27,7 +27,7 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resultLabel.text = String(format: "%.1f", result)+"%"
+        resultLabel.text = result+"%"
         
         guard let availableResult = Float(result) else {fatalError()}
         

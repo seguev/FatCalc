@@ -69,11 +69,11 @@ struct Calculator {
             if age <= 30 {
                 let bodyFat = hips+(0.8*thigh) - (2*calf) - wrist
                 
-                return String(bodyFat)
+                return String(format: "%.2f", bodyFat)
                 
             } else {
                     let bodyFat = hips + thigh - (2*calf) - wrist
-                    return String(bodyFat)
+                return String(format: "%.2f", bodyFat)
             }
         } else {
             let metricHips : Measurement<UnitLength> = .init(value: hips, unit: .centimeters).converted(to: .inches)
@@ -100,11 +100,11 @@ struct Calculator {
             if age <= 30 {
                 let bodyFat = waist + (0.5*hips) - (3*forearm) - wrist
                 
-                return String(bodyFat)
+                return String(format: "%.2f", bodyFat)
                 
             } else {
                     let bodyFat = waist + (0.5*hips) - (2.7*forearm) - wrist
-                    return String(bodyFat)
+                return String(format: "%.2f", bodyFat)
             }
         } else {
             let metricHips : Measurement<UnitLength> = .init(value: hips, unit: .centimeters).converted(to: .inches)

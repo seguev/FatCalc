@@ -29,10 +29,8 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
         
         addGradient(view: view)
         
-//        CoreDataModel.shared.addGradient(view: self.view)
         closeTextFieldsWhenTappedAround()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideLabel)))
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
     }
     @objc func hideLabel () {
         view.endEditing(true)
@@ -131,7 +129,8 @@ class CaliperCalculatorViewController: UIViewController, UITextFieldDelegate {
                 )
             } else if model.gender == .Female {
                 model.fatPercentage = Calculator.shared.calcWomenBodyFat(age: safeAge,
-                                                                         triceps: safeGenderUniqueFold, suprailiac: safeAbdominalFold,
+                                                                         triceps: safeGenderUniqueFold,
+                                                                         suprailiac: safeAbdominalFold,
                                                                          thigh: safeThighFold
                 )
             }
