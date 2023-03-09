@@ -27,11 +27,14 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //guard result != nil else {fatalError()}
-        resultLabel.text = result+"%"
+        resultLabel.text = String(format: "%.1f", result)+"%"
+        
         guard let availableResult = Float(result) else {fatalError()}
+        
         let isValidFatPercentage = availableResult > 2 && availableResult < 60
+        
         guard isValidFatPercentage else {
+            resultLabel.text = "Error"
             handleWrongParameters()
             return
         }
@@ -105,7 +108,6 @@ class ResultViewController: UIViewController {
             case 14..<21:
                 view.backgroundColor = .systemBlue
                 categoryLabel.text = "Typical Athletes"
-               
             case 21..<25:
                 view.backgroundColor = .systemYellow
                 categoryLabel.text = "Fitness"

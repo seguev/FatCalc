@@ -23,6 +23,7 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
     
     var model = TapeCalcModel()
     var infoLabel : UILabel?
+    var system : System = .Imperial
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,16 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func systemChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            system = .Imperial
+        case 1:
+            system = .Metric
+        default:
+            fatalError()
+        }
+    }
     func setMaleLabels () {
         print("male has been set")
         secondLabel.text = "Hips"
@@ -116,7 +127,8 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
                                                                        hips: safeSecond,
                                                                        waist: safeThird,
                                                                        forearm: safeFourh,
-                                                                       wrist: safeFifth
+                                                                       wrist: safeFifth,
+                                                                       system: system
                 )
                 
             } else if model.gender == .Female {
@@ -124,7 +136,8 @@ class TapeCalculatorViewController: UIViewController, UITextFieldDelegate {
                                                                          hips: safeSecond,
                                                                          thigh: safeThird,
                                                                          calf: safeFourh,
-                                                                         wrist: safeFifth
+                                                                         wrist: safeFifth,
+                                                                         system: system
                 )
                 
             }

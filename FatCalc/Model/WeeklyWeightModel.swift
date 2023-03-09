@@ -28,6 +28,7 @@ class WeeklyWeightModel {
     
     var today : Day {
         let df = DateFormatter()
+        df.locale = .init(components: .init(languageCode: .english))
         df.dateFormat = "EEEE"
         let today = df.string(from: Date())
         guard let todayDay = Day(rawValue: today) else {fatalError()}

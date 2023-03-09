@@ -17,6 +17,7 @@
 		603E00C62934E280003BDBCB /* TapeCalcModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603E00C52934E280003BDBCB /* TapeCalcModel.swift */; };
 		60435551291D75CC0023AA5B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435550291D75CC0023AA5B /* GraphViewController.swift */; };
 		60435555291D7C680023AA5B /* CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60435554291D7C680023AA5B /* CoreDataModel.swift */; };
+		604469EE29B9CA3000CEA7F9 /* FatCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604469ED29B9CA3000CEA7F9 /* FatCalcTests.swift */; };
 		604CACFB298699040093CA7F /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604CACFA298699040093CA7F /* Calculator.swift */; };
 		604E86E829AE2E770026F6A0 /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604E86E729AE2E770026F6A0 /* WeekViewController.swift */; };
 		604E86EA29AF5D830026F6A0 /* WeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604E86E929AF5D830026F6A0 /* WeightViewController.swift */; };
@@ -31,6 +32,16 @@
 		867FA9C46012822CF4A81400 /* Pods_FatCalc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E6ADDB23734F8F747095BC /* Pods_FatCalc.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		604469EF29B9CA3000CEA7F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6097B9DB291976B700773892 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6097B9E2291976B700773892;
+			remoteInfo = FatCalc;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		60017A402924090A00768028 /* CaliperCalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaliperCalculatorViewController.swift; sourceTree = "<group>"; };
 		60017A432924205600768028 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +53,8 @@
 		603E00C52934E280003BDBCB /* TapeCalcModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapeCalcModel.swift; sourceTree = "<group>"; };
 		60435550291D75CC0023AA5B /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		60435554291D7C680023AA5B /* CoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModel.swift; sourceTree = "<group>"; };
+		604469EB29B9CA3000CEA7F9 /* FatCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FatCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		604469ED29B9CA3000CEA7F9 /* FatCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatCalcTests.swift; sourceTree = "<group>"; };
 		604CACFA298699040093CA7F /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		604E86E729AE2E770026F6A0 /* WeekViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
 		604E86E929AF5D830026F6A0 /* WeightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +74,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		604469E829B9CA3000CEA7F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6097B9E0291976B700773892 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -97,10 +117,18 @@
 				60017A402924090A00768028 /* CaliperCalculatorViewController.swift */,
 				608F1EED2927F180001B98DE /* TapeCalculatorViewController.swift */,
 				60017A432924205600768028 /* ResultViewController.swift */,
-				60808644291D676700DAC7BE /* MainViewController.swift */,
 				60435550291D75CC0023AA5B /* GraphViewController.swift */,
+				60808644291D676700DAC7BE /* MainViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		604469EC29B9CA3000CEA7F9 /* FatCalcTests */ = {
+			isa = PBXGroup;
+			children = (
+				604469ED29B9CA3000CEA7F9 /* FatCalcTests.swift */,
+			);
+			path = FatCalcTests;
 			sourceTree = "<group>";
 		};
 		605E2A7C2933D32E009E95B4 /* Model */ = {
@@ -131,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				6097B9E5291976B700773892 /* FatCalc */,
+				604469EC29B9CA3000CEA7F9 /* FatCalcTests */,
 				6097B9E4291976B700773892 /* Products */,
 				3AB455B45406EACE7EF6BE1F /* Pods */,
 				267F26F88DB59FA2A94F7BF9 /* Frameworks */,
@@ -141,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				6097B9E3291976B700773892 /* FatCalc.app */,
+				604469EB29B9CA3000CEA7F9 /* FatCalcTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +193,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		604469EA29B9CA3000CEA7F9 /* FatCalcTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 604469F129B9CA3000CEA7F9 /* Build configuration list for PBXNativeTarget "FatCalcTests" */;
+			buildPhases = (
+				604469E729B9CA3000CEA7F9 /* Sources */,
+				604469E829B9CA3000CEA7F9 /* Frameworks */,
+				604469E929B9CA3000CEA7F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				604469F029B9CA3000CEA7F9 /* PBXTargetDependency */,
+			);
+			name = FatCalcTests;
+			productName = FatCalcTests;
+			productReference = 604469EB29B9CA3000CEA7F9 /* FatCalcTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6097B9E2291976B700773892 /* FatCalc */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6097B9FA291976B800773892 /* Build configuration list for PBXNativeTarget "FatCalc" */;
@@ -189,9 +237,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1400;
 				TargetAttributes = {
+					604469EA29B9CA3000CEA7F9 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = 6097B9E2291976B700773892;
+					};
 					6097B9E2291976B700773892 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -211,11 +263,19 @@
 			projectRoot = "";
 			targets = (
 				6097B9E2291976B700773892 /* FatCalc */,
+				604469EA29B9CA3000CEA7F9 /* FatCalcTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		604469E929B9CA3000CEA7F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6097B9E1291976B700773892 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,6 +331,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		604469E729B9CA3000CEA7F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				604469EE29B9CA3000CEA7F9 /* FatCalcTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6097B9DF291976B700773892 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,6 +366,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		604469F029B9CA3000CEA7F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6097B9E2291976B700773892 /* FatCalc */;
+			targetProxy = 604469EF29B9CA3000CEA7F9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		6097B9EC291976B700773892 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -318,6 +394,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		604469F229B9CA3000CEA7F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TAJ6K5RR87;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.seguev.FatCalcTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FatCalc.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FatCalc";
+			};
+			name = Debug;
+		};
+		604469F329B9CA3000CEA7F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TAJ6K5RR87;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = co.seguev.FatCalcTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FatCalc.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FatCalc";
+			};
+			name = Release;
+		};
 		6097B9F8291976B800773892 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -493,6 +607,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		604469F129B9CA3000CEA7F9 /* Build configuration list for PBXNativeTarget "FatCalcTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				604469F229B9CA3000CEA7F9 /* Debug */,
+				604469F329B9CA3000CEA7F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6097B9DE291976B700773892 /* Build configuration list for PBXProject "FatCalc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -30,8 +30,7 @@ class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+              
         addGradient(view: view)
 
         updateTitleLabel(isDone: false)
