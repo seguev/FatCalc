@@ -105,25 +105,31 @@ class ResultViewController: UIViewController {
     
     func womenHealthFat () {
         if let resultFloat = Float(result) {
+            
+            categoryLabel.clipsToBounds = true
+            var c : UIColor?
+            
             switch resultFloat{
             case 10..<14:
-                view.backgroundColor = .systemGreen
+                c = .systemGreen
                 categoryLabel.text = "Essential Fat"
             case 14..<21:
-                view.backgroundColor = .systemBlue
+                c = .systemBlue
                 categoryLabel.text = "Typical Athletes"
             case 21..<25:
-                view.backgroundColor = .systemYellow
+                c = .systemYellow
                 categoryLabel.text = "Fitness"
             case 25..<32:
-                view.backgroundColor = .orange
+                c = .orange
                 categoryLabel.text = "Acceptable"
             case 32...:
-                view.backgroundColor = .systemRed
+                c = .systemRed
                 categoryLabel.text = "Obese"
             default:
-                handleWrongParameters()
+                categoryLabel.text = "Error"
             }
+            (categoryLabel.superview!).backgroundColor = c!
+            (categoryLabel.superview!).layer.cornerRadius = 15
         }
        
     }
