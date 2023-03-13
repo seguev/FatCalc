@@ -12,189 +12,197 @@ let weightUpdateNotification = Notification.Name("weightUpdate")
 let fatUpdateNotification = Notification.Name("fatUpdate")
 
 class WeekViewController: UIViewController , WeeklyWeightModelDelegate {
-    
-    @IBOutlet var todayArrow: UIImageView!
-    @IBOutlet weak var weekNumberLabel: UILabel!
-    @IBOutlet weak var completeButtonOutlet: UIButton!
-    @IBOutlet weak var sundayButton : UIButton!
-    @IBOutlet weak var mondayButton : UIButton!
-    @IBOutlet weak var tuesdayButton : UIButton!
-    @IBOutlet weak var wednesdayButton : UIButton!
-    @IBOutlet weak var thursdayButton : UIButton!
-    @IBOutlet weak var fridayButton : UIButton!
-    @IBOutlet weak var saturdayButton : UIButton!
-    @IBOutlet weak var fatPercentBox: UIButton!
+    @IBOutlet weak var fatCheckMark: UIButton!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var weightButton: UIButton!
+    @IBOutlet weak var weightCheckMark: UIButton!
+    @IBOutlet weak var todayLabel: UILabel!
+    @IBOutlet weak var fatButton: UIButton!
     var infoLabel : UILabel?
     
+    var player : AVAudioPlayer!
+    
     let model = WeeklyWeightModel()
- 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-              
-        addGradient(view: view)
 
-        updateTitleLabel(isDone: false)
+        updateTitleLabel()
         
         model.delegate = self
         
         observersSetup()
         
-        model.checkSavedWeightBoxes()
+        model.checkIfEnoughForGraphUpdate()
         
-        todayArraySetup()
+        updateTodaysWeight()
+        
+        updateTodaysFat()
+        
+        setTimerForAnimation()
+ 
+        
+        
+    }
+    
+    // MARK: - initial setup
+    
+    /**
+     Shows the user that the button can be pressed.
+     */
+    private func setTimerForAnimation () {
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { [unowned self] timer in
+            self.model.clickAnimation(self.weightButton)
+            self.model.clickAnimation(self.fatButton)
+            if weightButton.isHidden {timer.invalidate()}
+        }
     }
     
     private func observersSetup () {
         NotificationCenter.default.addObserver(self, selector: #selector(saveNewWeight(_:)), name: weightUpdateNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(fatUpdate(_:)), name: fatUpdateNotification, object: nil)
-        
     }
-    
-    private func todayArraySetup () {
-        
-        todayArrow.tintColor =  #colorLiteral(red: 0.3960784314, green: 0.3647058824, blue: 0.7333333333, alpha: 1)
-        todayArrow.frame = .init(origin: .zero, size: .init(width: 25, height: 25))
-        todayArrow.transform = .init(rotationAngle: .pi / 2)
-        view.addSubview(todayArrow)
 
-        let buttonsSuperView = sundayButton.superview
-        let halfButtonHeight = sundayButton.frame.height / 2
+    func updateTitleLabel () {
+        let today = StorageModel.shared.currentDateComponents().today.rawValue
+        todayLabel.text = today
+     }
+
+    // MARK: - today's weight setup
+
+    
+    /**
+     Called from checkIfTodayIsDone()
+     */
+    private func updateProgressBar () {
+        let entries  = Float(StorageModel.shared.weeklyData.weights.count)
         
-        var f : CGRect?
-        
-        switch model.today {
-        case .Sunday:
-            f = view.convert(sundayButton.frame, from: buttonsSuperView)
-        case .Monday:
-            f = view.convert(mondayButton.frame, from: buttonsSuperView)
-        case .Tuesday:
-            f = view.convert(tuesdayButton.frame, from: buttonsSuperView)
-        case .Wednesday:
-            f = view.convert(wednesdayButton.frame, from: buttonsSuperView)
-        case .Thursday:
-            f = view.convert(thursdayButton.frame, from: buttonsSuperView)
-        case .Friday:
-            f = view.convert(fridayButton.frame, from: buttonsSuperView)
-        case .Saturday:
-            f = view.convert(saturdayButton.frame, from: buttonsSuperView)
+        UIView.animate(withDuration: 1) {
+            self.progressBar.progress = entries/4
         }
         
-        todayArrow.center.y = f!.maxY + halfButtonHeight
-        todayArrow.center.x = f!.maxX - halfButtonHeight
     }
     
-    /**
-     Being called when user sets weight .
-     */
-    @objc private func saveNewWeight (_ notification:Notification) {
-        guard let updatedWeight = notification.object as? Float else {fatalError()}
-        
-        model.updateWeightEntry (updatedWeight)
-    }
-    
-    /**
-     Being called from model after saveNewWeight()
-     */
-    func updateCheckmarks (_ day:Day) {
-        
-            switch day {
-            case .Sunday:
-                sundayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-            case .Monday:
-                mondayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-                
-            case .Tuesday:
-                tuesdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-                
-            case .Wednesday:
-                wednesdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-                
-            case .Thursday:
-                thursdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-                
-            case .Friday:
-                fridayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-                
-            case .Saturday:
-                saturdayButton.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
-            }
 
+    
+    // MARK: - fat percentage setup
+    
+    private func updateTodaysWeight () {
+        let today = StorageModel.shared.currentDateComponents().today.rawValue
+        let todayIsDone = StorageModel.shared.weeklyData.weights.keys.contains(today)
+        
+        if todayIsDone {
+            weightCheckMark.isHidden = false
+            weightButton.isHidden = true
 
+        } else {
+            displayTodayButton()
+        }
+        updateProgressBar()
     }
     
-    /**
-     Being called from model when theres 4 weight entries and 1 fat entry .
-     */
-    func showButton () {
-        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
-        UIView.animate(withDuration: 0.3) {
-            self.completeButtonOutlet.alpha = 1
+    private func displayTodayButton () {
+        weightButton.isHidden = false
+        weightButton.layer.shadowColor = UIColor.black.cgColor
+        weightButton.layer.shadowOffset = .init(width: 2, height: 2)
+        weightButton.layer.shadowOpacity = 0.8
+    }
+    
+    private func updateTodaysFat () {
+        let gotUsersFatPer = StorageModel.shared.weeklyData.fatPercentage != nil
+        
+        if gotUsersFatPer {
+            fatCheckMark.isHidden = false
+            fatButton.isHidden = true
+        } else {
+            fatButton.layer.shadowColor = UIColor.black.cgColor
+            fatButton.layer.shadowOffset = .init(width: 2, height: 2)
+            fatButton.layer.shadowOpacity = 0.8
+            
         }
     }
     
+
     
-    @IBAction func checkmarkPressed(_ sender: UIButton) {
-        
-//            sender.setImage(UIImage(systemName: "checkmark"), for: .selected)
-        
-        switch sender.tag {
-        case 0:
-            model.selectedDay = Day.allCases[0].rawValue
-        case 1:
-            model.selectedDay = Day.allCases[1].rawValue
-        case 2:
-            model.selectedDay = Day.allCases[2].rawValue
-        case 3:
-            model.selectedDay = Day.allCases[3].rawValue
-        case 4:
-            model.selectedDay = Day.allCases[4].rawValue
-        case 5:
-            model.selectedDay = Day.allCases[5].rawValue
-        case 6:
-            model.selectedDay = Day.allCases[6].rawValue
-        default:
-            fatalError()
+// MARK: - UI interactions
+
+    @IBAction func fatButtonPressed(_ sender: UIButton) {
+        let haptics = UIImpactFeedbackGenerator(style: .medium)
+        haptics.prepare()
+        haptics.impactOccurred(intensity: 0.8)
+        model.clickAnimation(fatButton) {
+            self.performSegue(withIdentifier: "toFat", sender: self)
         }
-        
-        performSegue(withIdentifier: "toWeight", sender: self)
+    }
+    
+    @IBAction func todayButtonPressed(_ sender: UIButton) {
+        let haptics = UIImpactFeedbackGenerator(style: .medium)
+        haptics.prepare()
+        haptics.impactOccurred(intensity: 0.8)
+        model.clickAnimation(weightButton) {
+            self.performSegue(withIdentifier: "toWeight", sender: self)
+        }
         
     }
     
+
+
+
     
+    @IBAction func weightCheckmarkPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "toWeight", sender: self)
+    }
+    
+    @IBAction func fatCheckmarkPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "toFat", sender: self)
+    }
+
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if segue.identifier == "toWeight" {
             let destinationVC = segue.destination as! WeightViewController
-            destinationVC.title = model.selectedDay
+            destinationVC.title = model.today.rawValue
         } else if segue.identifier == "toFat" {
             //prepare fat segue if needed..
         }
     }
     
+    // MARK: - notifications
+    
+    /**
+     Being called when user sets weight .
+     */
+    @objc private func saveNewWeight (_ notification:Notification) {
+        guard let newWeight = notification.object as? Float else {fatalError()}
+        
+        StorageModel.shared.save(weightEntry: (day: model.today.rawValue, weight: newWeight))
+        model.checkIfEnoughForGraphUpdate()
+        
+        updateTodaysWeight()
+        playCheckmarkSound()
+    }
+
     @objc private func fatUpdate(_ notification:Notification) {
         let fatPercent = notification.object as! Float
         
         StorageModel.shared.save(fat: fatPercent)
-        
-        checkFatBox()
-        
-        model.checkEnoughDataToSave()
+        model.checkIfEnoughForGraphUpdate()
+
+        updateTodaysFat()
+        playCheckmarkSound()
     }
     
-    func checkFatBox () {
-        fatPercentBox.configuration?.background.backgroundColor = #colorLiteral(red: 0.7490196078, green: 0.6745098039, blue: 0.8862745098, alpha: 1)
+// MARK: - sound
+    private func playCheckmarkSound () {
+        let url = Bundle.main.url(forResource: "checkSound", withExtension: "wav")!
+            player = try! AVAudioPlayer(contentsOf: url)
+        player.volume = 0.05
+            player.play()
     }
 
-    func updateTitleLabel (isDone:Bool) {
-        let weekNum = StorageModel.shared.currentDateComponents().weekNum
-        
-        if isDone {
-            weekNumberLabel.text = "Week number : \(weekNum) ✔"
-        } else {
-            weekNumberLabel.text = "Week number : \(weekNum)"
-        }
-    }
-    
+    // MARK: - info button
     @IBAction func infoPressed(_ sender: UIBarButtonItem) {
         infoLabel?.removeFromSuperview()
         let i = Info()

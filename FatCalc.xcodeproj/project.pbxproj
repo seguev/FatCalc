@@ -29,6 +29,7 @@
 		6097B9F1291976B700773892 /* FatCalc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6097B9EF291976B700773892 /* FatCalc.xcdatamodeld */; };
 		6097B9F3291976B800773892 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6097B9F2291976B800773892 /* Assets.xcassets */; };
 		6097B9F6291976B800773892 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6097B9F4291976B800773892 /* LaunchScreen.storyboard */; };
+		60CC88E929BF6C0E001704B8 /* checkSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = 60CC88E829BF6C0D001704B8 /* checkSound.wav */; };
 		867FA9C46012822CF4A81400 /* Pods_FatCalc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5E6ADDB23734F8F747095BC /* Pods_FatCalc.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		6097B9F2291976B800773892 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6097B9F5291976B800773892 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6097B9F7291976B800773892 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60CC88E829BF6C0D001704B8 /* checkSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = checkSound.wav; sourceTree = "<group>"; };
 		C5E6ADDB23734F8F747095BC /* Pods_FatCalc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FatCalc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EECBBD44B5FEF1603E9D4840 /* Pods-FatCalc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FatCalc.debug.xcconfig"; path = "Target Support Files/Pods-FatCalc/Pods-FatCalc.debug.xcconfig"; sourceTree = "<group>"; };
 		F4430FDC28BDFBDBAF1FCE74 /* Pods-FatCalc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FatCalc.release.xcconfig"; path = "Target Support Files/Pods-FatCalc/Pods-FatCalc.release.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				605E2A7D2933D35C009E95B4 /* View */,
 				60435556291D7E8F0023AA5B /* Controller */,
 				6097B9F2291976B800773892 /* Assets.xcassets */,
+				60CC88E829BF6C0D001704B8 /* checkSound.wav */,
 				6097B9F7291976B800773892 /* Info.plist */,
 				6097B9EF291976B700773892 /* FatCalc.xcdatamodeld */,
 			);
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6097B9F6291976B800773892 /* LaunchScreen.storyboard in Resources */,
+				60CC88E929BF6C0E001704B8 /* checkSound.wav in Resources */,
 				6097B9F3291976B800773892 /* Assets.xcassets in Resources */,
 				6097B9EE291976B700773892 /* Main.storyboard in Resources */,
 			);

@@ -8,18 +8,14 @@
 import UIKit
 
 protocol WeeklyWeightModelDelegate : UIViewController {
-    func showButton ()
-    func updateCheckmarks(_ day:Day)
-    func checkFatBox()
-    func updateTitleLabel(isDone:Bool)
+
+    func updateTitleLabel()
 }
 
 class WeeklyWeightModel {
 
     weak var delegate : WeeklyWeightModelDelegate?
-    
-    var selectedDay = "" {didSet {print("selectedDay = \(selectedDay)")}}
-        
+
     var isFatChecked : Bool {
         get {
             return StorageModel.shared.weeklyData.fatPercentage != nil
@@ -35,19 +31,9 @@ class WeeklyWeightModel {
         return todayDay
     }
     
-    func updateWeightEntry (_ weight:Float) {
-        
-        guard let day = Day(rawValue: selectedDay) else {fatalError("selected day is not updated")}
-                
-        StorageModel.shared.save(weightEntry: (day: selectedDay, weight: weight))
-        
-        delegate?.updateCheckmarks(day)
-        
-        checkEnoughDataToSave()
-         
-    }
 
-    func checkEnoughDataToSave () {
+
+    func checkIfEnoughForGraphUpdate () {
         let updatedStorageData = StorageModel.shared.weeklyData!
         let entriesCount = updatedStorageData.weights.count
         let isFatAvailable = updatedStorageData.fatPercentage != nil
@@ -59,7 +45,6 @@ class WeeklyWeightModel {
             let currentWeekNum = StorageModel.shared.currentDateComponents().weekNum
             
             CoreDataModel.shared.saveToCoreData(newAverage, fatPercentage: updatedStorageData.fatPercentage, weekNum: currentWeekNum)
-            delegate?.updateTitleLabel(isDone: true)
         }
         
         
@@ -76,21 +61,22 @@ class WeeklyWeightModel {
     }
     
     
-    func checkSavedWeightBoxes () {
-        for entry in StorageModel.shared.weeklyData.weights {
-            let key = entry.key
-            let day = Day(rawValue: key)!
-            delegate?.updateCheckmarks(day)
-        }
-        
-        if StorageModel.shared.weeklyData.fatPercentage != nil {
-            delegate?.checkFatBox()
-        }
-        
-        checkEnoughDataToSave()
-    }
-    
 
+    
+    func clickAnimation (_ button:UIButton, complition: @escaping () -> Void = {}) {
+        guard !button.isHidden else {return}
+        
+        let currentShadowOffset = button.layer.shadowOffset
+        UIView.animate(withDuration: 0.1) {
+            button.layer.shadowOffset = .init(width: 0, height: 0)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.1) {
+                button.layer.shadowOffset = currentShadowOffset
+            } completion: { _ in
+                complition()
+            }
+        }
+    }
     
     
     
